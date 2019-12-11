@@ -101,6 +101,7 @@ Xvfb :1 -screen 0 320x240x24 &
 echo "${GREEN}Starting dedicated server${NC}"
 
 # Start the server
+su -c "ls /game" $user
 su -c "wine /game/haloceded.exe" $user
 
 if [ -z "${WAIT_ON_EXIT}" ]; then
