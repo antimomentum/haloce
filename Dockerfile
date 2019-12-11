@@ -29,13 +29,6 @@ RUN wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/wine
 # Install X virtual frame buffer and winbind
 RUN apt-get install -y xvfb winbind
 
-# Configure wine prefix
-# WINEDLLOVERRIDES is required so wine doesn't ask any questions during setup
-# TODO: This is leftover from the fork, needs work.
-RUN Xvfb :1 -screen 0 320x240x24 & \
-    wineserver -w && \
-    ./winetricks -q MSXML4
-
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
     rm -rf /var/lib/apt/lists/* && \
