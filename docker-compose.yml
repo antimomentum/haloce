@@ -10,6 +10,7 @@ services:
     volumes:
       - /opt/haloce:/game
       - /opt/wine:/wine
+      - /opt/wine:/tmp/home/.wine
     environment:
       - PUID=1000
       - PGID=1000
