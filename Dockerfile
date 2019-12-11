@@ -14,8 +14,11 @@ RUN apt-get update && \
 
 # Install Wine stable
 RUN dpkg --add-architecture i386
+RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
+RUN apt-key add winehq.key
+RUN apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
 RUN apt-get update
-RUN apt-get install --no-install-recommends --assume-yes wine-stable wine64
+RUN apt-get install --no-install-recommends --assume-yes 
 
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
