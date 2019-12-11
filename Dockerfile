@@ -42,7 +42,7 @@ CMD /start.sh
 WORKDIR /game
 
 # Expose necessary ports
-EXPOSE 2302/udp 2303/tcp
+EXPOSE 2302/udp 2303/udp
 
 # Set volumes
 VOLUME /game
