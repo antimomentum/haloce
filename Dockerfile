@@ -15,7 +15,7 @@ RUN apt-get update && \
 # Install Wine stable
 RUN dpkg --add-architecture i386
 RUN apt-get update
-RUN apt-get install --no-install-recommends --assume-yes wine-stable
+RUN apt-get install --no-install-recommends --assume-yes wine-stable wine32
 
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
