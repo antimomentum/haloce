@@ -2,7 +2,7 @@ version: '2'
 
 services:
   haloceded:
-    image: augusdogus/haloce
+    image: augusdogus/halo
     restart: always
     ports:
       - 2302:2302/udp
