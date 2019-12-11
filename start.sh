@@ -82,7 +82,7 @@ fi
 
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
-    chown -R $PUID:$PGID /game /config /wine
+    chown -R $PUID:$PGID /game /wine
 
     echo "Changing folder permissions"
     find /game /config -type d -exec chmod 775 {} \;

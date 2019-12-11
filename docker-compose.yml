@@ -10,5 +10,6 @@ services:
     volumes:
       - /opt/haloce:/game
    # environment:
-   #   - PUID=1000
-   #   - PGID=1000
+      - PUID=1000
+      - PGID=1000
+      - RUN_AS_USER=true
