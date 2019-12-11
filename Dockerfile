@@ -13,8 +13,7 @@ RUN apt-get update && \
     apt-get install -y wget unzip software-properties-common apt-transport-https cabextract
 
 # Install Wine stable
-RUN dpkg --add-architecture i386 && \
-    wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
+RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
     apt-key add winehq.key && \
     rm winehq.key && \
     apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && \
