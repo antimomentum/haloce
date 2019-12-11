@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 
 # Set environment variables
 ENV CONTAINER_VERSION=0.1 \
-    DISPLAY=:0 \
+    DISPLAY=:1 \
     DEBIAN_FRONTEND=noninteractive \
     PUID=0 \
     PGID=0
@@ -18,7 +18,7 @@ RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
 RUN apt-key add winehq.key
 RUN apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
 RUN apt-get update
-RUN apt-get install --no-install-recommends --assume-yes winehq-stable
+RUN apt-get install --no-install-recommends --assume-yes winehq-stable xvfb
 
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
