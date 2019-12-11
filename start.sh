@@ -91,13 +91,10 @@ if [ -z "${SKIP_CHOWN}" ]; then
     find /game -type f -exec chmod 664 {} \;
 fi
 
-echo "Starting virtual frame buffer"
-Xvfb :1 -screen 0 320x240x24 &
-
 echo "${GREEN}Starting dedicated server${NC}"
 
 # Start the server
-su -c "wine /game/haloceded.exe" $user
+su -c "wineconsole /game/haloceded.exe" $user
 
 if [ -z "${WAIT_ON_EXIT}" ]; then
     echo "${RED}Server terminated, exiting${NC}"

@@ -21,17 +21,9 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y winehq-stable
 
-# Download winetricks from source
-RUN wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
-    chmod +x ./winetricks
-
-# Install X virtual frame buffer and winbind
-RUN apt-get install -y xvfb winbind
-
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
     rm -rf /var/lib/apt/lists/* && \
-    rm winetricks && \
     rm -rf .cache/
 
 # Add the start script
