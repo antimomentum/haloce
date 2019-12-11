@@ -1,10 +1,11 @@
-<img src="http://i.imgur.com/IkTrjna.png" width="190" height="164" align="right"/>
+![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
+<img src="https://i.imgur.com/zRXWDEK.png" width="190" height="164" align="right"/>
 
-# ElDewrito dedicated server dockerized
+# Halo CE dedicated server dockerized
 
 ## About
 
-This is a Dockerfile for running the ElDewrito server under Linux. The container uses Wine to run the Windows application and xvfb to create a virtual desktop.
+This is a Dockerfile for running the Halo CE dedicated server under Linux. The container uses Wine to run the Windows application and xvfb to create a virtual desktop.
 
 The container is running 100% headless - no GUI is required for installation, execution or configuration.
 
