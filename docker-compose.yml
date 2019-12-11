@@ -1,7 +1,7 @@
-version: '1'
+version: '2'
 
 services:
-  eldewrito:
+  haloceded:
     image: augusdogus/haloce
     restart: always
     ports:
