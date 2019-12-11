@@ -19,6 +19,7 @@ RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
     apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && \
     apt-get update && \
     apt-get install -y wine-stable && \
+    apt-get install -y wine-stable-i386 && \
     apt-get install -y winehq-stable
 
 # Cleanup
