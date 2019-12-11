@@ -2,9 +2,7 @@
 FROM ubuntu:18.04
 
 # Set environment variables
-ENV CONTAINER_VERSION=0.5 \
-    ELDEWRITO_VERSION=0.6.1 \
-    MTNDEW_CHECKSUM=496b9296239539c747347805e15d2540 \
+ENV CONTAINER_VERSION=0.1 \
     DISPLAY=:1 \
     WINEPREFIX="/wine" \
     DEBIAN_FRONTEND=noninteractive \
@@ -13,7 +11,7 @@ ENV CONTAINER_VERSION=0.5 \
 
 # Install temporary packages
 RUN apt-get update && \
-    apt-get install -y wget software-properties-common apt-transport-https cabextract
+    apt-get install -y wget unzip software-properties-common apt-transport-https cabextract
 
 # Install Wine stable
 RUN dpkg --add-architecture i386 && \
@@ -33,13 +31,14 @@ RUN apt-get install -y xvfb winbind
 
 # Configure wine prefix
 # WINEDLLOVERRIDES is required so wine doesn't ask any questions during setup
+# TODO: This is leftover from the fork, needs work.
 RUN Xvfb :1 -screen 0 320x240x24 & \
     WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -u && \
     wineserver -w && \
     ./winetricks -q vcrun2012 winhttp
 
 # Cleanup
-RUN apt-get remove -y wget software-properties-common apt-transport-https cabextract && \
+RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
     rm -rf /var/lib/apt/lists/* && \
     rm winetricks && \
     rm -rf .cache/
@@ -52,7 +51,7 @@ ADD defaults defaults
 
 # Make start script executable and create necessary directories
 RUN chmod +x start.sh && \
-    mkdir config logs
+    mkdir logs
 
 # Set start command to execute the start script
 CMD /start.sh
@@ -61,7 +60,7 @@ CMD /start.sh
 WORKDIR /game
 
 # Expose necessary ports
-EXPOSE 11774/udp 11775/tcp 11776/tcp 11777/tcp
+EXPOSE 2302/udp 2303/tcp
 
 # Set volumes
-VOLUME /game /config /logs
+VOLUME /game

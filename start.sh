@@ -8,46 +8,35 @@ YELLOW='\033[0;33m'
 # Function to create default configuration depending on path
 create_default_config()
 {
-    echo "${YELLOW}Could not find an existing dewrito_prefs.cfg. Using default.${NC}"
+    echo "${YELLOW}Could not find an existing configuration file. Creating one for you.${NC}"
     echo "${YELLOW}Make sure to adjust important settings like your RCon password!${NC}"
 
-    sleep 5
+    sleep 2
 
-    echo "Copying default dewrito_prefs.cfg."
-    cp /defaults/dewrito_prefs.cfg $1
-
-    echo "Copying default veto/voting json."
-
-    cp /defaults/veto.json /config
-    cp /defaults/voting.json /config
+    echo "Copying default init.txt."
+    cp /defaults/init.txt $1
 }
 
-echo "Initializing v${CONTAINER_VERSION} for ElDewrito ${ELDEWRITO_VERSION}"
+echo "Initializing v${CONTAINER_VERSION} for HaloCE SAPP v10.1"
 
-# Search for eldorado.exe in game directory
-if [ ! -f "eldorado.exe" ]; then
-    echo "${RED}Could not find eldorado.exe. Did you mount the game directory to /game?${NC}"
-
+# Search for haloceded.exe in game directory
+if [ ! -e /game/haloceded.exe ]; then
+    echo "${RED}Could not find haloceded.exe. Did you mount the game directory to /game?${NC}"
     sleep 2
     exit 1
 fi
 
-# Checksum the mtndew.dll to confirm we're running the correct version
-if [ -z "${SKIP_CHECKSUM_CHECK}" ]; then
-    checksum=$(md5sum mtndew.dll | awk '{ print $1 }')
-
-    if [ "$checksum" != "${MTNDEW_CHECKSUM}" ]; then
-        echo "${RED}Checksum mismatch! Make sure you are using a valid copy of the game.${NC}"
-        echo "${RED}This container only supports ElDewrito ${ELDEWRITO_VERSION}.${NC}"
-
-        echo "Expected ${checksum}"
-        echo "Got ${MTNDEW_CHECKSUM}"
-
-        sleep 2
-        exit 10
-    fi
-else
-    echo "Skipping checksum check."
+# Search for SAPP in game directory
+if [ ! -e /game/sapp.dll ]; then
+    echo "${YELLOW}Could not find SAPP. Downloading it for you.${NC}"
+    sleep 2
+    # Download SAPP v10.1 for Halo CE to game directory
+    wget https://opencarnage.net/misc/sapp_ce.zip -P /game && \
+    unzip sapp_ce.zip && \
+    mv sapp_ce/*.dll . && \
+    # Cleanup
+    rm -rf sapp_ce/ sapp_ce.zip && \
+    echo "${GREEN}SAPP download complete.${NC}"
 fi
 
 # Create user if container should run as user
@@ -63,8 +52,8 @@ if [ -z "${RUN_AS_USER}" ]; then
         exit 40
     fi
 else
-    echo "Running as eldewrito"
-    user=eldewrito
+    echo "Running as haloce"
+    user=haloce
 
     if [ $PUID -lt 1000 ] || [ $PUID -gt 60000 ]; then
         echo "${RED}PUID is invalid${NC}"
@@ -80,39 +69,26 @@ else
         exit 30
     fi
 
-    if ! id -u eldewrito > /dev/null 2>&1; then
+    if ! id -u haloce > /dev/null 2>&1; then
         echo "Creating user"
-        useradd -u $PUID -m -d /tmp/home eldewrito
+        useradd -u $PUID -m -d /tmp/home haloce
     fi
 fi
 
-# Copy configuration files or create default config
-if [ -z "${INSTANCE_ID}" ]; then
-    echo "${YELLOW}Running in single instance mode.${NC}"
-
-    if [ ! -f "dewrito_prefs.cfg" ]; then
-        create_default_config "."
-    fi
-else
-    echo "Running in multi instance mode"
-
-    if [ ! -f "/config/dewrito_prefs.cfg" ]; then
-        create_default_config "/config"
-    fi
-
-    echo "Copying instance configuration"
-    cp /config/dewrito_prefs.cfg dewrito_prefs_${INSTANCE_ID}.cfg
+# Search for init.txt in /game directory
+if [ ! -e "init.txt" ]; then
+    create_default_config "/game"
 fi
 
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
-    chown -R $PUID:$PGID /game /config /logs /wine
+    chown -R $PUID:$PGID /game /config /wine
 
     echo "Changing folder permissions"
-    find /game /config /logs -type d -exec chmod 775 {} \;
+    find /game /config -type d -exec chmod 775 {} \;
 
     echo "Changing file permissions"
-    find /game /config /logs -type f -exec chmod 664 {} \;
+    find /game /config -type f -exec chmod 664 {} \;
 fi
 
 # Xvfb needs cleaning because it doesn't exit cleanly
@@ -132,12 +108,8 @@ if [ ! -z "${WINE_DEBUG}" ]; then
     export WINEDEBUG=warn+all
 fi
 
-if [ -z "${INSTANCE_ID}" ]; then
-    su -c "wine eldorado.exe -launcher -dedicated -window -height 200 -width 200 -minimized" $user
-else
-    echo "Starting instance ${INSTANCE_ID}"
-    su -c "wine eldorado.exe -launcher -dedicated -window -height 200 -width 200 -minimized -instance ${INSTANCE_ID}" $user
-fi
+# Start the server
+su -c "wine haloceded.exe" $user
 
 if [ -z "${WAIT_ON_EXIT}" ]; then
     echo "${RED}Server terminated, exiting${NC}"
