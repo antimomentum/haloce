@@ -6,7 +6,7 @@ services:
     restart: always
     ports:
       - 2302:2302/udp
-      - 2303:2303/tcp
+      - 2303:2303/udp
     volumes:
       - /opt/haloce:/game
       - /opt/wine:/wine
