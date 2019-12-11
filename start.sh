@@ -85,15 +85,11 @@ if [ -z "${SKIP_CHOWN}" ]; then
     chown -R $PUID:$PGID /game /wine
 
     echo "Changing folder permissions"
-    find /game /config -type d -exec chmod 775 {} \;
+    find /game -type d -exec chmod 775 {} \;
 
     echo "Changing file permissions"
-    find /game /config -type f -exec chmod 664 {} \;
+    find /game -type f -exec chmod 664 {} \;
 fi
-
-# Xvfb needs cleaning because it doesn't exit cleanly
-echo "Cleaning up"
-rm /tmp/.X1-lock
 
 echo "Starting virtual frame buffer"
 Xvfb :1 -screen 0 320x240x24 &
