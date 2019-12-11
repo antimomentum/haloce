@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 
 # Set environment variables
 ENV CONTAINER_VERSION=0.1 \
-    DISPLAY=:1 \
+    DISPLAY=:0 \
     DEBIAN_FRONTEND=noninteractive \
     PUID=0 \
     PGID=0

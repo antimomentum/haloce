@@ -94,7 +94,7 @@ fi
 echo "${GREEN}Starting dedicated server${NC}"
 
 # Start the server
-su -c "wineconsole /game/haloceded.exe" $user
+su -c "wineconsole --backend=curses /game/haloceded.exe" $user
 
 if [ -z "${WAIT_ON_EXIT}" ]; then
     echo "${RED}Server terminated, exiting${NC}"
