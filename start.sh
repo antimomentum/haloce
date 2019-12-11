@@ -96,7 +96,7 @@ echo "${GREEN}Starting dedicated server${NC}"
 Xvfb :1 -screen 0 1280x960x24 
 
 # Start the server
-su -c "wineconsole /game/haloceded.exe" $user
+su -c "DISPLAY=:0 wineconsole /game/haloceded.exe" $user
 
 if [ -z "${WAIT_ON_EXIT}" ]; then
     echo "${RED}Server terminated, exiting${NC}"
