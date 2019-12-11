@@ -100,14 +100,6 @@ Xvfb :1 -screen 0 320x240x24 &
 
 echo "${GREEN}Starting dedicated server${NC}"
 
-# DLL overrides for Wine are required to prevent issues with master server announcement
-export WINEDLLOVERRIDES="winhttp,rasapi32=n"
-
-if [ ! -z "${WINE_DEBUG}" ]; then
-    echo "Setting wine to verbose output"
-    export WINEDEBUG=warn+all
-fi
-
 # Start the server
 su -c "wine haloceded.exe" $user
 
