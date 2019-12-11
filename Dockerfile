@@ -33,9 +33,8 @@ RUN apt-get install -y xvfb winbind
 # WINEDLLOVERRIDES is required so wine doesn't ask any questions during setup
 # TODO: This is leftover from the fork, needs work.
 RUN Xvfb :1 -screen 0 320x240x24 & \
-    WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -u && \
     wineserver -w && \
-    ./winetricks -q vcrun2012 winhttp
+    ./winetricks -q MSXML4
 
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
