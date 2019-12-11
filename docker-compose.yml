@@ -9,6 +9,6 @@ services:
       - 2303:2303/tcp
     volumes:
       - /opt/haloce:/game
-    environment:
-      - PUID=1000
-      - PGID=1000
+   # environment:
+   #   - PUID=1000
+   #   - PGID=1000
