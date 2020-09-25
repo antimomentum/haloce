@@ -27,17 +27,17 @@ if [ ! -e /game/haloceded.exe ]; then
 fi
 
 # Search for SAPP in game directory
-if [ ! -e /game/sapp.dll ]; then
-    echo "${YELLOW}Could not find SAPP. Downloading it for you.${NC}"
-    sleep 2
-    # Download SAPP v10.1 for Halo CE to game directory
-    wget https://opencarnage.net/misc/sapp_ce.zip -P /game && \
-    unzip sapp_ce.zip && \
-    mv sapp_ce/*.dll . && \
-    # Cleanup
-    rm -rf sapp_ce/ sapp_ce.zip && \
-    echo "${GREEN}SAPP download complete.${NC}"
-fi
+# if [ ! -e /game/sapp.dll ]; then
+#    echo "${YELLOW}Could not find SAPP. Downloading it for you.${NC}"
+#    sleep 2
+#    # Download SAPP v10.1 for Halo CE to game directory
+#    wget https://opencarnage.net/misc/sapp_ce.zip -P /game && \
+#    unzip sapp_ce.zip && \
+#    mv sapp_ce/*.dll . && \
+#    # Cleanup
+#    rm -rf sapp_ce/ sapp_ce.zip && \
+#    echo "${GREEN}SAPP download complete.${NC}"
+#fi
 
 # Create user if container should run as user
 if [ -z "${RUN_AS_USER}" ]; then
