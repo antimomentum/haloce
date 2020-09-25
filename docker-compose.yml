@@ -2,16 +2,18 @@ version: '2'
 
 services:
   haloceded:
-    image: augusdogus/halo
+    image: antimomentum/haloce
     restart: always
     ports:
       - 2302:2302/udp
       - 2303:2303/udp
     volumes:
-      - /opt/haloce:/game
+      - /opt/haloce/halopull:/game
       - /opt/wine:/wine
       - /opt/wine:/tmp/home/.wine
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - RUN_AS_USER=true
+    cap_add:
+      - SYS_PTRACE
+#     environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - RUN_AS_USER=true
