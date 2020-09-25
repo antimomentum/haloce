@@ -13,9 +13,9 @@ The game files are required in order to start this container. They are not bundl
 
 ## Usage
 
-SAPP has been disabled for now (in the start.sh script) for testing. It will boot the haloceded.exe console. Not fully working.
+SAPP has been disabled for now (in the start.sh script) for testing. It will boot the haloceded.exe console. Not fully working. Feel free to research docker run for more secure execution, currently uses full root privileges.
  
-    docker run -it -p 2302:2302/udp -p 2303:2303/udp --privileged antimomentum/haloce
+    docker run -it -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged antimomentum/haloce
 
 ## Configuration
 
