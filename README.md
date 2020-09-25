@@ -13,7 +13,9 @@ The game files are required in order to start this container. They are not bundl
 
 ## Usage
 
-    docker run -d -p 2302:2302/udp -p 2303:2303/udp -v /path/to/game:/game -v /path/to/config:/config -v /path/to/logs:/logs augusdogus/docker-haloce-sapp
+SAPP has been disabled for now (in the start.sh script) for testing. It will boot the haloceded.exe console. Not fully working.
+ 
+    docker run -it -p 2302:2302/udp -p 2303:2303/udp --privileged antimomentum/haloce
 
 ## Configuration
 
