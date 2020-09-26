@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y apt-transport-https && apt-get install 
 #    apt-get install -y wget unzip software-properties-common apt-transport-https cabextract
 RUN apt-get install -y gnupg
 RUN apt-get install -y software-properties-common
-RUN apt-get install -y aptitude
+# RUN apt-get install -y aptitude
 RUN apt-get install -y wget
 # Install Wine stable
 RUN dpkg --add-architecture i386
@@ -43,6 +43,7 @@ RUN chmod +x start.sh && \
 # Set start command to execute the start script
 CMD /start.sh
 COPY ./halopull /game
+COPY ["./Halo CE", "/root/My Games/Halo CE"]
 # Set working directory into the game directory
 WORKDIR /game
 
@@ -53,3 +54,4 @@ EXPOSE 2302/udp 2303/udp
 VOLUME /game
 
 # update me
+

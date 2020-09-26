@@ -13,9 +13,30 @@ The game files are required in order to start this container. They are not bundl
 
 ## Usage
 
-SAPP has been disabled for now (in the start.sh script) for testing. It will boot the haloceded.exe console. Not fully working. Feel free to research docker run for more secure execution, currently uses full root privileges.
+SAPP is working! Note: --privileged gives the container full root access to the host OS. Feel free to try different docker run commands for more secure execution!
  
     docker run -it -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged antimomentum/haloce
+
+
+## To install custom server/sapp files!
+
+git clone https://github.com/antimomentum/haloce
+cd haloce
+mkdir halopull
+mkdir 'Halo CE'
+
+Now copy in the haloceded.exe, Strings.dll, sapp.dll (basically whatever is from you Program Files/Micorosft Games/Halo Custom Edition folder) in the halopull folder.
+For sapp, also copy your My Documents\My Games\Halo CE stuff in the 'Halo CE' folder.
+
+Then do:
+
+docker build . 
+
+You should see something like: "Successfully built f01ecb978acc" <---- the f01ecb is the docker image you need to start the container. So do:
+
+docker run -it -p 2302:2302/udp -p 2303:2302/udp -p 80:80 --privileged f01ecb978acc 
+
+with the f01ecb replaced with whatever ID you got from the docker build :) 
 
 ## Configuration
 
