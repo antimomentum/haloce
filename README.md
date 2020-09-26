@@ -9,7 +9,9 @@ This is a Dockerfile for running the Halo CE dedicated server under Linux. The c
 
 The container is running 100% headless - no GUI is required for installation, execution or configuration.
 
-The game files are required in order to start this container. They are not bundled within the container and you will have to provide them.
+To install docker:
+apt-update
+apt-get install docker.io
 
 ## Usage
 
