@@ -29,7 +29,7 @@ mkdir halopull
 mkdir 'Halo CE'
 
 
-Now copy in the haloceded.exe, Strings.dll, sapp.dll (basically whatever is from you Program Files/Micorosft Games/Halo Custom Edition folder) in the halopull folder.
+Now copy in the haloceded.exe, Strings.dll, sapp.dll (basically whatever is from you Program Files\Micorosft Games\Halo Custom Edition folder) in the halopull folder.
 For sapp, also copy your My Documents\My Games\Halo CE stuff in the 'Halo CE' folder.
 
 
