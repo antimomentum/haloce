@@ -86,10 +86,16 @@ apt-get install docker.io
 
 docker run -it -p 2302:2302/udp -p 2303:2303/udp 80:80 --privileged antimomentum/haloce
 
+Wait for it to build and boot
+
 sv_name "Test Container"
 
+You can now find in in the game server list
+
 Here are some sapp commands:
+
 pl
+
 map
 
 
