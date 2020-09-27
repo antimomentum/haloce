@@ -180,6 +180,8 @@ service ssh stop
 Note: disabling ssh may disable access to your server on AWS, Gcloud, Azure. On linode/DO the Launch Console still gives access to your server. 
 
 
+On your actual cloud service account, enable 2 factor authentication and set a complex password.
+
 ## Configuration
 
 ### Ports
