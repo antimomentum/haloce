@@ -147,7 +147,7 @@ apt update
 apt-get install docker.io
 
 
-docker run -t -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged dockerusname/containername
+docker run -t -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged dockerusname/imagename
 
 
 Done :)
