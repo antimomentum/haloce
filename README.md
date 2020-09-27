@@ -84,7 +84,7 @@ apt upgrade
 
 apt-get install docker.io
 
-docker run -it -p 2302:2302/udp -p 2303:2303/udp 80:80 --privileged antimomentum/haloce
+docker run -it -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged antimomentum/haloce
 
 Wait for it to build and boot
 
