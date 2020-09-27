@@ -153,6 +153,30 @@ docker run -t -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged dockerusna
 Done :)
 
 
+## Some basic cloud services info
+
+Cloud services such as AWS, Google CLoud, and Azure have security rules outside the host operating system you need to configure to allow your server to communicate with the internet. You need to allow ports: 22, 2302, 2303, 80
+
+Other cloud services such as Linode and Digital Ocean do not require this, but it means we need to do some basic security steps.
+
+First allow the ports through ufw (built into ubuntu).
+
+ufw allow 2302
+ufw allow 2303
+ufw allow 80
+ufw enable
+
+Check to make sure you can still access the server from the game client. If not, try rebooting and re-running your docker run command.
+
+When everything is well and you are ready to let your server just run, disable ssh (on Linode and DigitalOcean only!)
+
+
+service ssh stop
+
+
+Note: disabling ssh may disable access to your server on AWS, Gcloud, Azure. On linode/DO the Launch Console still gives access to your server. 
+
+
 ## Configuration
 
 ### Ports
