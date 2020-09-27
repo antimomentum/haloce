@@ -59,6 +59,7 @@ password is whatever root password you made on your cloud provider dashboard
 port is 22
 The haloce folder is probably under /root/haloce
 
+
 ## Step by step example 
 
 
@@ -98,6 +99,59 @@ pl
 
 map
 
+
+## But wait! There's more! Automated Installs of YOUR server files!
+
+So if you sucessfully built and ran a container with your own custom server files you might be wondering: "Well, if I buillt my own container what do I need the antimomentum/haloce container for?"
+
+The answer is you don't!
+
+To push your own container to Docker make a docker account on the docker website. A free account is fine and is what I'm using.
+
+
+Make sure your container halo server isn't currently running. docker ps will show running containers. docker stop containerid will close the container.
+
+
+Now tag your image. Remember the image ID you got when you succesfully built your custom container image? You needed it to use the docker run command for your files. Good. Give it a name.
+
+
+docker tag imageid dockerusername/containername
+
+
+containerid is the id you got from the docker build . command. dockerusername is your docker user name. And containername is whatever name you want to give it :)
+
+
+next install this:
+
+
+apt-get install gnupg
+
+
+Then login to docker:
+
+
+docker login
+
+
+then push your custom server image to docker!
+
+
+docker push -t dockerusername/containername
+
+
+To download your image to a new server:
+
+
+apt update
+
+
+apt-get install docker.io
+
+
+docker run -t -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged dockerusname/containername
+
+
+Done :)
 
 
 ## Configuration
