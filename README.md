@@ -11,7 +11,7 @@ The container is running 100% headless - no GUI is required for installation, ex
 
 To install docker:
 
-apt-update
+apt update
 
 apt-get install docker.io
 
@@ -47,6 +47,17 @@ docker run -it -p 2302:2302/udp -p 2303:2302/udp -p 80:80 --privileged f01ecb978
 
 with the f01ecb replaced with whatever ID you got from the docker build :) 
 
+## What's that? Copy files to a linux server?
+
+If you're not familiar with command line linux and aren't sure how to get your custom files
+to your server, Filezilla makes this pretty easy. Most cloud providers like Linode and DigitalOcean provide ssh access
+and port access by default. 
+So in Filezilla on your Windows PC enter do this:
+For host enter the IP address of your server
+Username: root
+password is whatever root password you made on your cloud provider dashboard
+port is 22
+The haloce folder is probably under /root/haloce
 ## Configuration
 
 ### Ports
