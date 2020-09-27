@@ -162,8 +162,11 @@ Other cloud services such as Linode and Digital Ocean do not require this, but i
 First allow the ports through ufw (built into ubuntu).
 
 ufw allow 2302
+
 ufw allow 2303
+
 ufw allow 80
+
 ufw enable
 
 Check to make sure you can still access the server from the game client. If not, try rebooting and re-running your docker run command.
