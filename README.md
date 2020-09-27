@@ -112,13 +112,12 @@ To push your own container to Docker make a docker account on the docker website
 Make sure your container halo server isn't currently running. docker ps will show running containers. docker stop containerid will close the container.
 
 
-Now tag your image. Remember the image ID you got when you succesfully built your custom container image? You needed it to use the docker run command for your files. Good. Give it a name.
+Now tag your image. 
+
+docker build -t dockerusername/containername .
 
 
-docker tag imageid dockerusername/containername
-
-
-containerid is the id you got from the docker build . command. dockerusername is your docker user name. And containername is whatever name you want to give it :)
+Don't forget the . there!
 
 
 next install this:
@@ -136,7 +135,7 @@ docker login
 then push your custom server image to docker!
 
 
-docker push -t dockerusername/containername
+docker push dockerusername/containername
 
 
 To download your image to a new server:
