@@ -106,7 +106,7 @@ So if you sucessfully built and ran a container with your own custom server file
 
 The answer is you don't!
 
-To push your own container to Docker make a docker account on the docker website. A free account is fine and is what I'm using.
+To push your own container image to Docker make a docker account on the docker website. A free account is fine and is what I'm using.
 
 
 Make sure your container halo server isn't currently running. docker ps will show running containers. docker stop containerid will close the container.
