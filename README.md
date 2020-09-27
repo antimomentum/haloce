@@ -90,7 +90,7 @@ Wait for it to build and boot
 
 sv_name "Test Container"
 
-You can now find in in the game server list
+You can now find it in the game server list from the game client :)  Make sure your halo server list isn't filtering empty servers!
 
 Here are some sapp commands:
 
