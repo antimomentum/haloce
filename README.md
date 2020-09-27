@@ -58,6 +58,42 @@ Username: root
 password is whatever root password you made on your cloud provider dashboard
 port is 22
 The haloce folder is probably under /root/haloce
+
+## Step by step example 
+
+
+At cloud.linode.com/linodes click Add a Linode
+
+Under Choose a Distribution pick Ubuntu 18 LTS
+
+For Linode plan pick Nanode 1GB
+
+Type in a Root Password and then click create
+
+After it provisions and boots up click on it. You should see "Launch Console" to the right of the page. Click that
+
+Login as: root
+
+with the password you typed in
+
+Then issue:
+
+apt update
+
+apt upgrade
+
+apt-get install docker.io
+
+docker run -it -p 2302:2302/udp -p 2303:2303/udp 80:80 --privileged antimomentum/haloce
+
+sv_name "Test Container"
+
+Here are some sapp commands:
+pl
+map
+
+
+
 ## Configuration
 
 ### Ports
