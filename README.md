@@ -114,10 +114,10 @@ Make sure your container halo server isn't currently running. docker ps will sho
 
 Now tag your image. 
 
-docker build -t dockerusername/containername .
+docker build -t dockerusername/imagename .
 
 
-Don't forget the . there!
+Don't forget the . there! Also, the imagename can be whatever you make up for it.
 
 
 next install this:
@@ -135,7 +135,7 @@ docker login
 then push your custom server image to docker!
 
 
-docker push dockerusername/containername
+docker push dockerusername/imagename
 
 
 To download your image to a new server:
