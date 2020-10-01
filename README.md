@@ -170,9 +170,9 @@ Want to run multiple servers?
 apt-get install -y screen
 
 
-screen -S halo1 docker run -it -p 2304:2304 dockerusername/imagename wineconsole haloceded.exe
+screen -S halo1 docker run -it -p 2304:2304 dockerusername/imagename wineconsole haloceded.exe -port 2304
 
-You'll notice all the ports match each other. For the next server make sure it has its own port that matches too, and just repeat
+You'll notice all the ports match each other. (In order it's: hostport:dockerport and at the end of the command is wineconsole telling halo which port it needs). For the next server make sure it has its own port that matches too, and just repeat
 
 
 screen -S halo2 docker run -it -p 2308:2308 dockerusername/imagename2 wineconsole haloceded.exe -port 2308
