@@ -47,7 +47,18 @@ docker run -it -p 2302:2302/udp f01ecb978acc
 
 with the f01ecb replaced with whatever ID you got from the docker build :) 
 
+##  Push your halo server images to docker!
+
+docker build -t YourDockerUsername/MadeUpImageName . 
+
+apt-get install gnupg
+
+docker login
+
+docker push YourDockerUsername/MadeUpImageName
+
 ## What's that? Copy files to a linux server?
+
 
 If you're not familiar with command line linux and aren't sure how to get your custom files
 to your server, Filezilla makes this pretty easy. Most cloud providers like Linode and DigitalOcean provide ssh access
@@ -147,10 +158,28 @@ apt update
 apt-get install docker.io
 
 
-docker run -t -p 2302:2302/udp dockerusname/imagename
+docker run -it -p 2302:2302/udp dockerusname/imagename
 
 
 Done :)
+
+
+Want to run multiple servers?
+
+
+apt-get install -y screen
+
+
+screen -S halo1 docker run -it -p 2304:2304 dockerusername/imagename wineconsole haloceded.exe
+
+You'll notice all the ports match each other. For the next server make sure it has its own port that matches too, and just repeat
+
+
+screen -S halo2 docker run -it -p 2308:2308 dockerusername/imagename2 wineconsole haloceded.exe -port 2308
+
+
+In other words all you have to do is make an image for EACH halo server once. After that you can run them simply by specifying the image name and port like we just did here!
+
 
 
 ## Some basic cloud services info
