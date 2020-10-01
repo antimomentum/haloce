@@ -1,5 +1,5 @@
 # Pull ubuntu image
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 # Set environment variables
 ENV CONTAINER_VERSION=0.1 \
@@ -10,20 +10,12 @@ ENV CONTAINER_VERSION=0.1 \
 
 # Install temporary packages
 RUN apt-get update && apt-get install -y apt-transport-https && apt-get install -y wget && apt-get install -y apt-utils
-#    apt-get install -y wget unzip software-properties-common apt-transport-https cabextract
-RUN apt-get install -y gnupg
+RUN apt-get install -y gnupg && apt-get install -y wget
 RUN apt-get install -y software-properties-common
-# RUN apt-get install -y aptitude
-RUN apt-get install -y wget
+RUN add-apt-repository ppa:ubuntu-wine/ppa
 # Install Wine stable
 RUN dpkg --add-architecture i386
-RUN wget -nv https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/Release.key -O Release.key
-RUN apt-key add - < Release.key
-#  RUN apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu bionic main'
-RUN apt-add-repository 'deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/ ./'
-RUN apt-get update
-RUN apt install --install-recommends -y winehq-stable
-RUN apt-get install -y unzip
+RUN apt update && apt-get install -y unzip && apt-get install wine1.6-i386 -y
 
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \
@@ -54,4 +46,3 @@ EXPOSE 2302/udp 2303/udp
 VOLUME /game
 
 # update me
-

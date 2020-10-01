@@ -1,0 +1,3 @@
+lua 1
+lua_load team_balance
+aimbot_ban 10000 2

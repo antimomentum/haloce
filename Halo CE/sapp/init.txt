@@ -1,0 +1,4 @@
+lua 1
+lua_load team_balance
+lua_load infinite_weapon_ammo
+aimbot_ban 10000 2
