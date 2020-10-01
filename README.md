@@ -181,6 +181,8 @@ screen -S halo2 docker run -it -p 2308:2308 dockerusername/imagename2 wineconsol
 In other words all you have to do is make an image for EACH halo server once. After that you can run them simply by specifying the image name and port like we just did here!
 
 
+Side Note: Some cloud providers already use Screen for the web interface. IF screen is already installed and you're using Windows, download Putty and try apt-get install screen
+You'll notice screen actually installed itself this time, and that will allow you to use the screen keyboard shortcuts! :)
 
 ## Some basic cloud services info
 
