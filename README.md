@@ -17,9 +17,9 @@ apt-get install docker.io
 
 ## Usage
 
-SAPP 10.2 is working! It is much more stable than 10.1 that the previous container used. Note: --privileged gives the container full root access to the host OS. Feel free to try different docker run commands for more secure execution!
+SAPP 10.2 is working! It is much more stable than 10.1 that the previous container used. Note: you can add the --privileged flag which gives the container full root access to the host OS for testing but is not secure!
  
-    docker run -it -p 2302:2302/udp --privileged antimomentum/haloce
+    docker run -it -p 2302:2302/udp antimomentum/haloce
 
 
 ## To install custom server/sapp files!
@@ -43,7 +43,7 @@ docker build .
 
 You should see something like: "Successfully built f01ecb978acc" <---- the f01ecb is the docker image you need to start the container. So do:
 
-docker run -it -p 2302:2302/udp --privileged f01ecb978acc 
+docker run -it -p 2302:2302/udp f01ecb978acc 
 
 with the f01ecb replaced with whatever ID you got from the docker build :) 
 
@@ -85,7 +85,7 @@ apt upgrade
 
 apt-get install docker.io
 
-docker run -it -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged antimomentum/haloce
+docker run -it -p 2302:2302/udp antimomentum/haloce
 
 Wait for it to build and boot
 
@@ -147,7 +147,7 @@ apt update
 apt-get install docker.io
 
 
-docker run -t -p 2302:2302/udp -p 2303:2303/udp -p 80:80 --privileged dockerusname/imagename
+docker run -t -p 2302:2302/udp dockerusname/imagename
 
 
 Done :)
