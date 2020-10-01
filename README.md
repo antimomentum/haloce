@@ -184,6 +184,7 @@ In other words all you have to do is make an image for EACH halo server once. Af
 Side Note: Some cloud providers already use Screen for the web interface. IF screen is already installed and you're using Windows, download Putty and try apt-get install screen
 You'll notice screen actually installed itself this time, and that will allow you to use the screen keyboard shortcuts! :)
 
+
 ## Some basic cloud services info
 
 Cloud services such as AWS, Google CLoud, and Azure have security rules outside the host operating system you need to configure to allow your server to communicate with the internet. You need to allow ports: 22, 2302, 2303, 80
