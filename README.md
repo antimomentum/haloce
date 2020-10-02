@@ -17,7 +17,7 @@ apt-get install docker.io
 
 ## Usage
 
-SAPP 10.2 is working! It is much more stable than 10.1 that the previous container used. Note: you can add the --privileged flag which gives the container full root access to the host OS for testing but is not secure!
+SAPP 10.2.x is working! (UPX and no UPX versions for sapp 10.2 and 10.2.1) It is much more stable than 10.1 that the previous container used. Note: you can add the --privileged flag which gives the container full root access to the host OS for testing but is not secure!
  
     docker run -it -p 2302:2302/udp antimomentum/haloce
 
