@@ -22,6 +22,10 @@ SAPP 10.2.x is working! (UPX and no UPX versions for sapp 10.2 and 10.2.1) It is
     docker run -it -p 2302:2302/udp antimomentum/haloce
 
 
+No lead Team slayer server. Assult Rifle and Pistol starting weapons:
+
+docker run -it -p 2302:2302/udp antimomentum/noleadts
+
 ## To install custom server/sapp files!
 
 git clone https://github.com/antimomentum/haloce
