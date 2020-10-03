@@ -22,7 +22,7 @@ SAPP 10.2.x is working! (UPX and no UPX versions for sapp 10.2 and 10.2.1) It is
     docker run -it -p 2302:2302/udp antimomentum/haloce
 
 
-No lead Team slayer server. Assult Rifle and Pistol starting weapons:
+No lead Team slayer server. Assult Rifle and Pistol starting weapons. Some of the regular Halo maps are used in the mapcycle:
 
 docker run -it -p 2302:2302/udp antimomentum/noleadts
 
