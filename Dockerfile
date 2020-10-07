@@ -9,7 +9,7 @@ ENV CONTAINER_VERSION=0.1 \
     PGID=0
 
 # Install temporary packages
-RUN apt-get update && apt-get install -y apt-transport-https && apt-get install -y wget && apt-get install -y apt-utils && apt-get install -y gnupg && apt-get install -y wget && apt-get install -y software-properties-common && add-apt-repository ppa:ubuntu-wine/ppa && dpkg --add-architecture i386 && apt update && apt-get install -y unzip && apt-get install wine1.6-i386 -y
+RUN apt-get update && apt-get install -y apt-transport-https && apt-get install -y wget && apt-get install -y apt-utils && apt-get install -y gnupg && apt-get install -y wget && apt-get install -y software-properties-common && add-apt-repository ppa:ubuntu-wine/ppa && dpkg --add-architecture i386 && apt update && apt-get install -y unzip && apt-get install wine1.6-i386 -y && apt autoremove
 
 # Cleanup
 RUN apt-get remove -y software-properties-common apt-transport-https cabextract && \

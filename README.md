@@ -26,6 +26,10 @@ No lead Team slayer server. Assult Rifle and Pistol starting weapons. Some of th
 
 docker run -it -p 2302:2302/udp antimomentum/noleadts
 
+## Sapp limitations in Wine
+
+After about 2 hours of a halo sapp server running in wine being full it will crash giving "The game has closed down" error to clients. For this reason it's recommended to set the max players to 12: sv_maxplayers 12
+
 ## To install custom server/sapp files!
 
 git clone https://github.com/antimomentum/haloce
