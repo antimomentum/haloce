@@ -26,10 +26,10 @@ No lead Team slayer server. Assult Rifle and Pistol starting weapons. Some of th
 
 docker run -it -p 2302:2302/udp antimomentum/noleadts
 
-## Someone is ddosing halo servers. 
+## Someone is DDOSing halo servers. 
 
-See the Basic Cloud Services info section for iptables rules. These rules will mitigate attacks at 300+Mb/s and bring traffic down to about 35Mb/s. Note this is only during the attacks. Halo itself uses far less traffic.
-I will update the iptables rules in a few hours.
+Some iptables rules have been put into the ddosprotection.sh command script. If you are chosing to allow your halo server to show up in the public game list and it fills with players, there's a good chance it will get hit by DDOS attacks.
+These rules will bring the attacks down from over 300Mb/s to about 30Mb/s during the attack. This script works in ubuntu 18.04 on Linode. It could cause issues on AWS, Gcloud, Azure (I haven't tried it on those).
 
 
 ## To install custom server/sapp files!
