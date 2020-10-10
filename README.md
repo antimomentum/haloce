@@ -28,14 +28,7 @@ docker run -it -p 2302:2302/udp antimomentum/noleadts
 
 ## Someone is DDOSing halo servers. 
 
-Some iptables rules have been put into the ddosprotection.sh command script. If you are chosing to allow your halo server to show up in the public game list and it fills with players, there's a good chance it will get hit by DDOS attacks.
-These rules will bring the attacks down from over 300Mb/s to about 30Mb/s during the attack. This script works in ubuntu 18.04 on Linode. It could cause issues on AWS, Gcloud, Azure (I haven't tried it on those).
-
-The script must be ran on the host OS for it to work:
-
-chmod +x ddosprotect.sh
-
-./ddosprotect.sh
+Within about 4 hours of a server being full some no life is DDOSing halo servers. I am currently looking into ways to stop/mitigate the attacks. The current ddos protection script did not work. I will update this section once I have a working solution.
 
 
 ## To install custom server/sapp files!
