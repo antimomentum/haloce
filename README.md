@@ -228,12 +228,6 @@ On your actual cloud service account, enable 2 factor authentication and set a c
 
 ## Configuration
 
-### Ports
-| Port       | Protocol | Description |
-|------------|----------|-------------|
-| `2302` | UDP | The host listener port.  |
-| `2303` | UDP | The client connection port. |
-
 ### Volumes
 
 | Path       | Description | Required |
