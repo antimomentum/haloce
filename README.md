@@ -198,6 +198,7 @@ You'll notice screen actually installed itself this time, and that will allow yo
 
 
 ## Some basic cloud services info
+## This section is about to get a major change
 
 Cloud services such as AWS, Google CLoud, and Azure have security rules outside the host operating system you need to configure to allow your server to communicate with the internet. You need to allow ports: 22, 2302, 2303, 80
 
