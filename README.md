@@ -32,7 +32,8 @@ Within about 4 hours of a server being about full some no life is DDOSing halo s
 
 *update*
 
-testing for a bit first. That is all :)
+https://opencarnage.net/index.php?/topic/8149-halo-ce-servers-ddos/
+
 
 ## To install custom server/sapp files!
 
