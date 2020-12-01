@@ -1,0 +1,69 @@
+iptables -t raw -A PREROUTING -f -j DROP
+iptables -t mangle -I PREROUTING -s your.ssh.IP.here -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
+iptables -t mangle -A PREROUTING -s 34.197.71.170 -j ACCEPT
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 -j DROP
+iptables -t mangle -A PREROUTING -m set --match-set LEGIT src,dst -m state --state ESTABLISHED -j ACCEPT
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m set --match-set DDOS src -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state ESTABLISHED -m recent --name badguy --set" | bash
+iptables -t mangle -A PREROUTING -m state --state ESTABLISHED -m recent --update --name badguy --seconds 410 --hitcount 15 -j SET --add-set DDOS src" | bash
+iptables -t mangle -A PREROUTING ! -p udp -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp -s s1.master.hosthpc.com -j ACCEPT
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 --source-port 53 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 53 --source-port 53 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state INVALID,RELATED -j DROP
+iptables -t mangle -A PREROUTING -s 169.254.0.0/16 -j DROP
+iptables -t mangle -A PREROUTING -s 192.0.2.0/24 -j DROP
+iptables -t mangle -A PREROUTING -s 192.168.0.0/16 -j DROP
+iptables -t mangle -A PREROUTING -s 10.0.0.0/8 -j DROP
+iptables -t mangle -A PREROUTING -s 0.0.0.0/8 -j DROP
+iptables -t mangle -A PREROUTING -s 240.0.0.0/5 -j DROP
+iptables -t mangle -A PREROUTING -s 127.0.0.0/8 ! -i lo,docker0 -j DROP
+iptables -t mangle -A PREROUTING -s 224.0.0.0/3 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m length ! --length 32:900 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m string --string ffffffff676574737461747573 --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "22&0xFFFF=0x0008" -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 389 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 123 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 80 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 443 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 427 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 500 -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 2869 -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "Config" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "VALUE" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SNMP" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "NTP" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "Source Engine Query" --algo kmp --to 65535 -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "getstatus" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "QUIC" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SNMP" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "MDNS" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SRVLOC" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "ISAKMP" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "NBDS" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "XDCMP" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SSDP" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "RTCP" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "H.248" --algo kmp -j DROP
+
+iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "H.323" --algo kmp -j DROP
+
+iptables -t mangle -A POSTROUTING -m state --state INVALID -j DROP
