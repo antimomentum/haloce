@@ -7,7 +7,7 @@
 create_default_firewall()
 {
     echo "Troubleshooter WARNING:"
-    echo "This install is for Linode, DigitalOcean, ONLY (for now). You have 10 seconds to abort now (press CTL +C). This will block SSH and DNS" 
+    echo "This install is for Linode, DigitalOcean, ONLY (for now). You have 5 seconds to abort now (press CTL +C). This will block SSH and DNS" 
     sleep 5
     echo "If you already ran this install script on this system and have not restored your own previous /etc/sysctl.conf_backup settings"
     echo "you need to do that before running this install script again. Reboot to flush iptables as well."
