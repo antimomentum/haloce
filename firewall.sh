@@ -41,7 +41,6 @@ create_default_firewall()
     echo "net.ipv4.conf.default.accept_source_route = 0" >> /etc/sysctl.conf
     echo "net.ipv4.conf.all.proxy_arp = 0" >> /etc/sysctl.conf
     echo "net.ipv4.conf.all.bootp_relay = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.ip_forward = 0" >> /etc/sysctl.conf
     echo "net.ipv4.udp_rmem_min = 16384" >> /etc/sysctl.conf
     echo "net.core.rmem_default = 262144" >> /etc/sysctl.conf
     echo "net.core.rmem_max = 16777216" >> /etc/sysctl.conf
@@ -59,7 +58,7 @@ create_default_firewall()
     echo "ipset create LEGIT hash:ip" | bash
     wait
     echo "iptables -t raw -A PREROUTING -f -j DROP" | bash
-    echo "iptables -t mangle -I PREROUTING -s your.ssh.IP.here -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT" | bash
+    # echo "iptables -t mangle -I PREROUTING -s your.ssh.IP.here -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -s 34.197.71.170 -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -m set --match-set LEGIT src,dst -m state --state ESTABLISHED -j ACCEPT" | bash
