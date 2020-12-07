@@ -5,7 +5,7 @@
 # Function to create default configuration depending on path
 create_default_firewall()
 {
-    echo "This install is for Linode and DigitalOcean. But you can reboot to flush changes 
+    echo "This install is for Linode and DigitalOcean. But you can reboot to flush changes" 
     echo "This will block SSH and DNS. You have 8 seconds to abort"
     echo "Press Ctrl + c to abort if needed" 
     sleep 5
