@@ -5,14 +5,20 @@
 # Function to create default configuration depending on path
 create_default_firewall()
 {
-    echo "This install is for Linode and DigitalOcean. But you can reboot to flush changes" 
-    echo "This will block SSH and DNS. You have 8 seconds to abort"
-    echo "Press Ctrl + c to abort if needed" 
-    sleep 8
+    echo "Troubleshooter WARNING:"
+    echo "This install is for Linode, DigitalOcean, ONLY (for now). You have 5 seconds to abort now (press CTL +C). This will block SSH and DNS" 
+    sleep 5
+    echo "If you already ran this install script on this system and have not restored your own previous /etc/sysctl.conf_backup settings"
+    echo "you need to do that before running this install script again. Reboot to flush iptables as well."
+    echo "If you need to do that abort now (press CTL +C)"
+    sleep 3
     wait
     echo "Installing ipset"
     echo "apt-get install ipset -y" | bash    
+    echo "Backing up current /etc/sysctl.conf and then applying new settings"
+    cp /etc/sysctl.conf /etc/sysctl.conf_backup
     wait    
+    echo 0 > /proc/sys/net/ipv4/ipfrag_high_thresh echo 0 > /proc/sys/net/ipv4/ipfrag_low_thresh
     echo "sysctl -w kernel.pid_max=65535" | bash
     echo "sysctl -w kernel.msgmnb=65535" | bash
     echo "sysctl -w kernel.msgmax=65535" | bash
@@ -50,15 +56,16 @@ create_default_firewall()
     echo "ipset create LEGIT hash:ip" | bash
     wait
     echo "iptables -t raw -A PREROUTING -f -j DROP" | bash
-    # echo "iptables -t mangle -I PREROUTING -s your.ssh.IP.here -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -s 34.197.71.170 -j ACCEPT" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp -s s1.master.hosthpc.com -j ACCEPT" | bash
+    wait
+    # echo "iptables -t mangle -I PREROUTING -s your.ssh.IP.here -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -m set --match-set LEGIT src,dst -m state --state ESTABLISHED -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m set --match-set DDOS src -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state ESTABLISHED -m recent --name badguy --set" | bash
     echo "iptables -t mangle -A PREROUTING -m state --state ESTABLISHED -m recent --update --name badguy --seconds 410 --hitcount 15 -j SET --add-set DDOS src" | bash
     echo "iptables -t mangle -A PREROUTING ! -p udp -j DROP" | bash
-    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp -s s1.master.hosthpc.com -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 --source-port 53 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 53 --source-port 53 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state INVALID,RELATED -j DROP" | bash
