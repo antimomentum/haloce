@@ -6,19 +6,12 @@
 create_default_firewall()
 {
     echo "Troubleshooter WARNING:"
-    echo "This install is for Linode, DigitalOcean, ONLY (for now). You have 5 seconds to abort now (press CTL +C). This will block SSH and DNS" 
-    sleep 5
-    echo "If you already ran this install script on this system and have not restored your own previous /etc/sysctl.conf_backup settings"
-    echo "you need to do that before running this install script again. Reboot to flush iptables as well."
-    echo "If you need to do that abort now (press CTL +C)"
-    sleep 3
+    echo "This install is for Linode/DigitalOcean. This will block SSH and DNS"
+    echo "You can reboot to flush these changes" 
+    sleep 8
     wait
     echo "Installing ipset"
-    echo "apt-get install ipset -y" | bash    
-    echo "Backing up current /etc/sysctl.conf and then applying new settings"
-    cp /etc/sysctl.conf /etc/sysctl.conf_backup
-    wait    
-    echo 0 > /proc/sys/net/ipv4/ipfrag_high_thresh echo 0 > /proc/sys/net/ipv4/ipfrag_low_thresh
+    echo "apt-get install ipset -y" | bash
     echo "sysctl -w kernel.pid_max=65535" | bash
     echo "sysctl -w kernel.msgmnb=65535" | bash
     echo "sysctl -w kernel.msgmax=65535" | bash
