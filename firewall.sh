@@ -12,10 +12,7 @@ create_default_firewall()
     wait
     echo "Installing ipset"
     echo "apt-get install ipset -y" | bash    
-    echo "Backing up current /etc/sysctl.conf and then applying new settings"
-    cp /etc/sysctl.conf /etc/sysctl.conf_backup
     wait    
-    echo 0 > /proc/sys/net/ipv4/ipfrag_high_thresh echo 0 > /proc/sys/net/ipv4/ipfrag_low_thresh
     echo "sysctl -w kernel.pid_max=65535" | bash
     echo "sysctl -w kernel.msgmnb=65535" | bash
     echo "sysctl -w kernel.msgmax=65535" | bash
