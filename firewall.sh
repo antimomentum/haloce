@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 
@@ -20,36 +19,35 @@ create_default_firewall()
     cp /etc/sysctl.conf /etc/sysctl.conf_backup
     wait    
     echo 0 > /proc/sys/net/ipv4/ipfrag_high_thresh echo 0 > /proc/sys/net/ipv4/ipfrag_low_thresh
-    echo "kernel.pid_max = 65535" >> /etc/sysctl.conf
-    echo "kernel.msgmnb = 65535" >> /etc/sysctl.conf
-    echo "kernel.msgmax = 65535" >> /etc/sysctl.conf
-    echo "fs.suid_dumpable = 0" >> /etc/sysctl.conf
-    echo "vm.min_free_kbytes = 65535" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.all.forwarding = 0" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.default.forwarding = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.conf.all.send_redirects = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.conf.default.send_redirects = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.conf.all.accept_source_route = 0" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.all.mc_forwarding=0" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.all.accept_redirects=0" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.eth0.disable_ipv6 = 1" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.all.accept_source_route = 0" >> /etc/sysctl.conf
-    echo "net.ipv6.conf.default.accept_source_route = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.conf.default.accept_source_route = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.conf.all.proxy_arp = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.conf.all.bootp_relay = 0" >> /etc/sysctl.conf
-    echo "net.ipv4.udp_rmem_min = 16384" >> /etc/sysctl.conf
-    echo "net.core.rmem_default = 262144" >> /etc/sysctl.conf
-    echo "net.core.rmem_max = 16777216" >> /etc/sysctl.conf
-    echo "net.ipv4.udp_wmem_min = 16384" >> /etc/sysctl.conf
-    echo "net.core.wmem_default = 262144" >> /etc/sysctl.conf
-    echo "net.core.wmem_max = 16777216" >> /etc/sysctl.conf
-    echo "net.core.optmem_max = 65535" >> /etc/sysctl.conf
-    echo "kernel.sysrq = 0" >> /etc/sysctl.conf
-    sysctl -p
+    echo "sysctl -w kernel.pid_max=65535" | bash
+    echo "sysctl -w kernel.msgmnb=65535" | bash
+    echo "sysctl -w kernel.msgmax=65535" | bash
+    echo "sysctl -w fs.suid_dumpable=0" | bash
+    echo "sysctl -w vm.min_free_kbytes=65535" | bash
+    echo "sysctl -w net.ipv6.conf.all.forwarding=0" | bash
+    echo "sysctl -w net.ipv6.conf.default.forwarding=0" | bash
+    echo "sysctl -w net.ipv4.conf.all.send_redirects=0" | bash
+    echo "sysctl -w net.ipv4.conf.default.send_redirects=0" | bash
+    echo "sysctl -w net.ipv4.conf.all.accept_source_route=0" | bash
+    echo "sysctl -w net.ipv6.conf.all.mc_forwarding=0" | bash
+    echo "sysctl -w net.ipv6.conf.all.accept_redirects=0" | bash
+    echo "sysctl -w net.ipv6.conf.all.disable_ipv6=1" | bash
+    echo "sysctl -w net.ipv6.conf.default.disable_ipv6=1" | bash
+    echo "sysctl -w net.ipv6.conf.lo.disable_ipv6=1" | bash
+    echo "sysctl -w net.ipv6.conf.eth0.disable_ipv6=1" | bash
+    echo "sysctl -w net.ipv6.conf.all.accept_source_route=0" | bash
+    echo "sysctl -w net.ipv6.conf.default.accept_source_route=0" | bash
+    echo "sysctl -w net.ipv4.conf.default.accept_source_route=0" | bash
+    echo "sysctl -w net.ipv4.conf.all.proxy_arp=0" | bash
+    echo "sysctl -w net.ipv4.conf.all.bootp_relay=0" | bash
+    echo "sysctl -w net.ipv4.udp_rmem_min=16384" | bash
+    echo "sysctl -w net.core.rmem_default=262144" | bash
+    echo "sysctl -w net.core.rmem_max=16777216" | bash
+    echo "sysctl -w net.ipv4.udp_wmem_min=16384" | bash
+    echo "sysctl -w net.core.wmem_default=262144" | bash
+    echo "sysctl -w net.core.wmem_max=16777216" | bash
+    echo "sysctl -w net.core.optmem_max=65535" | bash
+    echo "sysctl -w kernel.sysrq=0" | bash
     wait
     sleep 2
     echo "Applying default firewall rules"
