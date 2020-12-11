@@ -75,13 +75,13 @@ create_default_firewall()
     wait
     echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "22&0xFFFF=0x0008" -j DROP)" | bash
     wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 --source-port 389 -j DROP" | bash
-    echo "iptables -t mangle -A PREROUTING -i eth0 --source-port 123 -j DROP" | bash
-    echo "iptables -t mangle -A PREROUTING -i eth0 --source-port 80 -j DROP" | bash
-    echo "iptables -t mangle -A PREROUTING -i eth0 --source-port 443 -j DROP" | bash
-    echo "iptables -t mangle -A PREROUTING -i eth0 --source-port 427 -j DROP" | bash
-    echo "iptables -t mangle -A PREROUTING -i eth0 --source-port 500 -j DROP" | bash
-    echo "iptables -t mangle -A PREROUTING -i eth0 --source-port 2869 -j DROP" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 389 -j DROP" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 123 -j DROP" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 80 -j DROP" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 443 -j DROP" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 427 -j DROP" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 500 -j DROP" | bash
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 2869 -j DROP" | bash
     wait
     echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "Config" --algo kmp -j DROP)" | bash
     wait
