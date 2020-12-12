@@ -75,10 +75,6 @@ create_default_firewall()
     wait
     echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "22&0xFFFF=0x0008" -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m u32 --u32 "42=0x1333360c" -j DROP)" | bash
-    wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "24&0xFF=0x5c" -j DROP)" | bash
-    wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 389 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 123 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 80 -j DROP" | bash
@@ -87,39 +83,39 @@ create_default_firewall()
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 500 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --source-port 2869 -j DROP" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "Config" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "Config" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "VALUE" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "VALUE" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SNMP" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "SNMP" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "NTP" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "NTP" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "Source Engine Query" --algo kmp --to 65535 -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "Source Engine Query" --algo kmp --to 65535 -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "getstatus" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "getstatus" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "QUIC" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "QUIC" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SNMP" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "SNMP" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "MDNS" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "MDNS" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SRVLOC" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "SRVLOC" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "ISAKMP" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "ISAKMP" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "NBDS" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "NBDS" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "XDCMP" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "XDCMP" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "SSDP" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "SSDP" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "RTCP" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "RTCP" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "H.248" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "H.248" --algo kmp -j DROP)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp -m string --string "H.323" --algo kmp -j DROP)" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -m string --string "H.323" --algo kmp -j DROP)" | bash
     wait
     echo "$(iptables -t mangle -A POSTROUTING -m state --state INVALID -j DROP)" | bash
     wait
