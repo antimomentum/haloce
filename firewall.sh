@@ -52,7 +52,7 @@ create_default_firewall()
     echo "iptables -t mangle -A PREROUTING -s 34.197.71.170 -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp -s s1.master.hosthpc.com -j ACCEPT" | bash
     wait
-    echo "iptables -t mangle -I PREROUTING -s 192.58.106.184 -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT" | bash
+    echo "iptables -t mangle -I PREROUTING -s your.ssh.ip.here -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -m set --match-set LEGIT src,dst -m state --state ESTABLISHED -j ACCEPT" | bash
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m set --match-set DDOS src -j DROP" | bash
