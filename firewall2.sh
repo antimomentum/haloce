@@ -64,8 +64,6 @@ create_default_firewall()
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m state --state INVALID,RELATED -j DROP" | bash
     echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "42=0x1333360c" -m recent --name query --set)" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "42=0x1333360c" -m recent --update --name query --seconds 410 --hitcount 3 -j DROP)" | bash
-    wait
     echo "iptables -t mangle -A PREROUTING -s 169.254.0.0/16 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -s 192.0.2.0/24 -j DROP" | bash
     echo "iptables -t mangle -A PREROUTING -s 192.168.0.0/16 -j DROP" | bash
