@@ -45,6 +45,10 @@ create_default_firewall()
     wait
     echo "ipset create TEST1 hash:ip" | bash
     wait
+    echo "ipset add LEGIT 54.82.252.156" | bash
+    wait
+    echo "ipset add LEGIT 34.197.71.170" | bash
+    wait
     sleep 1
     echo "iptables -t mangle -N ctest1" | bash
     wait
@@ -54,9 +58,7 @@ create_default_firewall()
     wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m set --match-set LEGIT src -j ACCEPT" | bash
     wait
-    echo "iptables -t mangle -A PREROUTING -s 34.197.71.170 -j ACCEPT" | bash
-    wait
-    echo "iptables -t mangle -A PREROUTING -s 54.82.252.156 -j ACCEPT" | bash
+    echo "iptables -t mangle -A PREROUTING ! -p udp -j DROP" | bash
     wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -m set --match-set TEST2 src -j ctest2" | bash
     wait
@@ -69,8 +71,6 @@ create_default_firewall()
     echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "42=0x1333360c" -j SET --add-set TEST1 src)" | bash
     wait
     echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "42=0x1333360c" -j ACCEPT)" | bash
-    wait
-    echo "iptables -t mangle -A PREROUTING ! -p udp -j DROP" | bash
     wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -j DROP" | bash
     wait
