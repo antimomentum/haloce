@@ -37,26 +37,26 @@ create_default_firewall()
     echo "sysctl -w kernel.sysrq=0" | bash
     wait
     sleep 1
-    echo "ipset create LEGIT hash:ip timeout 43200" | bash
+    echo "ipset create LEGIT hash:ip" | bash
     wait
-    echo "ipset create DDOS hash:ip timeout 300" | bash
+    echo "ipset create DDOS hash:ip" | bash
     wait
-    echo "ipset create TEST2 hash:ip timeout 300" | bash
+    echo "ipset create TEST2 hash:ip" | bash
     wait
-    echo "ipset create TEST1 hash:ip timeout 300" | bash
+    echo "ipset create TEST1 hash:ip" | bash
     wait
-    echo "ipset add LEGIT 54.82.252.156 timeout 0" | bash
+    echo "ipset add LEGIT 54.82.252.156" | bash
     wait
-    echo "ipset add LEGIT 34.197.71.170 timeout 0" | bash
+    echo "ipset add LEGIT 34.197.71.170" | bash
     wait
     sleep 1
     echo "iptables -t mangle -N ctest1" | bash
     wait
     echo "iptables -t mangle -N ctest2" | bash
     wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m set --match-set LEGIT src -j ACCEPT" | bash
-    wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp -m set --match-set DDOS src -j DROP" | bash
+    wait
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m set --match-set LEGIT src -j ACCEPT" | bash
     wait
     echo "iptables -t mangle -A PREROUTING ! -p udp -j DROP" | bash
     wait
