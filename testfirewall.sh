@@ -129,6 +129,7 @@ create_default_firewall()
     wait
     echo "iptables -P FORWARD DROP" | bash
     wait
+    sleep 1
 
 
 }
