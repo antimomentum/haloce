@@ -64,7 +64,7 @@ create_default_firewall()
     wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -m set --match-set TEST1 src -j ctest1" | bash
     wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 ! --u32 "42=0x1333360c" -j DROP" | bash
+    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 ! --u32 "42=0x1333360c" -j DROP)" | bash
     wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp -m set --match-set DDOS src -j DROP" | bash
     wait
@@ -127,7 +127,7 @@ create_default_firewall()
     wait
     echo "iptables -A INPUT -j DROP" | bash
     wait
-    echo "iptables -P FORWARD DROP" | bash
+    echo "$(iptables -P FORWARD DROP)" | bash
     wait
     sleep 1
 
