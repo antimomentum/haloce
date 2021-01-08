@@ -37,9 +37,7 @@ create_default_firewall()
     echo "sysctl -w kernel.sysrq=0" | bash
     wait
     sleep 1
-    echo "ipset create LEGIT hash:ip timeout 43200" | bash
-    wait
-    echo "ipset create DDOS hash:ip timeout 300" | bash
+    echo "ipset create LEGIT hash:ip timeout 130" | bash
     wait
     echo "ipset create TEST2 hash:ip timeout 300" | bash
     wait
@@ -54,57 +52,41 @@ create_default_firewall()
     wait
     echo "iptables -t mangle -N ctest2" | bash
     wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m set --match-set LEGIT src -j ACCEPT" | bash
+    echo "iptables -t mangle -N legit" | bash
     wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp -m set --match-set DDOS src -j DROP" | bash
+    echo "iptables -t mangle -N pcheck" | bash
+    wait
+    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -j pcheck" | bash
     wait
     echo "iptables -t mangle -A PREROUTING ! -p udp -j DROP" | bash
     wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 -m set --match-set TEST2 src -j ctest2" | bash
-    wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 -m set --match-set TEST1 src -j ctest1" | bash
-    wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 ! --u32 "42=0x1333360c" -j SET --add-set DDOS src)" | bash
-    wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp -m set --match-set DDOS src -j DROP" | bash
-    wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "42=0x1333360c" -j SET --add-set TEST1 src)" | bash
-    wait
-    echo "$(iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -m u32 --u32 "42=0x1333360c" -j ACCEPT)" | bash
-    wait
-    echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 2302 -j DROP" | bash
-    wait
     echo "iptables -t mangle -A PREROUTING -i eth0 -p udp --dport 53 -j DROP" | bash
     wait
-    echo "iptables -t mangle -A ctest1 -m set --match-set DDOS src -j DROP" | bash
+    echo "iptables -t mangle -A pcheck -m set --match-set LEGIT src -j legit" | bash
     wait
-    echo "$(iptables -t mangle -A ctest1 -m u32 --u32 "28=0x5C717565" -j ACCEPT)" | bash
+    echo "$(iptables -t mangle -A pcheck -m u32 --u32 "28=0xfefe0100" -j ctest2)" | bash
     wait
-    echo "$(iptables -t mangle -A ctest1 -m u32 --u32 "42=0x1333360c" -j ACCEPT)" | bash
+    echo "$(iptables -t mangle -A pcheck -m u32 --u32 "28=0x5C717565" -j ACCEPT)" | bash
     wait
-    echo "$(iptables -t mangle -A ctest1 -m u32 --u32 "27&0xFFFFFF=0xFEFD00 && 34&0xFFFFFF=0xFFFFFF" -j SET --add-set TEST2 src)" | bash
+    echo "$(iptables -t mangle -A pcheck -m u32 --u32 "34&0xFFFFFF=0xFFFFFF" -j ctest1)" | bash
     wait
-    echo "$(iptables -t mangle -A ctest1 -m u32 --u32 "27&0xFFFFFF=0xFEFD00 && 34&0xFFFFFF=0xFFFFFF" -j ACCEPT)" | bash
+    echo "$(iptables -t mangle -A pcheck -m u32 ! --u32 "42=0x1333360c" -j DROP)" | bash
     wait
-    echo "iptables -t mangle -A ctest1 -j SET --add-set DDOS src" | bash
+    echo "$(iptables -t mangle -A pcheck -m u32 --u32 "42=0x1333360c" -j SET --add-set TEST1 src)" | bash
     wait
-    echo "iptables -t mangle -A ctest1 -j DROP" | bash
+    echo "$(iptables -t mangle -A pcheck -m u32 --u32 "42=0x1333360c" -j ACCEPT)" | bash
     wait
-    echo "iptables -t mangle -A ctest2 -m set --match-set DDOS src -j DROP" | bash
+    echo "iptables -t mangle -A legit -j SET --exist --add-set LEGIT src" | bash
     wait
-    echo "$(iptables -t mangle -A ctest2 -m u32 --u32 "28=0xfefe0100" -j SET --add-set LEGIT src)" | bash
+    echo "iptables -t mangle -A legit -j ACCEPT" | bash
     wait
-    echo "$(iptables -t mangle -A ctest2 -m u32 --u32 "28=0xfefe0100" -j ACCEPT)" | bash
+    echo "iptables -t mangle -A ctest1 -m set --match-set TEST1 src -j SET --add-set TEST2 src" | bash
     wait
-    echo "$(iptables -t mangle -A ctest2 -m u32 --u32 "28=0x5C717565" -j ACCEPT)" | bash
+    echo "iptables -t mangle -A ctest1 -j ACCEPT" | bash
     wait
-    echo "$(iptables -t mangle -A ctest2 -m u32 --u32 "42=0x1333360c" -j ACCEPT)" | bash
+    echo "iptables -t mangle -A ctest2 -m set --match-set TEST2 src -j SET --add-set LEGIT src" | bash
     wait
-    echo "$(iptables -t mangle -A ctest2 -m u32 --u32 "27&0xFFFFFF=0xFEFD00 && 34&0xFFFFFF=0xFFFFFF" -j ACCEPT)" | bash
-    wait
-    echo "iptables -t mangle -A ctest2 -j SET --add-set DDOS src" | bash
-    wait
-    echo "iptables -t mangle -A ctest2 -j DROP" | bash
+    echo "iptables -t mangle -A ctest2 -j ACCEPT" | bash
     wait
     sleep 1
     echo "iptables -t mangle -A PREROUTING -s 169.254.0.0/16 -j DROP" | bash
@@ -125,8 +107,9 @@ create_default_firewall()
     wait
     echo "iptables -A INPUT -j DROP" | bash
     wait
-    echo "iptables -P FORWARD DROP" | bash
+    echo "$(iptables -P FORWARD DROP)" | bash
     wait
+    sleep 1
 
 
 }
