@@ -1,5 +1,8 @@
 apt-get install ipset -y
 wait
+echo "sysctl -w net.ipv6.conf.all.disable_ipv6=1" | bash
+echo "sysctl -w net.ipv6.conf.default.disable_ipv6=1" | bash
+echo "sysctl -w net.ipv6.conf.lo.disable_ipv6=1" | bash
 ipset create LEGIT hash:ip timeout 30
 ipset create TEST2 hash:ip timeout 120
 ipset create TEST1 hash:ip timeout 120
