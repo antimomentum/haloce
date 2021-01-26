@@ -212,3 +212,14 @@ Note: disabling ssh may disable access to your server on AWS, Gcloud, Azure. On 
 
 
 On your actual cloud service account, enable 2 factor authentication and set a complex password.
+
+## Thanks and Resources ##
+
+Special thanks to:
+Devieth
+http://halopc.com/sv_extensions/
+
+.þsϵυdø.þrø×϶n
+
+Crash
+https://theashclan.org/
