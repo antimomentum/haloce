@@ -216,6 +216,9 @@ On your actual cloud service account, enable 2 factor authentication and set a c
 ## Thanks and Resources ##
 
 Special thanks to:
+
+AugusDogus
+
 Devieth
 http://halopc.com/sv_extensions/
 
@@ -223,3 +226,5 @@ http://halopc.com/sv_extensions/
 
 Crash
 https://theashclan.org/
+
+Everyone else involved in helping make Halo more awesome
