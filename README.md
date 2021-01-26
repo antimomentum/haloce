@@ -201,23 +201,8 @@ You'll notice screen actually installed itself this time, and that will allow yo
 ## Some basic cloud services info
 ## This section is about to get a major change
 
-Cloud services such as AWS, Google CLoud, and Azure have security rules outside the host operating system you need to configure to allow your server to communicate with the internet. You need to allow ports: 22, 2302, 2303, 80
-
-Other cloud services such as Linode and Digital Ocean do not require this, but it means we need to do some basic security steps.
-
-First allow the ports through ufw (built into ubuntu).
-
-ufw allow 2302
-
-ufw allow 2303
-
-ufw allow 80
-
-ufw enable
-
-Check to make sure you can still access the server from the game client. If not, try rebooting and re-running your docker run command.
-
-When everything is well and you are ready to let your server just run, disable ssh (on Linode and DigitalOcean only!)
+Cloud services such as AWS, Google CLoud, and Azure have security rules outside the host operating system you need to configure to allow your server to communicate with the internet. You need to allow ports: 22 and 2302.
+(Note: My firewall blocks tcp, you will need to alter it to accept your IP above the PREROUTING rules for ssh to work for you)
 
 
 service ssh stop
