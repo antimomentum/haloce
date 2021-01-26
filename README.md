@@ -212,13 +212,3 @@ Note: disabling ssh may disable access to your server on AWS, Gcloud, Azure. On 
 
 
 On your actual cloud service account, enable 2 factor authentication and set a complex password.
-
-## Configuration
-
-### Volumes
-
-| Path       | Description | Required |
-|------------|-------------|----------|
-| `/game` | Has to be mounted with the HaloCE Custom Edition game files in place. | Yes |
-| `/config` | Contains config files, if not supplied the default configuration is used. | No |
-| `/logs` | Contains the server logs. | No |
