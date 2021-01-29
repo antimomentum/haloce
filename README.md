@@ -219,6 +219,8 @@ Special thanks to:
 
 AugusDogus
 
+Chalwk77 https://github.com/Chalwk77/HALO-SCRIPT-PROJECTS
+
 Devieth
 http://halopc.com/sv_extensions/
 
