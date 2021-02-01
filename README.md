@@ -229,4 +229,6 @@ http://halopc.com/sv_extensions/
 Crash
 https://theashclan.org/
 
+Chimera http://vaporeon.io/hosted/halo/chimera/ 
+
 Everyone else involved in helping make Halo more awesome
