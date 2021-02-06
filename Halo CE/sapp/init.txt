@@ -1,4 +1,0 @@
-auto_update 0
-network_thread 0
-aimbot_ban 8300 1
-max_idle 0
