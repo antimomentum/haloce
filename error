@@ -1,4 +1,0 @@
-W: GPG error: https://dl.winehq.org/wine-builds/ubuntu bionic InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 76F1A20FF987672F
-E: The repository 'https://dl.winehq.org/wine-builds/ubuntu bionic InRelease' is not signed.
-N: Updating from such a repository can't be done securely, and is therefore disabled by default.
-N: See apt-secure(8) manpage for repository creation and user configuration details.
