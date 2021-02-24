@@ -5,6 +5,8 @@ wait
 tc qdisc replace dev eth0 root prio priomap 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 tc qdisc add dev eth0 ingress
 wait
+apt install ipset -y
+wait
 ipset create LEGIT hash:ip timeout 10
 ipset create TEST2 hash:ip timeout 60
 ipset create TEST1 hash:ip timeout 60
