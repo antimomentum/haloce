@@ -4,6 +4,9 @@ echo "sysctl -w net.ipv6.conf.lo.disable_ipv6=1" | bash
 wait
 tc qdisc replace dev eth0 root prio priomap 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 tc qdisc add dev eth0 ingress
+apt install ipset -y
+wait
+sleep 1
 ipset create LEGIT hash:ip timeout 10
 ipset create TEST2 hash:ip timeout 20
 ipset create TEST1 hash:ip timeout 20
