@@ -31,7 +31,7 @@ iptables -t raw -A PREROUTING -i eth0 -m length ! --length 48 -j DROP
 iptables -t raw -A PREROUTING -i eth0 -m u32 ! --u32 "42=0x1333360c" -j DROP
 iptables -t raw -A PREROUTING -i eth0 -j SET --exist --add-set TEST1 src
 iptables -t raw -A PREROUTING -i eth0 -j ACCEPT
-iptables -A INPUT -i eth0 -m set --match-set TEST1 src -j SET --exist --add-set TEST1 src
+iptables -A INPUT -i eth0 -j SET --exist --add-set TEST1 src
 iptables -A INPUT -i eth0 -m set --match-set LEGIT src -j SET --exist --add-set LEGIT src
 iptables -A INPUT -i eth0 -m set --match-set LEGIT src -j ACCEPT
 iptables -A INPUT -i eth0 -m set --match-set TESTS src -j pcheck

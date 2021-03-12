@@ -32,7 +32,7 @@ iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -m length ! --l
 iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -m u32 ! --u32 "42=0x1333360c" -j DROP
 iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -j SET --exist --add-set TEST1 src
 iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -j ACCEPT
-iptables -t raw -A pcheck -m set --match-set TEST1 src -j SET --exist --add-set TEST1 src
+iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
 iptables -t raw -A pcheck -m set --match-set LEGIT src -j SET --exist --add-set LEGIT src
 iptables -t raw -A pcheck -m set --match-set LEGIT src -j ACCEPT
 iptables -t raw -A pcheck -m u32 --u32 "42=0x1333360c" -j ACCEPT
