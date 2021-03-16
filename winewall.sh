@@ -1,3 +1,4 @@
+
 echo "sysctl -w net.ipv6.conf.all.disable_ipv6=1" | bash
 echo "sysctl -w net.ipv6.conf.default.disable_ipv6=1" | bash
 echo "sysctl -w net.ipv6.conf.lo.disable_ipv6=1" | bash
@@ -20,11 +21,12 @@ iptables -t raw -N pcheck
 iptables -t raw -N legit
 iptables -t raw -A PREROUTING ! -p udp -j DROP
 iptables -t raw -A PREROUTING -i eth0 -p udp -m udp ! --dport 2302 -j DROP
-iptables -t raw -A PREROUTING -i eth0 -m set --match-set TESTS src -j pcheck
-iptables -t raw -A PREROUTING -i eth0 -m length ! --length 48 -j DROP
-iptables -t raw -A PREROUTING -i eth0 -m u32 ! --u32 "42=0x1333360c" -j DROP
-iptables -t raw -A PREROUTING -i eth0 -j SET --exist --add-set TEST1 src
-iptables -t raw -A PREROUTING -i eth0 -j ACCEPT
+iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -m set --match-set TESTS src -j pcheck
+iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -m length ! --length 48 -j DROP
+iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -m u32 ! --u32 "42=0x1333360c" -j DROP
+iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -j SET --exist --add-set TEST1 src
+iptables -t raw -A PREROUTING -i eth0 -p udp -m udp --dport 2302 -j ACCEPT
+iptables -t raw -A PREROUTING -i eth0 -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
 iptables -t raw -A pcheck -m set --match-set LEGIT src -j SET --exist --add-set LEGIT src
 iptables -t raw -A pcheck -m set --match-set LEGIT src -j ACCEPT
@@ -42,9 +44,9 @@ iptables -t raw -A ctest2 -m set --match-set LEGIT src -j ACCEPT
 iptables -t raw -A ctest2 -m u32 --u32 "28=0x5C717565" -j ACCEPT
 iptables -t raw -A ctest2 -m u32 --u32 "34&0xFFFFFF=0xFFFFFF" -j ACCEPT
 iptables -t raw -A ctest2 -j DROP
-iptables -A INPUT -i eth0 -m set --match-set LEGIT src -j ACCEPT
-iptables -A INPUT -i eth0 -m set --match-set TEST2 src -j ACCEPT
-iptables -A INPUT -i eth0 -m set --match-set TEST1 src -j ACCEPT
+iptables -A INPUT -i eth0 -p udp -m udp --dport 2302 -m set --match-set LEGIT src -j ACCEPT
+iptables -A INPUT -i eth0 -p udp -m udp --dport 2302 -m set --match-set TEST2 src -j ACCEPT
+iptables -A INPUT -i eth0 -p udp -m udp --dport 2302 -m set --match-set TEST1 src -j ACCEPT
 iptables -A INPUT -i eth0 -m set --match-set MDNS src -j ACCEPT
 iptables -A INPUT -j DROP
 iptables -P FORWARD  DROP
