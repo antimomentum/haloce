@@ -26,15 +26,6 @@ No lead Team slayer server. Assult Rifle and Pistol starting weapons. Some of th
 
 docker run -it -p 2302:2302/udp antimomentum/noleadts
 
-## Someone is DDOSing halo servers. 
-
-Within about 4 hours of a server being about full some no life is DDOSing halo servers. (If you configured your halo sever not to show in the game's server list it should be fine). I am currently looking into ways to stop/mitigate the attacks. The current ddos protection script did not work. I will update this section once I have a working solution.
-
-*update*
-
-https://opencarnage.net/index.php?/topic/8149-halo-ce-servers-ddos/
-
-
 ## To install custom server/sapp files!
 
 git clone https://github.com/antimomentum/haloce
