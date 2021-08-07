@@ -135,21 +135,6 @@ Side Note: Some cloud providers already use Screen for the web interface. IF scr
 You'll notice screen actually installed itself this time, and that will allow you to use the screen keyboard shortcuts! :)
 
 
-## Some basic cloud services info
-## This section is about to get a major change
-
-Cloud services such as AWS, Google CLoud, and Azure have security rules outside the host operating system you need to configure to allow your server to communicate with the internet. You need to allow ports: 22 and 2302.
-(Note: My firewall blocks tcp, you will need to alter it to accept your IP above the PREROUTING rules for ssh to work for you)
-
-
-service ssh stop
-
-
-Note: disabling ssh may disable access to your server on AWS, Gcloud, Azure. On linode/DO the Launch Console still gives access to your server. 
-
-
-On your actual cloud service account, enable 2 factor authentication and set a complex password.
-
 ## Thanks and Resources ##
 
 Special thanks to:
