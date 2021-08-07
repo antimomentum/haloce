@@ -61,60 +61,6 @@ docker login
 
 docker push YourDockerUsername/MadeUpImageName
 
-## What's that? Copy files to a linux server?
-
-
-If you're not familiar with command line linux and aren't sure how to get your custom files
-to your server, Filezilla makes this pretty easy. Most cloud providers like Linode and DigitalOcean provide ssh access
-and port access by default. 
-So in Filezilla on your Windows PC enter do this:
-For host enter the IP address of your server
-Username: root
-password is whatever root password you made on your cloud provider dashboard
-port is 22
-The haloce folder is probably under /root/haloce
-
-
-## Step by step example 
-
-
-At cloud.linode.com/linodes click Add a Linode
-
-Under Choose a Distribution pick Ubuntu 18 LTS
-
-For Linode plan pick Nanode 1GB
-
-Type in a Root Password and then click create
-
-After it provisions and boots up click on it. You should see "Launch Console" to the right of the page. Click that
-
-Login as: root
-
-with the password you typed in
-
-Then issue:
-
-apt update
-
-apt upgrade
-
-apt-get install docker.io
-
-docker run -it -p 2302:2302/udp antimomentum/haloce
-
-Wait for it to build and boot
-
-sv_name "Test Container"
-
-You can now find it in the game server list from the game client :)  Make sure your halo server list isn't filtering empty servers!
-
-Here are some sapp commands:
-
-pl
-
-map
-
-
 ## But wait! There's more! Automated Installs of YOUR server files!
 
 So if you sucessfully built and ran a container with your own custom server files you might be wondering: "Well, if I buillt my own container what do I need the antimomentum/haloce container for?"
