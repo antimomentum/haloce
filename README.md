@@ -140,6 +140,7 @@ You'll notice screen actually installed itself this time, and that will allow yo
 Special thanks to:
 
 AugusDogus
+
 Chalwk77 https://github.com/Chalwk77/HALO-SCRIPT-PROJECTS
 
 Devieth
