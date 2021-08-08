@@ -13,18 +13,11 @@ RUN echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/s
 RUN apt-get update && apt-get install -y apt-transport-https && apt-get install -y wget && apt-get install -y && dpkg --add-architecture i386 && apt-get update && apt install -y wine wine32 wine64 libwine libwine:i386 fonts-wine
 
 
-# Add the start script
-ADD start.sh .
-
 # Add the default configuration files
 ADD defaults defaults
 
-# Make start script executable and create necessary directories
-RUN chmod +x start.sh && \
-    mkdir logs
-
 # Set start command to execute the start script
-CMD /start.sh
+CMD wineconsole haloceded.exe
 COPY ./halopull /game
 COPY ["./Halo CE", "/root/My Games/Halo CE"]
 # Set working directory into the game directory
