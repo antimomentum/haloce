@@ -1,0 +1,17 @@
+FROM i386/alpine:3.10.2
+
+RUN apk add --no-cache wine=3.0.4-r1 freetype=2.10.0-r1
+								    
+ENV DISPLAY :0
+ENV WINEARCH win32
+
+CMD wine haloceded.exe -path .
+COPY ./halopull /game
+# Set working directory into the game directory
+WORKDIR /game
+
+# Expose necessary ports
+EXPOSE 2302/udp 2303/udp
+
+# Set volumes
+VOLUME /game
