@@ -5,7 +5,7 @@
 
 ## About
 
-This is a Dockerfile for running the Halo CE dedicated server under Linux. The container uses Wine to run the Windows application and xvfb to create a virtual desktop.
+This is a Dockerfile for running the Halo CE dedicated server under Linux.
 
 The container is running 100% headless - no GUI is required for installation, execution or configuration.
 
@@ -19,7 +19,7 @@ apt-get install docker.io
 
 SAPP 10.2.x is working! (UPX and no UPX versions for sapp 10.2 and 10.2.1) It is much more stable than 10.1 that the previous container used. Note: you can drop privileges! Example: sudo docker run -it -p 2302:2302/udp --cap-drop NET_RAW --cap-drop NET_BIND_SERVICE antimomentum/haloce
  
-    docker run -it -p 2302:2302/udp antimomentum/haloce
+    docker run -it -p 2302:2302/udp antimomentum/halo
 
 
 No lead Team slayer server. Assult Rifle and Pistol starting weapons. Some of the regular Halo maps are used in the mapcycle:
