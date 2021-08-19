@@ -54,6 +54,16 @@ docker login
 
 docker push YourDockerUsername/MadeUpImageName
 
+## If not using default port 2302 ## 
+
+To use a different port for the Halo Custom Edition server two changes must be made:
+
+1. In the Dockerfile the last line must be given a port switch at the end to build the container, example:
+CMD wineconsole --backend=curses haloceded -path . -port 2304
+
+2. Then when running it, the port switch must also use 2304. Example:
+docker run -it -p 2304:2304/udp antimomentum/bigassv2
+
 ## Thanks and Resources ##
 
 Special thanks to:
