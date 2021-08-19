@@ -32,14 +32,7 @@ git clone https://github.com/antimomentum/haloce
 
 cd haloce
 
-mkdir halopull
-
-mkdir 'Halo CE'
-
-
-Now copy in the haloceded.exe, Strings.dll, sapp.dll (basically whatever is from you Program Files\Micorosft Games\Halo Custom Edition folder) in the halopull folder.
-For sapp, also copy your My Documents\My Games\Halo CE stuff in the 'Halo CE' folder.
-
+Now copy in your halo server files, all in one folder named "halopull"
 
 Then do:
 
@@ -138,6 +131,8 @@ You'll notice screen actually installed itself this time, and that will allow yo
 ## Thanks and Resources ##
 
 Special thanks to:
+
+Haloss1
 
 AugusDogus
 
