@@ -64,7 +64,7 @@ CMD wineconsole --backend=curses haloceded -path . -port 2304
 
 2. Then when running it, the port switch must also use 2304. Example:
 
-docker run -it -p 2304:2304/udp antimomentum/bigassv2
+docker run -it -p 2304:2304/udp antimomentum/icelandic-tundra-port2304
 
 ## Thanks and Resources ##
 
