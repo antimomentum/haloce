@@ -56,6 +56,8 @@ docker push YourDockerUsername/MadeUpImageName
 
 ## If not using default port 2302 ## 
 
+Skip this section if using Docker Compose
+
 To use a different port for the Halo Custom Edition server two changes must be made:
 
 1. In the Dockerfile the last line must be given a port switch at the end to build the container, example:
@@ -95,6 +97,10 @@ docker attach --detach-keys z haloce_halo_1
 haloce_halo_1 is just an example name you might see from docker ps
 
 press z to leave the halo console without closing the container you attached too.
+
+To stop all containers that docker-compose started:
+
+docker-compose down
 
 ## Thanks and Resources ##
 
