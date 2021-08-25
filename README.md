@@ -84,7 +84,7 @@ docker-compose -d
 
 This brings up all containers in the yml.
 
-To attack to a running container get a list of the *running* containers:
+To attach to a running container get a list of the *running* containers:
 
 docker ps
 
