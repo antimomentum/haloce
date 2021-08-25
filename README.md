@@ -82,7 +82,7 @@ docker build -t yourdockerID/yourcontainer -f Dockerfile-compose .
 
 I have provided an example docker-compose.yml file. Once you have your own containers built you can use yours in the yml instead. To use compose:
 
-docker-compose -d
+docker-compose up -d
 
 This brings up all containers in the yml.
 
