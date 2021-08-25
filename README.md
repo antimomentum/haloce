@@ -66,6 +66,36 @@ CMD wineconsole --backend=curses haloceded -path . -port 2304
 
 docker run -it -p 2304:2304/udp antimomentum/icelandic-tundra-port2304
 
+## Docker Compose ##
+
+Docker compose can be used to quickly bring up multiple halo containers after they've been built. If you plan on using docker compose, you must build your containers with the compatible "Dockerfile-compose" file rather than "Dockerfile"
+
+You can also delete the main Dockerfile and rename Dockerfile-compose to Dockerfile.
+
+By default Docker uses "Dockerfile" for the build instructions, or you can build them like so:
+
+docker build -t yourdockerID/yourcontainer -f Dockerfile-compose .
+
+-f specifies the file for Docker to build with if not using "Dockerfile"
+
+I have provided an example docker-compose.yml file. Once you have your own containers built you can use yours in the yml instead. To use compose:
+
+docker-compose -d
+
+This brings up all containers in the yml.
+
+To attack to a running container get a list of the *running* containers:
+
+docker ps
+
+Then something like this to attach:
+
+docker attach --detach-keys z haloce_halo_1
+
+haloce_halo_1 is just an example name you might see from docker ps
+
+press z to leave the halo console without closing the container you attached too.
+
 ## Thanks and Resources ##
 
 Special thanks to:
