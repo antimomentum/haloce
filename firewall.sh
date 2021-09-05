@@ -3,9 +3,13 @@
 # Requires ipset: apt install ipset -y
 # Add your ip to MDNS for ssh
 # Compatible with Wine-only and Docker
-# Wine requires the master server ips in hosts if NOT using gateway:
+# If using wine-only the master server ips must be in hosts if NOT using gateway:
 # echo "34.197.71.170 hosthpc.com" >> /etc/hosts
 # echo "34.197.71.170 s1.master.hosthpc.com" >> /etc/hosts
+
+# If using Docker, the master ips can be added in the docker run command:
+# docker run -e INTERNAL_PORT=2302 -it -p 2302:2302/udp --add-host=s1.master.hosthpc.com:34.197.71.170 --add-host=hosthpc.com:34.197.71.170 antimomentum/halo
+# docker-compose already has the hosts in the example yml file.
 
 # Rebooting will flush ALL rules/changes below
 wait
