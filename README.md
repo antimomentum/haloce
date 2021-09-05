@@ -56,9 +56,15 @@ docker push YourDockerUsername/MadeUpImageName
 
 ## If not using default port 2302 ## 
 
-INTERNAL_PORT is simply the -port number you give to Halo. For instance, in Windows if you started the halo server by doing:
+INTERNAL_PORT is simply the -port number you give to Halo. 
+
+For instance, in Windows if you started the halo server by doing:
+
 haloceded.exe -port 2312
+
 then INTERNAL_PORT=2312
+
+
 also -p Docker ports must match. So: docker run -e INTERNAL_PORT=2312 -p 2312:2312/udp
 
 ## Docker Compose ##
