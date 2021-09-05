@@ -40,7 +40,7 @@ docker build .
 
 You should see something like: "Successfully built f01ecb978acc" <---- the f01ecb is the docker image you need to start the container. So do:
 
-docker run -it -p 2302:2302/udp f01ecb978acc 
+docker run -e INTERNAL_PORT=2302 -it -p 2302:2302/udp f01ecb978acc 
 
 with the f01ecb replaced with whatever ID you got from the docker build :) 
 
