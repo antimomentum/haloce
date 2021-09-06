@@ -1,5 +1,5 @@
 # Assumes public interface name eth0
-# Uncomment the BOTTOM lines for a NAT gateway, 10.0.0.2 is a VLAN ip example.
+# Uncomment the BOTTOM lines for a NAT gateway, 10.0.0.2 is a VLAN ip example. Also uncomment the sysctl ip_forward setting.
 # Requires ipset: apt install ipset -y
 # Add your ip to MDNS for ssh
 # Compatible with Wine-only and Docker
@@ -19,6 +19,7 @@ sysctl -w net.ipv4.ipfrag_time=0
 sysctl -w net.ipv6.conf.all.disable_ipv6=1 
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 
 sysctl -w net.ipv6.conf.lo.disable_ipv6=1 
+# sysctl -w net.ipv4.ip_forward=1
 sysctl -w net.core.netdev_max_backlog=4000
 wait
 sleep 1
