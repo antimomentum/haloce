@@ -36,6 +36,7 @@ ipset add MDNS 34.197.71.170
 wait
 iptables -t raw -N ctest2
 iptables -t raw -N pcheck
+iptables -t raw -I PREROUTING -i eth0 -p udp --sport 0 -j DROP
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TESTS src -j ACCEPT
 iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "35=0x0a010308" -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TEST1 src -j pcheck
