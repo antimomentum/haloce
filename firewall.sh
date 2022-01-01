@@ -1,4 +1,3 @@
-
 # Assumes public interface name eth0
 # Uncomment the BOTTOM lines for a NAT gateway, 10.0.0.2 is a VLAN ip example. Also uncomment the sysctl ip_forward setting.
 # Requires ipset: apt install ipset -y
@@ -34,6 +33,7 @@ ipset add MDNS 34.197.71.170
 wait
 iptables -t raw -N ctest2
 iptables -t raw -N pcheck
+iptables -t mangle -N reconnect
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j ACCEPT
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set MDNS src -j ACCEPT
 iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "35=0x0a010308" -j pcheck
@@ -59,7 +59,9 @@ iptables -t raw -A ctest2 -m u32 --u32 "42=0x1333360c" -j ACCEPT
 iptables -t raw -A ctest2 -m u32 --u32 "34&0xFFFFFF=0xFFFFFF" -j ACCEPT
 iptables -t raw -A ctest2 -j DROP
 iptables -t mangle -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j SET --exist --add-set LEGIT src,src
-iptables -t mangle -A PREROUTING -i eth0 -m length --length 31 -m set --match-set LEGIT src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j SET --del-set LEGIT src,src
+iptables -t mangle -A PREROUTING -i eth0 -m length --length 31 -m set --match-set LEGIT src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
+iptables -t mangle -A reconnect -j SET --exist --add-set TEST2 src
+iptables -t mangle -A reconnect -j SET --del-set LEGIT src,src
 # iptables -t nat -A PREROUTING -i eth0 -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
 # iptables -t nat -A PREROUTING -i eth0 -m udp -p udp --dport 2304 -j DNAT --to-destination 10.0.0.2:2304
 # iptables -I FORWARD -j ACCEPT
