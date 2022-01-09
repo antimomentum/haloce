@@ -33,9 +33,10 @@ ipset add MDNS 34.197.71.170
 wait
 iptables -t raw -N ctest2
 iptables -t raw -N pcheck
+iptables -t raw -N madmins
 iptables -t mangle -N reconnect
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j ACCEPT
-iptables -t raw -A PREROUTING -i eth0 -m set --match-set MDNS src -j ACCEPT
+iptables -t raw -A PREROUTING -i eth0 -m set --match-set MDNS src -j madmins
 iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "35=0x0a010308" -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TEST1 src -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -m length ! --length 34 -j DROP
@@ -45,7 +46,7 @@ iptables -t raw -A pcheck -p udp --sport 0 -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
 iptables -t raw -A pcheck -m u32 --u32 "42=0x1333360c" -j ACCEPT
 iptables -t raw -A pcheck -m set --match-set TEST2 src -j ctest2
-iptables -t raw -A pcheck -m u32 --u32 "28=0x5C717565" -j ACCEPT
+iptables -t raw -A pcheck -m u32 --u32 "28=0x5C717565" -j ctest2
 iptables -t raw -A pcheck -m u32 ! --u32 "34&0xFFFFFF=0xFFFFFF" -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST2 src
 iptables -t raw -A pcheck -j ACCEPT
@@ -58,6 +59,10 @@ iptables -t raw -A ctest2 -m u32 --u32 "28=0x5C717565" -j ACCEPT
 iptables -t raw -A ctest2 -m u32 --u32 "42=0x1333360c" -j ACCEPT
 iptables -t raw -A ctest2 -m u32 --u32 "34&0xFFFFFF=0xFFFFFF" -j ACCEPT
 iptables -t raw -A ctest2 -j DROP
+iptables -t raw -A madmins -s 34.197.71.170 -j ACCEPT
+iptables -t raw -A madmins -s 54.82.252.156 -j ACCEPT
+iptables -t raw -A madmins -p tcp -j ACCEPT
+iptables -t raw -A madmins -p udp -j pcheck
 iptables -t mangle -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j SET --exist --add-set LEGIT src,src
 iptables -t mangle -A PREROUTING -i eth0 -m length --length 31 -m set --match-set LEGIT src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
 iptables -t mangle -A reconnect -j SET --del-set TEST1 src
