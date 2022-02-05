@@ -1,4 +1,4 @@
-## This is a quick copy pasta file for the docker installation on Debian 9
+## This is a quick copy pasta file for the docker installation on Debian 9 on amd64 systems
 
 
 apt-get update
