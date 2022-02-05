@@ -27,7 +27,9 @@ Then the management port for the client server must be allowed through the firew
 
 iptables -t nat -A PREROUTING -i eth0 -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.2:3389
 
-would allow RDP to the Windows halo client, put these rules under the nat rules for the halo port rules to keep player packets prioritized. For a Linux client replace port 3389 with 22 for ssh. Unlike ipset ip changes, changing iptables to a running firewall can disrupt other connections. It is recommended to TEST FIRST. And plan your rules to not require iptables changes to the live firewall.
+would allow RDP to the Windows halo client, put these rules under the nat rules for the halo port rules to keep player packets prioritized. 
+For a Linux client replace port 3389 with 22 for ssh. Unlike ipset ip changes, changing iptables to a running firewall can disrupt other connections. 
+It is recommended to TEST FIRST. And plan your rules to not require iptables changes to the live firewall.
 
 
 Assuming a default Wireguard install on the gateway these files go in the /etc/wireguard directory:
