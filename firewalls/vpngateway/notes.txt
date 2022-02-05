@@ -42,7 +42,8 @@ wg-quick up wg0   <--- runs firewall.sh and brings up the tunnel interface conne
 
 Lastly, vpn client whitelisting:
 
-vpn client ips should be whitelisted. vpnwall.sh actually leaves port 51820 (default wireguard port) open. This is to fast track vpn packets coming out from the halo servers back to players as quick as possible. The hosting provider of the gateway should have an outside/edge firewall you can use to only allow the public ip of the halo vpn clients to this port. But in case there is no outside firewall option available you can replace this rule:
+vpn client ips should be whitelisted. vpnwall.sh actually leaves port 51820 (default wireguard port) open. This is to fast track vpn packets coming out from the halo servers back to players as quick as possible. 
+The hosting provider of the gateway should have an outside/edge firewall you can use to only allow the public ip of the halo vpn clients to this port. But in case there is no outside firewall option available you can replace this rule:
 
 iptables -t raw -A PREROUTING -i eth0 -p udp --dport 51820 -j ACCEPT
 
