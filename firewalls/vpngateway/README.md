@@ -38,9 +38,16 @@ would allow RDP to the Windows halo client, put these rules under the nat rules 
 
 Assuming a default Wireguard install on the gateway these files go in the /etc/wireguard directory:
 
-wg0.conf flush.sh vpnwall.sh open.sh (for troubleshooting if needed)
 
-open.sh is just a totally open and unprotected proxy forwarding without any firewall rules used ONLY for troubleshooting. In wg0.conf replace vpnwall.sh with open.sh to use it.
+wg0.conf 
+
+flush.sh 
+
+vpnwall.sh 
+
+opentroubleshooter.sh (for troubleshooting if needed)
+
+opentroubleshooter.sh is just a totally open and unprotected proxy forwarding without any firewall rules used ONLY for troubleshooting. In wg0.conf replace vpnwall.sh with open.sh to use it.
 
 wg-quick down wg0 <--brings down the tunnel and runs flush.sh to flush the firewall rules wg-quick up wg0 <--- runs firewall.sh and brings up the tunnel interface connection. If everything is set up properly a Windows Client could click Activate in Wireguard and connect to the gateway.
 
