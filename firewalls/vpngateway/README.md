@@ -49,7 +49,9 @@ opentroubleshooter.sh (for troubleshooting if needed)
 
 opentroubleshooter.sh is just a totally open and unprotected proxy forwarding without any firewall rules used ONLY for troubleshooting. In wg0.conf replace vpnwall.sh with open.sh to use it.
 
-wg-quick down wg0 <--brings down the tunnel and runs flush.sh to flush the firewall rules wg-quick up wg0 <--- runs firewall.sh and brings up the tunnel interface connection. If everything is set up properly a Windows Client could click Activate in Wireguard and connect to the gateway.
+wg-quick down wg0 <--brings down the tunnel and runs flush.sh to flush the firewall rules 
+
+wg-quick up wg0 <--- runs firewall.sh and brings up the tunnel interface connection. If everything is set up properly a Windows Client could click Activate in Wireguard and connect to the gateway.
 
 Lastly, vpn client whitelisting:
 
