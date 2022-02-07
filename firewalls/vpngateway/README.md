@@ -16,7 +16,9 @@ Windows clients will also need the master server ip in the hosts file. For Windo
 c:\windows\system32\drivers\etc\hosts
 
 add these two lines to the bottom of hosts:
+
 34.197.71.170 hosthpc.com
+
 34.197.71.170 s1.master.hosthpc.com
 
 
