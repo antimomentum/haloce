@@ -4,6 +4,9 @@ Here is the Wireguard install page:
 
 https://www.wireguard.com/install/
 
+
+## Clients
+
 All client public keys are given to the gateway's /etc/wireguard/wg0.conf file. An example of the file with two client peers is present with the name "wg0.conf"
 
 Each of those two peers would need their PUBLIC key there in that file on the gateway.
@@ -21,6 +24,8 @@ add these two lines to the bottom of hosts:
 
 34.197.71.170 s1.master.hosthpc.com
 
+
+## The Gateway
 
 The gateway itself however MUST be Linux server with both Wireguard and ipset installed. I recommend Debian 9 or Ubuntu 18.04 LTS (or higher). On these ditros ipset should be easy to install, just apt update and apt install ipset
 
