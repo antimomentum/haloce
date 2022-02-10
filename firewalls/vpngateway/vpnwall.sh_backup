@@ -1,8 +1,9 @@
 # Assumes public interface name eth0
+# Uncomment the BOTTOM lines for a NAT gateway, 10.0.0.2 is a VLAN/VPN ip example. Also uncomment the sysctl ip_forward setting.
 # Requires ipset: apt install ipset -y
 # Add your ip to MDNS for ssh
 # Compatible with Wine-only and Docker
-# If using wine-only the master server ips must be in hosts of the wireguard client:
+# If using wine-only the master server ips must be in hosts if NOT using gateway:
 # echo "34.197.71.170 hosthpc.com" >> /etc/hosts
 # echo "34.197.71.170 s1.master.hosthpc.com" >> /etc/hosts
 
@@ -10,6 +11,8 @@
 # docker run -e INTERNAL_PORT=2302 -it -p 2302:2302/udp --add-host=s1.master.hosthpc.com:34.197.71.170 --add-host=hosthpc.com:34.197.71.170 antimomentum/halo
 # docker-compose already has the hosts in the example yml file.
 
+# Rebooting will flush ALL rules/changes below
+wait
 sysctl -w net.ipv6.conf.all.disable_ipv6=1 
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 
 sysctl -w net.ipv6.conf.lo.disable_ipv6=1
@@ -73,7 +76,5 @@ iptables -t mangle -A reconnect -j SET --del-set TEST1 src
 iptables -t mangle -A reconnect -j SET --del-set LEGIT src,src
 iptables -t nat -A PREROUTING -i eth0 -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
 iptables -t nat -A PREROUTING -i eth0 -m udp -p udp --dport 2304 -j DNAT --to-destination 10.0.0.4:2304
-iptables -A FORWARD -m udp -p udp -d 10.0.0.2 --dport 2302 -j ACCEPT
-iptables -A FORWARD -m udp -p udp -s 10.0.0.2 --sport 2302 -j ACCEPT
-iptables -A FORWARD -j DROP
+iptables -I FORWARD -j ACCEPT
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
