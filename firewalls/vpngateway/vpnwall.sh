@@ -29,7 +29,6 @@ wait
 ipset add MDNS 54.82.252.156
 ipset add MDNS 34.197.71.170
 # ipset add MDNS haloserverpublicip
-ipset add MDNS 1.1.1.1
 wait
 iptables -t raw -N ctest2
 iptables -t raw -N pcheck
