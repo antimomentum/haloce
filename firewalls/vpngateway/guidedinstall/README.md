@@ -30,9 +30,9 @@ Usually it will named something like eth0 or enp1s0
 
 
 
-2. A static ip to be whitelisted in the firewall for admin management. Whether it be for ssh to the gateway itself or RDP to the windows vpn client a static ip is required for this. However, if your gateway VPS host offers web UI console access to the server through an account on their website,
 
-then the admin ip(s) can be changed at any time with: ipset add MDNS newiphere
+2. A static ip to be whitelisted in the firewall for admin management. Whether it be for ssh to the gateway itself or RDP to the windows vpn client a static ip is required for this. However, if your gateway VPS host offers web UI console access to the server through an account on their website, then the admin ip(s) can be changed at any time with: ipset add MDNS newiphere
+
 
 
 
@@ -56,3 +56,12 @@ The Wireguard client on Windows MAY LOCK YOU OUT OF THE SERVER!!!!! If the host 
 It is important to have the correct admin ip entered. If you entered it incorrectly go to /etc/wireguard/vpnwall.sh and enter your ip into MDNS.
 
 If everything was correct you can copy the client1.conf and client2.conf files off the gateway. They should be fully ready to use in Windows or Linux, but again expect to RDP to the gateway once you import the conf file and click Activate in Wireguard on Windows if you rely on RDP for access. 
+
+
+## Start the firewall and tunnel
+
+
+On the gateway this will run the firewall and start the tunnel:
+
+wg-quick up wg0
+
