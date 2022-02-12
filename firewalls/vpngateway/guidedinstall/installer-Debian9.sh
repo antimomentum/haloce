@@ -1,6 +1,10 @@
 # service ssh stop
 # Wireguard Gateway install
 
+## Disabling ufw
+
+ufw disable
+
 # ipset
 echo "Installing ipset"
 apt update
