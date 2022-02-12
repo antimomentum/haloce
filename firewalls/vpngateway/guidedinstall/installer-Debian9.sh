@@ -71,6 +71,7 @@ iptables -t raw -N ctest2
 iptables -t raw -N pcheck
 iptables -t raw -N madmins
 iptables -t mangle -N reconnect
+# iptables -t raw -A PREROUTING -i eth0 -p udp --dport 51820 -m set --match-set MDNS src -j ACCEPT
 iptables -t raw -A PREROUTING -i eth0 -p udp --dport 51820 -j ACCEPT
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j ACCEPT
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TEST1 src -j pcheck

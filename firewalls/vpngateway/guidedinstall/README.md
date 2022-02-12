@@ -49,6 +49,25 @@ ipset and wireguard will be installed. The firewall and wireguard will not be en
 
 
 
+## Host provider firewall
+
+
+Port 51820 will still be open. The host provider for your gateway will likely have an outside/edge firewall you can use to only allow your windows/linux client public ip to the port. But in case there is not firewall for you to use, or it costs money, you can replace this line in /etc/wireguard/vpnwall.sh:
+
+
+iptables -t raw -A PREROUTING -i eth0 -p udp --dport 51820 -j ACCEPT
+
+
+with this line:
+
+ 
+iptables -t raw -A PREROUTING -i eth0 -p udp --dport 51820 -m set --match-set MDNS src -j ACCEPT
+
+
+assuming iface name eth0. Be sure to add the real public ip of your halo client to MDNS.
+
+
+
 ## Be careful-lockout
 
 The Wireguard client on Windows MAY LOCK YOU OUT OF THE SERVER!!!!! If the host provider has web UI access or you have physical access to the server you don't have to worry about getting locked out.
