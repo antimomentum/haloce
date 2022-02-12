@@ -71,16 +71,16 @@ iptables -t raw -N ctest2
 iptables -t raw -N pcheck
 iptables -t raw -N madmins
 iptables -t mangle -N reconnect
-# iptables -t raw -A PREROUTING -i eth0 -p udp --dport 51820 -m set --match-set MDNS src -j ACCEPT
-iptables -t raw -A PREROUTING -i eth0 -p udp --dport 51820 -j ACCEPT
-iptables -t raw -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j ACCEPT
-iptables -t raw -A PREROUTING -i eth0 -m set --match-set TEST1 src -j pcheck
-iptables -t raw -A PREROUTING -i eth0 -m set --match-set MDNS src -j madmins
-iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "35=0x0a010308" -j pcheck
-iptables -t raw -A PREROUTING -i eth0 -m length --length 67 -m u32 --u32 "28=0xfefe0100" -j ctest2
-iptables -t raw -A PREROUTING -i eth0 -m length ! --length 34 -j DROP
-iptables -t raw -A PREROUTING -i eth0 -m u32 ! --u32 "28=0x5C717565" -j DROP
-iptables -t raw -A PREROUTING -i eth0 -j ctest2
+# iptables -t raw -A PREROUTING -i $newname -p udp --dport 51820 -m set --match-set MDNS src -j ACCEPT
+iptables -t raw -A PREROUTING -i $newname -p udp --dport 51820 -j ACCEPT
+iptables -t raw -A PREROUTING -i $newname -m set --match-set LEGIT src,src -j ACCEPT
+iptables -t raw -A PREROUTING -i $newname -m set --match-set TEST1 src -j pcheck
+iptables -t raw -A PREROUTING -i $newname -m set --match-set MDNS src -j madmins
+iptables -t raw -A PREROUTING -i $newname -m length --length 48 -m u32 --u32 "35=0x0a010308" -j pcheck
+iptables -t raw -A PREROUTING -i $newname -m length --length 67 -m u32 --u32 "28=0xfefe0100" -j ctest2
+iptables -t raw -A PREROUTING -i $newname -m length ! --length 34 -j DROP
+iptables -t raw -A PREROUTING -i $newname -m u32 ! --u32 "28=0x5C717565" -j DROP
+iptables -t raw -A PREROUTING -i $newname -j ctest2
 iptables -t raw -A pcheck -p udp --sport 0 -j DROP
 iptables -t raw -A pcheck ! -p udp -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
@@ -106,13 +106,13 @@ iptables -t raw -A madmins -s 54.82.252.156 -j ACCEPT
 iptables -t raw -A madmins -p tcp -j ACCEPT
 iptables -t raw -A madmins -p udp --dport 3389 -j ACCEPT
 iptables -t raw -A madmins -p udp -j pcheck
-iptables -t mangle -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j SET --exist --add-set LEGIT src,src
-iptables -t mangle -A PREROUTING -i eth0 -m length --length 31 -m set --match-set LEGIT src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
+iptables -t mangle -A PREROUTING -i $newname -m set --match-set LEGIT src,src -j SET --exist --add-set LEGIT src,src
+iptables -t mangle -A PREROUTING -i $newname -m length --length 31 -m set --match-set LEGIT src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
 iptables -t mangle -A reconnect -j SET --del-set TEST1 src
 iptables -t mangle -A reconnect -j SET --del-set LEGIT src,src
-iptables -t nat -A PREROUTING -i eth0 -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
-iptables -t nat -A PREROUTING -i eth0 -m udp -p udp --dport 2304 -j DNAT --to-destination 10.0.0.4:2304
-iptables -t nat -A PREROUTING -i eth0 -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.2:3389 
+iptables -t nat -A PREROUTING -i $newname -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
+iptables -t nat -A PREROUTING -i $newname -m udp -p udp --dport 2304 -j DNAT --to-destination 10.0.0.4:2304
+iptables -t nat -A PREROUTING -i $newname -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.2:3389 
 iptables -A FORWARD -m udp -p udp -d 10.0.0.2 --dport 2302 -j ACCEPT
 iptables -A FORWARD -m udp -p udp -s 10.0.0.2 --sport 2302 -j ACCEPT
 iptables -A FORWARD -m udp -p udp -d 10.0.0.4 --dport 2304 -j ACCEPT
@@ -120,7 +120,7 @@ iptables -A FORWARD -m udp -p udp -s 10.0.0.4 --sport 2304 -j ACCEPT
 iptables -A FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
 iptables -A FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
 iptables -A FORWARD -j DROP
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o $newname -j MASQUERADE
 END
 
 wait
@@ -157,9 +157,9 @@ echo "Done"
 echo "Create firewall flusher"
 
 cat <<FLUSH >/etc/wireguard/flush.sh
-iptables -t nat -D PREROUTING -i eth0 -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
-iptables -t nat -D PREROUTING -i eth0 -m udp -p udp --dport 2304 -j DNAT --to-destination 10.0.0.4:2304
-iptables -t nat -D PREROUTING -i eth0 -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.2:3389 
+iptables -t nat -D PREROUTING -i $newname -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
+iptables -t nat -D PREROUTING -i $newname -m udp -p udp --dport 2304 -j DNAT --to-destination 10.0.0.4:2304
+iptables -t nat -D PREROUTING -i $newname -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.2:3389 
 iptables -D FORWARD -m udp -p udp -d 10.0.0.2 --dport 2302 -j ACCEPT
 iptables -D FORWARD -m udp -p udp -s 10.0.0.2 --sport 2302 -j ACCEPT
 iptables -D FORWARD -m udp -p udp -d 10.0.0.4 --dport 2304 -j ACCEPT
@@ -194,11 +194,9 @@ Address = 10.0.0.1/24
 PostUp = /etc/wireguard/vpnwall.sh
 PostDown = /etc/wireguard/flush.sh
 ListenPort = 51820
-
 [Peer]
 PublicKey = $C1KEY
 AllowedIPs = 10.0.0.2/32
-
 [Peer]
 PublicKey = $C2KEY
 AllowedIPs = 10.0.0.4/32
@@ -212,7 +210,6 @@ cat <<CLIENTS1 >client1.conf
 [Interface]
 Address = 10.0.0.2/32
 PrivateKey = $C1PKEY
-
 [Peer]
 PublicKey = $PUBLICKEY
 AllowedIPs = 0.0.0.0/0
@@ -225,7 +222,6 @@ cat <<CLIENTS2 >client2.conf
 [Interface]
 Address = 10.0.0.4/32
 PrivateKey = $C2PKEY
-
 [Peer]
 PublicKey = $PUBLICKEY
 AllowedIPs = 0.0.0.0/0
