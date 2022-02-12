@@ -65,3 +65,10 @@ On the gateway this will run the firewall and start the tunnel:
 
 wg-quick up wg0
 
+
+To bring down the tunnel:
+
+wg-quick down wg0
+
+
+Rebooting the gateway will also flush the firewall and bring down the tunnel.
