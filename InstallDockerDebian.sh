@@ -1,4 +1,4 @@
-## This is a quick copy pasta file for the docker installation on Debian 9
+## This is a quick copy pasta file for the docker installation on Debian 9 on amd64 systems
 
 
 apt-get update
@@ -14,7 +14,7 @@ apt-get install \
 
 
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
 
 

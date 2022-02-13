@@ -19,7 +19,7 @@ Follow the [Docker install documentation](https://docs.docker.com/get-docker/) f
 SAPP 10.2.x is working! (UPX and no UPX versions for sapp 10.2 and 10.2.1) It is much more stable than 10.1 that the previous container used. 
 
 ``` 
-docker run -it -p 2302:2302/udp antimomentum/halo
+$ docker run -it -p 2302:2302/udp antimomentum/halo
 ```
 
 **_NOTE:_** you can drop privileges! 
@@ -41,7 +41,7 @@ Now copy in your halo server files, all in one folder named `halopull`
 
 Then do:
 ```
-docker build . 
+$ docker build . 
 ```
 You should see something like: 
 ```
@@ -51,22 +51,22 @@ The `f01ecb` is the docker image you need to start the container.
 
 So do:
 ```
-docker run -it -p 2302:2302/udp f01ecb978acc 
+$ docker run -it -p 2302:2302/udp f01ecb978acc 
 ```
 With the `f01ecb` replaced with whatever `ID` you got from the `docker build` :) 
 
 ##  Push your halo server images to docker!
 ```
-docker build -t YourDockerUsername/MadeUpImageName . 
+$ docker build -t YourDockerUsername/MadeUpImageName . 
 ```
 ```
-apt-get install gnupg
+# apt-get install gnupg
 ```
 ```
-docker login
+$ docker login
 ```
 ```
-docker push YourDockerUsername/MadeUpImageName
+$ docker push YourDockerUsername/MadeUpImageName
 ```
 ## Example custom image:
 
@@ -75,15 +75,15 @@ docker push YourDockerUsername/MadeUpImageName
 Assult Rifle and Pistol starting weapons. 
 Some of the regular Halo maps are used in the mapcycle:
 ```
-docker run -it -p 2302:2302/udp antimomentum/noleadts
+$ docker run -it -p 2302:2302/udp antimomentum/noleadts
 ```
 ## If not using default port 2302 ## 
 
-To use a different port for the Halo Custom Edition server two changes must be made:
+INTERNAL_PORT is simply the -port number you give to Halo. 
 
 1. In the `Dockerfile` the last line must be given a port switch at the end to build the container.
 
-Example:
+### Example:
 
 DockerFile
 ```
@@ -92,9 +92,60 @@ CMD wineconsole --backend=curses haloceded -path . -port 2304
 
 2. Then when running it, the port switch must also use 2304. 
 
-Example:
+### Example:
 ```
-docker run -it -p 2304:2304/udp antimomentum/icelandic-tundra-port2304
+$ docker run -it -p 2304:2304/udp antimomentum/icelandic-tundra-port2304
+```
+
+For instance, in Windows if you started the halo server by doing:
+
+```
+haloceded.exe -port 2312
+```
+
+then `INTERNAL_PORT`=`2312`
+
+Also `-p` Docker ports must match. 
+
+So: 
+```
+$ docker run -e INTERNAL_PORT=2312 -p 2312:2312/udp
+```
+
+## Docker Compose ##
+
+[Docker compose](https://docs.docker.com/compose/) can be used to quickly bring up multiple halo containers after they've been built. If you plan on using Docker compose, you must build your containers with the compatible `docker-compose.yaml` file rather than `Dockerfile`
+
+I have provided an example `docker-compose.yaml` file. Once you have your own containers built you can use your container images inside the file instead. 
+
+To use compose:
+
+```
+$ docker-compose up -d
+```
+
+This brings up all containers declared in the `docker-compose.yaml` file.
+
+To attach to a running container get a list of the *running* containers:
+
+```
+$ docker ps
+```
+
+Then something like this to attach:
+
+```
+$ docker attach --detach-keys z haloce_halo_1
+```
+
+`haloce_halo_1` is just an example `name` you might see from `docker ps`
+
+Press `z` to leave the halo console without closing the container you attached too.
+
+To stop all containers that `docker-compose` started:
+
+```
+$ docker-compose down
 ```
 
 ## Thanks and Resources ##
