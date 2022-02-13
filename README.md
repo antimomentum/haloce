@@ -101,7 +101,7 @@ docker run -it -p 2304:2304/udp antimomentum/icelandic-tundra-port2304
 
 Special thanks to:
 
-Haloss1
+[Haloss1](https://www.haloss1.me/)
 
 AugusDogus
 
