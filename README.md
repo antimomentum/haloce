@@ -2,11 +2,13 @@
 
 # Halo CE dedicated server dockerized
 
+[DockerHub](https://hub.docker.com/r/antimomentum/halo)
+
 ## About
 
-This is a Dockerfile for running the Halo CE dedicated server under Linux.
+This is a [Dockerfile](https://docs.docker.com/engine/reference/builder/) for running the Halo CE dedicated server under Linux.
 
-The container is running 100% headless - no GUI is required for installation, execution or configuration.
+The [container](https://www.docker.com/resources/what-container) is running 100% headless - no GUI is required for installation, execution or configuration.
 
 ## To install Docker:
 
