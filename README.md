@@ -113,6 +113,6 @@ AugusDogus
 
 [Crash](https://theashclan.org/)
 
-[Chimera](http://vaporeon.io/hosted/halo/chimera/)
+[Chimera](https://github.com/SnowyMouse/chimera)
 
 Everyone else involved in helping make Halo more awesome
