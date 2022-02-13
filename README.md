@@ -105,16 +105,14 @@ Special thanks to:
 
 AugusDogus
 
-Chalwk77 https://github.com/Chalwk77/HALO-SCRIPT-PROJECTS
+[Chalwk77](https://github.com/Chalwk77/HALO-SCRIPT-PROJECTS)
 
-Devieth
-http://halopc.com/sv_extensions/
+[Devieth](http://halopc.com/sv_extensions/)
 
 .þsϵυdø.þrø×϶n
 
-Crash
-https://theashclan.org/
+[Crash](https://theashclan.org/)
 
-Chimera http://vaporeon.io/hosted/halo/chimera/ 
+[Chimera](http://vaporeon.io/hosted/halo/chimera/)
 
 Everyone else involved in helping make Halo more awesome
