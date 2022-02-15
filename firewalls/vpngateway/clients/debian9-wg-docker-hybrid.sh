@@ -1,7 +1,8 @@
 apt-get update
 wait
 apt install unzip
-
+wait
+sleep 1
 wget https://opencarnage.net/applications/core/interface/file/attachment.php?id=1364 && mv attachment.php\?id\=1364 halopull.zip
 wait
 sleep 2
@@ -113,7 +114,7 @@ apt-get remove \
     curl \
     gnupg-agent \
     software-properties-common \
-    apt remove unattended-upgrades -y
+    unattended-upgrades -y
 
 echo "Done"
 
