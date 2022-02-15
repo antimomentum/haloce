@@ -1,5 +1,8 @@
 apt-get update
 wait
+apt upgrade -y
+wait
+sleep 3
 apt install unzip
 wait
 sleep 1
