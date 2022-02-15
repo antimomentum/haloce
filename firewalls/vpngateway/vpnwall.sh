@@ -1,3 +1,17 @@
+# You must disable ufw: ufw disable
+# Assumes public interface name eth0
+# Requires ipset: apt install ipset -y
+# Add your ip to MDNS for ssh
+# Compatible with Wine-only and Docker
+# If using wine-only the master server ips must be in hosts of the wireguard client:
+# echo "34.197.71.170 hosthpc.com" >> /etc/hosts
+# echo "34.197.71.170 s1.master.hosthpc.com" >> /etc/hosts
+# If using Docker, the master ips can be added in the docker run command:
+# docker run -e INTERNAL_PORT=2302 -it -p 2302:2302/udp --add-host=s1.master.hosthpc.com:34.197.71.170 --add-host=hosthpc.com:34.197.71.170 antimomentum/halo
+# docker-compose already has the hosts in the example yml file.
+
+
+
 sysctl -w net.ipv6.conf.all.disable_ipv6=1 
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 
 sysctl -w net.ipv6.conf.lo.disable_ipv6=1
