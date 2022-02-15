@@ -34,9 +34,6 @@ sleep 5
 
 cat <<DOCK >Dockerfile
 # Pull ubuntu image
-FROM amd64/debian
-
-# Set environment variables
 FROM i386/alpine:3.13
 
 RUN apk add --no-cache wine freetype ncurses
