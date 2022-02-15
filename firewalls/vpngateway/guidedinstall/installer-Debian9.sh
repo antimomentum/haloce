@@ -5,6 +5,8 @@
 echo "Installing ipset"
 apt update
 wait
+apt upgrade -y
+wait
 apt install ipset -y
 wait
 
@@ -292,7 +294,10 @@ systemctl start systemd-resolved
 STOP
 
 chmod +x stop.sh
-
+wait
+apt remove unattended-upgrades -y
+wait
+sleep 1
 echo "Done!"
 rm c*-*.key
 echo "Copy the client.conf files to use on other Wireguard peers that are NOT the gateway:"

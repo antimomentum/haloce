@@ -112,7 +112,8 @@ apt-get remove \
     ca-certificates \
     curl \
     gnupg-agent \
-    software-properties-common
+    software-properties-common \
+    apt remove unattended-upgrades -y
 
 echo "Done"
 
