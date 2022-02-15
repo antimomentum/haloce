@@ -115,6 +115,11 @@ apt-get remove \
     software-properties-common \
     unattended-upgrades -y
 
+wait
+
+apt autoremove -y
+
+
 echo "Done"
 
 sleep 1

@@ -130,7 +130,11 @@ apt-get remove \
     curl \
     gnupg-agent \
     software-properties-common
-    remove unattended-upgrades -y
+    unattended-upgrades -y
+
+wait
+
+apt autoremove -y
 
 echo "Done"
 
