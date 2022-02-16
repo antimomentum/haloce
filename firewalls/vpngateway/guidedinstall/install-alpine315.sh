@@ -1,29 +1,20 @@
-# service ssh stop
-# Wireguard Gateway install
-
 # ipset
 echo "Installing ipset"
-apt update
+apk update
 wait
-apt upgrade -y
+apk upgrade
 wait
-apt install ipset -y
+apk add ipset
 wait
-
+sleep 2
 
 echo "Installing Wireguard, press Ctrl + C to cancel..."
 sleep 5
-
-echo "deb http://deb.debian.org/debian/ unstable main" > \
-/etc/apt/sources.list.d/unstable-wireguard.list
-
-printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > \
-/etc/apt/preferences.d/limit-unstable
-
-apt update
+apk add wireguard-tools
 wait
-apt-get install wireguard-dkms wireguard-tools -y
-wait
+sleep 3
+
+modprobe wireguard
 
 echo "Done"
 
@@ -121,11 +112,10 @@ iptables -t nat -A PREROUTING -i $newname -m udp -p udp --dport 2304:2504 -j DNA
 iptables -t nat -A PREROUTING -i $newname -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.4:3389 
 iptables -A FORWARD -m udp -p udp --dport 2302:2502 -j ACCEPT
 iptables -A FORWARD -m udp -p udp --sport 2302:2502 -j ACCEPT
-# iptables -A FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
-# iptables -A FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
+iptables -A FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
+iptables -A FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
 iptables -A FORWARD -j DROP
 iptables -A INPUT -i $newname -p udp --dport 51820 -j ACCEPT
-iptables -A INPUT -i $newname -m set --match-set MDNS src -p tcp --dport 22 -j ACCEPT
 iptables -A INPUT -i $newname -j DROP
 iptables -t nat -A POSTROUTING -o $newname -j MASQUERADE
 END
@@ -164,60 +154,10 @@ echo "Done"
 echo "Create firewall flusher"
 
 cat <<FLUSH >/etc/wireguard/flush.sh
-# iptables -t raw -D PREROUTING -i $newname -p udp --dport 51820 -m set --match-set MDNS src -j ACCEPT
-iptables -t raw -D PREROUTING -i $newname -p udp --dport 51820 -j ACCEPT
-iptables -t raw -D PREROUTING -i $newname -m set --match-set LEGIT src,src -j ACCEPT
-iptables -t raw -D PREROUTING -i $newname -m set --match-set TEST1 src -j pcheck
-iptables -t raw -D PREROUTING -i $newname -m set --match-set MDNS src -j madmins
-iptables -t raw -D PREROUTING -i $newname -m length --length 48 -m u32 --u32 "42=0x1333360c" -j pcheck
-iptables -t raw -D PREROUTING -i $newname -m length --length 67 -m u32 --u32 "28=0xfefe0100" -j ctest2
-iptables -t raw -D PREROUTING -i $newname -m length ! --length 34 -j DROP
-iptables -t raw -D PREROUTING -i $newname -m u32 ! --u32 "28=0x5C717565" -j DROP
-iptables -t raw -D PREROUTING -i $newname -j ctest2
-iptables -t raw -D pcheck -p udp --sport 0 -j DROP
-iptables -t raw -D pcheck ! -p udp -j DROP
-iptables -t raw -D pcheck -p udp ! --dport 2302:2502 -j DROP
-iptables -t raw -D pcheck -j SET --exist --add-set TEST1 src
-iptables -t raw -D pcheck -m u32 --u32 "42=0x1333360c" -j ACCEPT
-iptables -t raw -D pcheck -m set --match-set TEST2 src -j ctest2
-iptables -t raw -D pcheck -m u32 --u32 "28=0x5C717565" -j ctest2
-iptables -t raw -D pcheck -m set --match-set LEGIT src,src -j ACCEPT
-iptables -t raw -D pcheck -m u32 ! --u32 "34&0xFFFFFF=0xFFFFFF" -j DROP
-iptables -t raw -D pcheck -j SET --exist --add-set TEST2 src
-iptables -t raw -D pcheck -j ACCEPT
-iptables -t raw -D ctest2 -p udp --sport 0 -j DROP
-iptables -t raw -D ctest2 ! -p udp -j DROP
-iptables -t raw -D ctest2 -p udp ! --dport 2302:2502 -j DROP
-iptables -t raw -D ctest2 -j SET --exist --add-set TEST1 src
-iptables -t raw -D ctest2 -j SET --exist --add-set TEST2 src
-iptables -t raw -D ctest2 -m u32 --u32 "28=0xfefe0100" -j SET --exist --add-set LEGIT src,src
-iptables -t raw -D ctest2 -m set --match-set LEGIT src,src -j ACCEPT
-iptables -t raw -D ctest2 -m u32 --u32 "28=0x5C717565" -j ACCEPT
-iptables -t raw -D ctest2 -m u32 --u32 "42=0x1333360c" -j ACCEPT
-iptables -t raw -D ctest2 -m u32 --u32 "34&0xFFFFFF=0xFFFFFF" -j ACCEPT
-iptables -t raw -D ctest2 -j DROP
-iptables -t raw -D madmins -s 34.197.71.170 -j ACCEPT
-iptables -t raw -D madmins -s 54.82.252.156 -j ACCEPT
-iptables -t raw -D madmins -p tcp -j ACCEPT
-iptables -t raw -D madmins -p udp --dport 3389 -j ACCEPT
-iptables -t raw -D madmins -p udp -j pcheck
-iptables -t mangle -D PREROUTING -i $newname -m set --match-set LEGIT src,src -j SET --exist --add-set LEGIT src,src
-iptables -t mangle -D PREROUTING -i $newname -m length --length 31 -m set --match-set LEGIT src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
-iptables -t mangle -D reconnect -j SET --del-set TEST1 src
-iptables -t mangle -D reconnect -j SET --del-set LEGIT src,src
-iptables -t nat -D PREROUTING -i $newname -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
-iptables -t nat -D PREROUTING -i $newname -m udp -p udp --dport 2304:2504 -j DNAT --to-destination 10.0.0.4:2304-2504
-iptables -t nat -D PREROUTING -i $newname -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.4:3389 
-iptables -D FORWARD -m udp -p udp --dport 2302:2502 -j ACCEPT
-iptables -D FORWARD -m udp -p udp --sport 2302:2502 -j ACCEPT
-# iptables -D FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
-# iptables -D FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
-iptables -D FORWARD -j DROP
-iptables -D INPUT -i $newname -p udp --dport 51820 -j ACCEPT
-iptables -D INPUT -i $newname -j DROP
-iptables -t nat -D POSTROUTING -o $newname -j MASQUERADE
-# iptables -t nat -F
-# iptables -t nat -X
+iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
 iptables -t mangle -F
 iptables -t mangle -X
 iptables -t raw -F
@@ -294,10 +234,7 @@ systemctl start systemd-resolved
 STOP
 
 chmod +x stop.sh
-wait
-apt remove unattended-upgrades -y
-wait
-sleep 1
+
 echo "Done!"
 rm c*-*.key
 echo "Copy the client.conf files to use on other Wireguard peers that are NOT the gateway:"

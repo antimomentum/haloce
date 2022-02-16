@@ -109,8 +109,8 @@ iptables -t nat -A PREROUTING -i $newname -m udp -p udp --dport 2304:2504 -j DNA
 iptables -t nat -A PREROUTING -i $newname -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.4:3389 
 iptables -A FORWARD -m udp -p udp --dport 2302:2502 -j ACCEPT
 iptables -A FORWARD -m udp -p udp --sport 2302:2502 -j ACCEPT
-# iptables -A FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
-# iptables -A FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
+iptables -A FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
+iptables -A FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
 iptables -A FORWARD -j DROP
 iptables -A INPUT -i $newname -p udp --dport 51820 -j ACCEPT
 iptables -A INPUT -i $newname -m set --match-set MDNS src -p tcp --dport 22 -j ACCEPT
