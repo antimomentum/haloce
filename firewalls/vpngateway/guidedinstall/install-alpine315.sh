@@ -1,4 +1,4 @@
-# ipset
+# install ipset
 echo "Installing ipset"
 apk update
 wait

@@ -1,4 +1,4 @@
-# ipset
+# installs ipset
 echo "Updating and installing ipset"
 apt update
 wait

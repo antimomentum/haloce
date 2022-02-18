@@ -1,6 +1,6 @@
 # Wireguard Gateway install
 
-# ipset
+# install ipset
 echo "Installing ipset"
 apt update
 wait
