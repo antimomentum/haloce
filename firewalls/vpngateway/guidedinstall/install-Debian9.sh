@@ -67,6 +67,7 @@ ipset create MDNS hash:ip
 wait
 ipset add MDNS 54.82.252.156
 ipset add MDNS 34.197.71.170
+ipset add MDNS $ownerip
 # ipset add MDNS 1.1.1.1
 # ipset add MDNS haloserverpublicip
 wait
@@ -117,11 +118,11 @@ iptables -t mangle -A reconnect -j SET --del-set TEST1 src
 iptables -t mangle -A reconnect -j SET --del-set LEGIT src,src
 iptables -t nat -A PREROUTING -i $newname -m udp -p udp --dport 2302 -j DNAT --to-destination 10.0.0.2:2302
 iptables -t nat -A PREROUTING -i $newname -m udp -p udp --dport 2304:2504 -j DNAT --to-destination 10.0.0.4:2304-2504
-iptables -t nat -A PREROUTING -i $newname -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.4:3389 
+iptables -t nat -A PREROUTING -i $newname -m tcp -p tcp --dport 3389 -j DNAT --to-destination 10.0.0.2:3389 
 iptables -A FORWARD -m udp -p udp --dport 2302:2502 -j ACCEPT
 iptables -A FORWARD -m udp -p udp --sport 2302:2502 -j ACCEPT
-# iptables -A FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
-# iptables -A FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
+iptables -A FORWARD -m set --match-set MDNS src -m tcp -p tcp --dport 3389 -j ACCEPT
+iptables -A FORWARD -m set --match-set MDNS dst -m tcp -p tcp --sport 3389 -j ACCEPT
 iptables -A FORWARD -j DROP
 iptables -A INPUT -i $newname -p udp --dport 51820 -j ACCEPT
 iptables -A INPUT -i $newname -m set --match-set MDNS src -p tcp --dport 22 -j ACCEPT
