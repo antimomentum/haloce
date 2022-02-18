@@ -86,6 +86,8 @@ iptables -t raw -A PREROUTING -i $newname -m length ! --length 34 -j DROP
 iptables -t raw -A PREROUTING -i $newname -m u32 ! --u32 "28=0x5C717565" -j DROP
 iptables -t raw -A PREROUTING -i $newname -j ctest2
 iptables -t raw -A pcheck -p udp --sport 0 -j DROP
+iptables -t raw -A pcheck -m set --match-set MDNS src -p udp --dport 3389 -j ACCEPT
+iptables -t raw -A pcheck -m set --match-set MDNS src -p tcp -j ACCEPT
 iptables -t raw -A pcheck ! -p udp -j DROP
 iptables -t raw -A pcheck -p udp ! --dport 2302:2502 -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
