@@ -103,7 +103,7 @@ iptables -t raw -A pcheck -j ACCEPT
 iptables -t raw -A ctest2 -p udp --sport 0 -j DROP
 iptables -t raw -A ctest2 ! -p udp -j DROP
 iptables -t raw -A ctest2 -p udp ! --dport 2302:2502 -j DROP
-iptables -t raw -A pcheck -p udp --sport 53 -j DROP
+iptables -t raw -A ctest2 -p udp --sport 53 -j DROP
 iptables -t raw -A ctest2 -s 224.0.0.0/3 -j DROP 
 iptables -t raw -A ctest2 -s 169.254.0.0/16 -j DROP 
 iptables -t raw -A ctest2 -s 172.16.0.0/12 -j DROP 
