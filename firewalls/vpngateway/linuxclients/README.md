@@ -16,7 +16,13 @@ Feel free to use your own halo files. This script will attempt to properly start
 
 ## Proper shutdown:
 
-In the halo console type "quit" and press enter to stop halo and close the container. Then run the stop.sh script. It is important halo is closed BEFORE the vpn connection or the halo server's real ip may leak!
+In the halo console type "quit" and press enter to stop halo and close the container. Then to stop the wireguard tunnel do:
+
+
+wg-quick down wg0
+
+
+. It is important halo is closed BEFORE the vpn connection or the halo server's real ip may leak!
 
 If something should go wrong with the container itself:
 

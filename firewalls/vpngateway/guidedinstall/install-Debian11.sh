@@ -79,6 +79,16 @@ iptables -t raw -A pcheck -m set --match-set MDNS src -p udp --dport 3389 -j ACC
 iptables -t raw -A pcheck -m set --match-set MDNS src -p tcp -j ACCEPT
 iptables -t raw -A pcheck ! -p udp -j DROP
 iptables -t raw -A pcheck -p udp ! --dport 2302:2502 -j DROP
+iptables -t raw -A pcheck -p udp --sport 53 -j DROP
+iptables -t raw -A pcheck -s 224.0.0.0/3 -j DROP 
+iptables -t raw -A pcheck -s 169.254.0.0/16 -j DROP 
+iptables -t raw -A pcheck -s 172.16.0.0/12 -j DROP 
+iptables -t raw -A pcheck -s 192.0.2.0/24 -j DROP 
+iptables -t raw -A pcheck -s 192.168.0.0/16 -j DROP 
+iptables -t raw -A pcheck -s 10.0.0.0/8 -j DROP 
+iptables -t raw -A pcheck -s 0.0.0.0/8 -j DROP 
+iptables -t raw -A pcheck -s 240.0.0.0/5 -j DROP 
+iptables -t raw -A pcheck -s 127.0.0.0/8 -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
 iptables -t raw -A pcheck -m u32 --u32 "42=0x1333360c" -j ACCEPT
 iptables -t raw -A pcheck -m set --match-set TEST2 src -j ctest2
@@ -90,6 +100,16 @@ iptables -t raw -A pcheck -j ACCEPT
 iptables -t raw -A ctest2 -p udp --sport 0 -j DROP
 iptables -t raw -A ctest2 ! -p udp -j DROP
 iptables -t raw -A ctest2 -p udp ! --dport 2302:2502 -j DROP
+iptables -t raw -A pcheck -p udp --sport 53 -j DROP
+iptables -t raw -A ctest2 -s 224.0.0.0/3 -j DROP 
+iptables -t raw -A ctest2 -s 169.254.0.0/16 -j DROP 
+iptables -t raw -A ctest2 -s 172.16.0.0/12 -j DROP 
+iptables -t raw -A ctest2 -s 192.0.2.0/24 -j DROP 
+iptables -t raw -A ctest2 -s 192.168.0.0/16 -j DROP 
+iptables -t raw -A ctest2 -s 10.0.0.0/8 -j DROP 
+iptables -t raw -A ctest2 -s 0.0.0.0/8 -j DROP 
+iptables -t raw -A ctest2 -s 240.0.0.0/5 -j DROP 
+iptables -t raw -A ctest2 -s 127.0.0.0/8 -j DROP
 iptables -t raw -A ctest2 -j SET --exist --add-set TEST1 src
 iptables -t raw -A ctest2 -j SET --exist --add-set TEST2 src
 iptables -t raw -A ctest2 -m u32 --u32 "28=0xfefe0100" -j SET --exist --add-set LEGIT src,src
