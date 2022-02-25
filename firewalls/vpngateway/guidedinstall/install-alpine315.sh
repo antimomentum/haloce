@@ -227,6 +227,7 @@ PrivateKey = $C1PKEY
 PublicKey = $PUBLICKEY
 AllowedIPs = 0.0.0.0/0
 Endpoint = $gatewayip:51820
+PersistentKeepalive = 10
 CLIENTS1
 
 wait
@@ -239,6 +240,7 @@ PrivateKey = $C2PKEY
 PublicKey = $PUBLICKEY
 AllowedIPs = 0.0.0.0/0
 Endpoint = $gatewayip:51820
+PersistentKeepalive = 10
 CLIENTS2
 
 wait
