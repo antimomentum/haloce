@@ -32,7 +32,7 @@ int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
         struct udphdr *udph = data + nh_off + sizeof(struct iphdr);
         if (udph + 1 > (struct udphdr *)data_end)
         {
-            return XDP_PASS;
+            return XDP_DROP;
         }
         if (iph->protocol == IPPROTO_UDP && udph->dest != htons(2302))
         {
