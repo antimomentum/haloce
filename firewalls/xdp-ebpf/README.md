@@ -16,7 +16,7 @@ https://blog.cloudflare.com/how-to-drop-10-million-packets/
 Currently drops udp packets except to port 2302 (default Halo port)
 and tcp packets except (!) to port 22 (default ssh port).
 Drops ICMP.
-
+Drops udp packets with a source port of 53 (for filtering some dns floods)
 
 
 Rules do NOT apply to ipv6 packets for now
