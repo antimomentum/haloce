@@ -1,4 +1,4 @@
-## Highly expermimental 
+## Highly experimental 
 
 
 This attempts to use xdp ebpf for pacet filtering. Run at your own risk.
