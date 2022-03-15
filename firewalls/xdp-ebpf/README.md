@@ -1,7 +1,7 @@
 ## Highly experimental 
 
 
-This attempts to use xdp ebpf for pacet filtering. Run at your own risk.
+This attempts to use xdp ebpf for packet filtering at the network driver before the OS kernel. Run at your own risk.
 
 
 
