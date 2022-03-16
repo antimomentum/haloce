@@ -11,6 +11,8 @@
 
 #define htons(x) ((__be16)___constant_swab16((x)))
 
+#define IP_FRAGMENTED 65343
+
 SEC("prog")
 int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
 {
@@ -31,6 +33,10 @@ int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
         struct iphdr *iph = data + nh_off;
         struct udphdr *udph = data + nh_off + sizeof(struct iphdr);
         if (udph + 1 > (struct udphdr *)data_end)
+        {
+            return XDP_DROP;
+        }
+        if (iph->frag_off & IP_FRAGMENTED)
         {
             return XDP_DROP;
         }
