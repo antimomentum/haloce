@@ -56,7 +56,12 @@ int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
         {
             return XDP_DROP;
         }
+
     }
+/*    if (h_proto == htons(ETH_P_IPV6))*/
+/*   {*/
+/*       return XDP_DROP;*/
+/*   }*/
 
     return XDP_PASS;
 }
