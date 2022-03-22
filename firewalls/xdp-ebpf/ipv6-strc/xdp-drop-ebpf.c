@@ -6,7 +6,6 @@
 #include <linux/udp.h>
 #include <linux/tcp.h>
 #include <stdint.h>
-#include <arpa/inet.h>
 
 #define SEC(NAME) __attribute__((section(NAME), used))
 
