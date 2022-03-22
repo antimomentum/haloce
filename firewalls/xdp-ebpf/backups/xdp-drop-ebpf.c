@@ -2,7 +2,9 @@
 #include <linux/if_ether.h>
 #include <linux/in.h>
 #include <linux/ip.h>
+#include <linux/ipv6.h>
 #include <linux/udp.h>
+#include <linux/tcp.h>
 #include <stdint.h>
 
 #define SEC(NAME) __attribute__((section(NAME), used))
@@ -38,29 +40,34 @@ int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
         {
             return XDP_DROP;
         }
-        if (iph->protocol == IPPROTO_UDP)
+        if (iph->protocol == IPPROTO_UDP && udph->dest != htons(2302))
         {
-            if (udph->source == htons(53))
-            {
-                return XDP_DROP;
-            }
-            if (iph->tos != 0x00)
-            {
-                return XDP_DROP;
-            }
-            {
-                return XDP_PASS;
-            }
+            return XDP_DROP;
+        }
+        if (iph->protocol == IPPROTO_UDP && udph->source == htons(53))
+        {
+            return XDP_DROP;
+        }
+        if (iph->protocol == IPPROTO_UDP && iph->tos != 0x00)
+        {
+            return XDP_DROP;
+        }
         if (iph->protocol == IPPROTO_TCP && udph->dest != htons(22))
         {
             return XDP_DROP;
         }
+        if (iph->protocol == IPPROTO_ICMP)
+        {
+            return XDP_DROP;
+        }
+
     }
-    if (h_proto == htons(ETH_P_ARP))
-    {
-         return XDP_PASS;
-    }
-    return XDP_DROP;
+/*    if (h_proto == htons(ETH_P_IPV6))*/
+/*   {*/
+/*       return XDP_DROP;*/
+/*   }*/
+
+    return XDP_PASS;
 }
 
 char _license[] SEC("license") = "GPL";

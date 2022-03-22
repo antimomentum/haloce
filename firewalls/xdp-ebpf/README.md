@@ -16,16 +16,17 @@ https://blog.cloudflare.com/how-to-drop-10-million-packets/
 
 
 
-Currently drops udp packets except to port 2302 (default Halo port)
-and tcp packets except (!) to port 22 (default ssh port).
-Drops ICMP.
-Drops udp packets with a source port of 53 (for filtering some dns floods)
+Currently has some filters for ipv4:
+
+UDP (with halo in mind)
+
+TCP except to port 22 for ssh (you must still secure ssh)
+
+Fragmented packets
+
+Attempts to drop most other packets except for ARP packets (see backups or ipv6-struct for a blacklist approach rather than the whitelist attempt)
 
 
-Commented rules to drop ipv6 have been added to the xdp-drop-epbf.c file. The commented rules will NOT be applied to the interface.
-
-
-C programs use /* to start a comment and */ to end the comment. Simply remove both of those to uncomment the rules. In the future it is likely more commented rules will be added to the file.
 
 
 ## Usage
