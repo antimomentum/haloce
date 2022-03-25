@@ -97,29 +97,22 @@ cat <<XTTTNM >xdp-drop-ebpf.c
 #include <linux/ip.h>
 #include <linux/udp.h>
 #include <stdint.h>
-
 #define SEC(NAME) __attribute__((section(NAME), used))
-
 #define htons(x) ((__be16)___constant_swab16((x)))
 #define htonl(x) ((__be32)___constant_swab32((x)))
-
 #define IP_FRAGMENTED 65343
-
 SEC("prog")
 int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
 {
     void *data_end = (void *)(long)ctx->data_end;
     void *data = (void *)(long)ctx->data;
     struct ethhdr *eth = data;
-
     uint64_t nh_off = sizeof(*eth);
     if (data + nh_off > data_end)
     {
         return XDP_PASS;
     }
-
     uint16_t h_proto = eth->h_proto;
-
     if (h_proto == htons(ETH_P_IP))
     {
         struct iphdr *iph = data + nh_off;
@@ -142,10 +135,6 @@ int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
             {
                 return XDP_DROP;
             }
-            if (iph->tos != 0x00)
-            {
-                return XDP_DROP;
-            }
             {
             return XDP_PASS;
             }
@@ -161,7 +150,6 @@ int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
     }
     return XDP_DROP;
 }
-
 char _license[] SEC("license") = "GPL";
 XTTTNM
 
@@ -230,7 +218,6 @@ chmod +x disable.sh
 
 cat <<TRIGAPI >trigger.sh
 #!/bin/bash
-
 while :
 do
    R1=\$(cat /sys/class/net/eth0/statistics/rx_bytes)
@@ -238,7 +225,6 @@ do
    R2=\$(cat /sys/class/net/eth0/statistics/rx_bytes)
    tot=\$(( R2 - R1 ))
    wait
-
    if [ "\$tot" -gt "500000" ]; then
       ./update.sh
       wait
@@ -255,13 +241,11 @@ wait
 
 cat <<SPAPI >spark.sh
 #!/bin/bash
-
 R1=\$(cat /sys/class/net/eth0/statistics/rx_bytes)
 sleep 1
 R2=\$(cat /sys/class/net/eth0/statistics/rx_bytes)
 tot=\$(( R2 - R1 ))
 wait
-
 until [ "\$tot" -gt "600000" ]; do
     sleep 300
     R1=\$(cat /sys/class/net/eth0/statistics/rx_bytes)
@@ -271,7 +255,6 @@ until [ "\$tot" -gt "600000" ]; do
     wait
     tot=\$(( R2 - R1 ))
 done
-
 ./update.sh
 wait
 echo "Flood!"

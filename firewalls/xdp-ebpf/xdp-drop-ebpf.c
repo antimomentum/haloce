@@ -44,10 +44,6 @@ int xdp_drop_benchmark_traffic(struct xdp_md *ctx)
             {
                 return XDP_DROP;
             }
-            if (iph->tos != 0x00)
-            {
-                return XDP_DROP;
-            }
             {
                 return XDP_PASS;
             }
