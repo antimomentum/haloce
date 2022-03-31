@@ -7,7 +7,6 @@
 # Disables conntrack in the kernel, currently functions with wine on the host (vlans/vpn/etc) won't work with this firewall.
 
 
-
 sysctl -w net.ipv6.conf.all.disable_ipv6=1 
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 
 sysctl -w net.ipv6.conf.lo.disable_ipv6=1
@@ -29,16 +28,6 @@ tc qdisc add dev eth0 ingress
 tc filter add dev eth0 parent ffff: priority 1 basic match 'ipset(TEST1 src)' action pass
 tc filter add dev eth0 parent ffff: priority 2 protocol ip u32 match u32 0x360c0000 0xffffffff at nexthdr+44 action pass
 tc filter add dev eth0 parent ffff: priority 3 u32 match ip sport 2302 0xffff action police rate 1kbit burst 240 drop flowid :1
-wait
-sleep 1
-sysctl -w net.ipv4.ipfrag_low_thresh=0
-sysctl -w net.ipv4.ipfrag_high_thresh=0
-sysctl -w net.ipv4.ipfrag_time=0
-sysctl -w net.ipv6.conf.all.disable_ipv6=1 
-sysctl -w net.ipv6.conf.default.disable_ipv6=1 
-sysctl -w net.ipv6.conf.lo.disable_ipv6=1 
-# sysctl -w net.ipv4.ip_forward=1
-sysctl -w net.core.netdev_max_backlog=4000
 wait
 sleep 1
 iptables -t raw -N pcheck
