@@ -34,7 +34,7 @@ iptables -t raw -N pcheck
 iptables -t mangle -N ctest2
 iptables -t raw -A PREROUTING -j NOTRACK
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TEST1 src -j ACCEPT
-iptables -t raw -A PREROUTING -i eth0 -m length --length 36 -m u32 --u32 "36=0x0103080a" -j pcheck
+iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "36=0x0103080a" -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -j DROP
 iptables -t raw -A pcheck -p udp --sport 53 -j DROP
 iptables -t raw -A pcheck -p udp --sport 0 -j DROP
