@@ -27,14 +27,14 @@ wait
 tc qdisc add dev eth0 ingress
 tc filter add dev eth0 parent ffff: priority 1 basic match 'ipset(TEST1 src)' action pass
 tc filter add dev eth0 parent ffff: priority 2 protocol ip u32 match u32 0x0103080a 0xffffffff at nexthdr+36 action pass
-tc filter add dev eth0 parent ffff: priority 3 u32 match ip sport 2302 0xffff action police rate 1kbit burst 240 drop flowid :1
+tc filter add dev eth0 parent ffff: priority 3 u32 match ip dport 2302 0xffff action drop
 wait
 sleep 1
 iptables -t raw -N pcheck
 iptables -t mangle -N ctest2
 iptables -t raw -A PREROUTING -j NOTRACK
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TEST1 src -j ACCEPT
-iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "36=0x0103080a" -j pcheck
+iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "42=0x1333360c" -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -j DROP
 iptables -t raw -A pcheck -p udp --sport 53 -j DROP
 iptables -t raw -A pcheck -p udp --sport 0 -j DROP
@@ -49,7 +49,7 @@ iptables -t raw -A pcheck -s 10.0.0.0/8 -j DROP
 iptables -t raw -A pcheck -s 0.0.0.0/8 -j DROP 
 iptables -t raw -A pcheck -s 240.0.0.0/5 -j DROP 
 iptables -t raw -A pcheck -s 127.0.0.0/8 -j DROP
-iptables -t raw -A pcheck -m u32 --u32 "42=0x1333360c" -j SET --exist --add-set TEST1 src
+iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
 iptables -t raw -A pcheck -m set --match-set TEST1 src -j ACCEPT
 iptables -t raw -A pcheck -j DROP
 iptables -t mangle -A PREROUTING -i eth0 -j SET --exist --add-set TEST1 src
