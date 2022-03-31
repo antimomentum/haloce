@@ -50,8 +50,7 @@ iptables -t raw -A pcheck -s 0.0.0.0/8 -j DROP
 iptables -t raw -A pcheck -s 240.0.0.0/5 -j DROP 
 iptables -t raw -A pcheck -s 127.0.0.0/8 -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
-iptables -t raw -A pcheck -m set --match-set TEST1 src -j ACCEPT
-iptables -t raw -A pcheck -j DROP
+iptables -t raw -A pcheck -j ACCEPT
 iptables -t mangle -A PREROUTING -i eth0 -j SET --exist --add-set TEST1 src
 iptables -t mangle -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j SET --exist --add-set LEGIT src,src
 iptables -t mangle -A PREROUTING -i eth0 -m set --match-set LEGIT src,src -j ACCEPT
