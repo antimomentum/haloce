@@ -26,7 +26,7 @@ ipset add TEST1 34.197.71.170
 wait
 tc qdisc add dev eth0 ingress
 tc filter add dev eth0 parent ffff: priority 1 basic match 'ipset(TEST1 src)' action pass
-tc filter add dev eth0 parent ffff: priority 2 protocol ip u32 match u32 0x360c0000 0xffffffff at nexthdr+44 action pass
+tc filter add dev eth0 parent ffff: priority 2 protocol ip u32 match u32 0x0103080a 0xffffffff at nexthdr+36 action pass
 tc filter add dev eth0 parent ffff: priority 3 u32 match ip sport 2302 0xffff action police rate 1kbit burst 240 drop flowid :1
 wait
 sleep 1
@@ -34,7 +34,7 @@ iptables -t raw -N pcheck
 iptables -t mangle -N ctest2
 iptables -t raw -A PREROUTING -j NOTRACK
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TEST1 src -j ACCEPT
-iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "35=0x0a010308" -j pcheck
+iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "36=0x0103080a" -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -j DROP
 iptables -t raw -A pcheck -p udp --sport 53 -j DROP
 iptables -t raw -A pcheck -p udp --sport 0 -j DROP
