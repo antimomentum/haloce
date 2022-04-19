@@ -6,7 +6,7 @@ sleep 3
 apt install unzip
 wait
 sleep 1
-wget https://opencarnage.net/applications/core/interface/file/attachment.php?id=1364 && mv attachment.php\?id\=1364 halopull.zip
+wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && unzip halopull.zip && mv halopull-master halopull
 wait
 sleep 2
 
@@ -47,7 +47,6 @@ sleep 5
 
 cat <<DOCK >Dockerfile
 FROM i386/alpine:3.13
-
 RUN apk add --no-cache wine freetype ncurses
 DOCK
 
@@ -65,7 +64,6 @@ wait
 wg-quick up wg0 
 wait
 sleep 2
-
 VAR1=\$(wg | grep -o latest)
 VAR2="latest"
 until [ "\$VAR1" = "\$VAR2" ]; do
@@ -73,7 +71,6 @@ until [ "\$VAR1" = "\$VAR2" ]; do
     sleep 1
     VAR1=\$(wg | grep -o latest)
 done
-
 echo "Handshake established! Starting halo container..."
 sleep 2
 i=2304
@@ -99,11 +96,7 @@ wait
 
 echo "Done"
 
-sleep 5
-
-unzip halopull.zip
-wait
-sleep 1
+sleep 3
 
 echo "Cleanup.."
 

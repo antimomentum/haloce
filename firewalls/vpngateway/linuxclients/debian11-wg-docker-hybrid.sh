@@ -8,8 +8,7 @@ wait
 sleep 1
 
 # Downloads example working sapp 10.2.1 halo files for troubleshooting. The next line is not required.
-wget https://opencarnage.net/applications/core/interface/file/attachment.php?id=1364 && mv attachment.php\?id\=1364 halopull.zip
-
+wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && unzip halopull.zip && mv halopull-master halopull
 wait
 sleep 2
 
@@ -103,12 +102,6 @@ chmod +x start-example.sh
 echo "Done"
 
 sleep 5
-
-# unzips example halo files, these halo files can be removed
-
-unzip halopull.zip
-wait
-sleep 1
 
 echo "Cleanup.."
 
