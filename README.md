@@ -12,7 +12,6 @@ The container is running 100% headless - no GUI is required for installation, ex
 To install docker:
 
     apt update
-
     apt-get install docker.io
 
 ## Usage
@@ -52,9 +51,7 @@ Then run your server!
 docker build -t YourDockerUsername/MadeUpImageName . 
 
     apt-get install gnupg
-
     docker login
-
     docker push YourDockerUsername/MadeUpImageName
 
 ## If not using default port 2302 ## 
