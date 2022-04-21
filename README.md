@@ -24,25 +24,27 @@ SAPP 10.2.x is working! (UPX and no UPX versions for sapp 10.2 and 10.2.1) It is
 
 No lead Team slayer server. Assult Rifle and Pistol starting weapons. Some of the regular Halo maps are used in the mapcycle:
 
-docker run -e INTERNAL_PORT=2302 -it -p 2302:2302/udp antimomentum/noleadts
+    docker run -e INTERNAL_PORT=2302 -it -p 2302:2302/udp antimomentum/noleadts
 
-## To install custom server/sapp files!
+## Run your own halo files:
+Put your halo files into one directory named "halopull"
 
-git clone https://github.com/antimomentum/haloce
+Example halo server file structure can be found here:
 
-cd haloce
 
-Now copy in your halo server files, all in one folder named "halopull"
+https://github.com/antimomentum/halopull
 
-Then do:
 
-docker build . 
 
-You should see something like: "Successfully built f01ecb978acc" <---- the f01ecb is the docker image you need to start the container. So do:
+Use the Dockerfile to build a local wineconsole container:
 
-docker run -e INTERNAL_PORT=2302 -it -p 2302:2302/udp f01ecb978acc 
+    cd Dockerfiles
+    docker build -t wineconsole/lite .
 
-with the f01ecb replaced with whatever ID you got from the docker build :) 
+
+Then run your server!
+    docker run -v ~/halopull:/game -e INTERNAL_PORT=2302 -it -p 2302:2302/udp wineconsole-lite
+
 
 ##  Push your halo server images to docker!
 
@@ -83,9 +85,8 @@ docker ps
 
 Then something like this to attach:
 
-docker attach --detach-keys z haloce_halo_1
+docker attach --detach-keys z halo_first_1
 
-haloce_halo_1 is just an example name you might see from docker ps
 
 press z to leave the halo console without closing the container you attached too.
 
