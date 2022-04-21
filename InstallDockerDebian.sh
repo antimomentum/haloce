@@ -59,7 +59,7 @@ docker build -t wineconsole/lite .
 
 cat <<WEND >start-example.sh
 #!/bin/bash
-# Expects a halo server named "halopull"
+# Expects a halo server directory named "halopull"
 wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && unzip halopull.zip && mv halopull-master halopull
 wait 
 i=2302
