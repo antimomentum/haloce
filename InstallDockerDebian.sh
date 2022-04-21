@@ -28,7 +28,7 @@ wait
 apt-get install docker-ce docker-ce-cli containerd.io
 wait
 sleep 3
-echo "Building your wineconesole/lite container"
+echo "Building your wineconsole/lite container"
 
 sleep 5
 
@@ -38,7 +38,7 @@ cat <<DOCK >Dockerfile
 FROM i386/alpine:3.13
 RUN apk add --no-cache wine freetype ncurses
 WORKDIR /game
-CMD winconsole --backend=curses haloceded -path . -port ${INTERNAL_PORT}
+CMD wineconsole --backend=curses haloceded -path . -port \${INTERNAL_PORT}
 DOCK
 
 wait
