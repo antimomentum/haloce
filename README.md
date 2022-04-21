@@ -11,9 +11,9 @@ The container is running 100% headless - no GUI is required for installation, ex
 
 To install docker:
 
-apt update
+    apt update
 
-apt-get install docker.io
+    apt-get install docker.io
 
 ## Usage
 
@@ -43,6 +43,7 @@ Use the Dockerfile to build a local wineconsole container:
 
 
 Then run your server!
+
     docker run -v ~/halopull:/game -e INTERNAL_PORT=2302 -it -p 2302:2302/udp wineconsole-lite
 
 
@@ -50,11 +51,11 @@ Then run your server!
 
 docker build -t YourDockerUsername/MadeUpImageName . 
 
-apt-get install gnupg
+    apt-get install gnupg
 
-docker login
+    docker login
 
-docker push YourDockerUsername/MadeUpImageName
+    docker push YourDockerUsername/MadeUpImageName
 
 ## If not using default port 2302 ## 
 
@@ -75,24 +76,25 @@ Docker compose can be used to quickly bring up multiple halo containers after th
 
 I have provided an example docker-compose.yml file. Once you have your own containers built you can use yours in the yml instead. To use compose:
 
-docker-compose up -d
+    docker-compose up -d
 
 This brings up all containers in the yml.
 
 To attach to a running container get a list of the *running* containers:
 
-docker ps
+    docker ps
 
 Then something like this to attach:
 
-docker attach --detach-keys z halo_first_1
+    docker attach --detach-keys z halo_first_1
 
 
 press z to leave the halo console without closing the container you attached too.
 
 To stop all containers that docker-compose started:
 
-docker-compose down
+    docker-compose down
+
 
 ## Thanks and Resources ##
 
