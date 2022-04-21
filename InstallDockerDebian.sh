@@ -5,8 +5,7 @@
 
 
 apt-get update
-
-
+wait
 
 apt-get install \
     apt-transport-https \
@@ -16,23 +15,16 @@ apt-get install \
     unzip \
     software-properties-common
 
-
-
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-
-
+wait
 
 add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/debian \
    $(lsb_release -cs) \
    stable"
 
-
-
 apt-get update
-
-
-
+wait
 apt-get install docker-ce docker-ce-cli containerd.io
 wait
 sleep 3
@@ -59,7 +51,7 @@ docker build -t wineconsole/lite .
 
 cat <<WEND >start-example.sh
 #!/bin/bash
-# Expects a halo server directory named "halopull"
+# Expects a halo server directory named "halopull":
 wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && unzip halopull.zip && mv halopull-master halopull
 wait 
 i=2302
