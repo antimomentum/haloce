@@ -34,8 +34,6 @@ sleep 5
 
 # Create Dockerfile
 
-
-
 cat <<DOCK >Dockerfile
 FROM i386/alpine:3.13
 RUN apk add --no-cache wine freetype ncurses
