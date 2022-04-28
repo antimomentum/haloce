@@ -6,6 +6,9 @@
 
 apt-get update
 wait
+apt upgrade
+wait
+sleep 1
 
 apt-get install \
     apt-transport-https \
