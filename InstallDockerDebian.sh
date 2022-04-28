@@ -55,9 +55,9 @@ cat <<WEND >start-example.sh
 wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && unzip halopull.zip && mv halopull-master halopull
 wait 
 i=2302
-Here=$(pwd)
+Here=\$(pwd)
 wait
-docker run -it -v $Here/halopull:/game -e INTERNAL_PORT=$i -p $i:$i/udp --add-host=s1.master.hosthpc.com:34.197.71.170 --add-host=hosthpc.com:34.197.71.170 wineconsole/lite
+docker run -it -v \$Here/halopull:/game -e INTERNAL_PORT=$i -p \$i:\$i/udp --add-host=s1.master.hosthpc.com:34.197.71.170 --add-host=hosthpc.com:34.197.71.170 wineconsole/lite
 WEND
 
 chmod +x start-example.sh
