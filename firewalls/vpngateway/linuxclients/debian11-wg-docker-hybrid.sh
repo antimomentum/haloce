@@ -92,8 +92,9 @@ until [ "\$VAR1" = "\$VAR2" ]; do
 done
 echo "Handshake established! Starting halo container..."
 sleep 2
+Here=\$(pwd)
 i=2302
-docker run -it -v ~/halopull:/game -w /game -p \$i:\$i/udp --add-host=s1.master.hosthpc.com:34.197.71.170 --add-host=hosthpc.com:34.197.71.170 halo/wineconsole wineconsole haloceded.exe -path . -port \$i
+docker run -it -v \$Here/halopull:/game -w /game -p \$i:\$i/udp --add-host=s1.master.hosthpc.com:34.197.71.170 --add-host=hosthpc.com:34.197.71.170 halo/wineconsole wineconsole haloceded.exe -path . -port \$i
 WEND
 
 chmod +x start-example.sh
