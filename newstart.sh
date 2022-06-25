@@ -33,7 +33,7 @@ DRUN
 
 chmod +x start-example.sh
 
-# 4. Finally it attempts the docker run command and removes itself (newstart.sh) since it should only be once as mentioned.
+# 4. Finally it attempts the docker run command and removes itself (newstart.sh) since it should only be run once as mentioned.
 # start-example can be run any number of times
 
 ./start-example.sh && rm newstart.sh
