@@ -11,7 +11,7 @@ ENV CONTAINER_VERSION=0.1 \
 RUN echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && \
     dpkg --add-architecture i386 && \
     apt-get update && \
-    apt install -y wine wine32 libwine:i386 fonts-wine
+    apt install -y wine32 libwine:i386 fonts-wine
 
 # Set start command to execute the start script
 CMD wineconsole haloceded.exe -path .
