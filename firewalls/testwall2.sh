@@ -13,7 +13,7 @@ ipset create MDNS hash:ip
 wait
 ipset add MDNS 54.82.252.156
 ipset add MDNS 34.197.71.170
-ipset add MDNS api.linode.com
+# ipset add MDNS api.linode.com
 ipset create TESTS list:set
 ipset add TESTS TEST1
 ipset add TESTS MDNS
@@ -24,7 +24,7 @@ iptables -t raw -A PREROUTING -j NOTRACK
 iptables -t raw -A PREROUTING -i eth0 -m set --match-set TESTS src -j ACCEPT
 iptables -t raw -A PREROUTING -i eth0 -m length --length 48  -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -m length ! --length 67 -j DROP
-iptables -t raw -A PREROUTING -i eth0 -m u32 --u32 "28=0xfefe0100" -j ctest2
+iptables -t raw -A PREROUTING -i eth0 -m u32 --u32 "28=0xfefe0100" -j pcheck
 iptables -t raw -A PREROUTING -i eth0 -j DROP
 iptables -t raw -A pcheck -p udp --sport 53 -j DROP
 iptables -t raw -A pcheck -m set --match-set BLOCK src -j DROP
@@ -33,6 +33,7 @@ iptables -t raw -A pcheck -m set --match-set BLOCK src -j DROP
 iptables -t raw -A pcheck ! -p udp -j SET --exist --add-set BLOCK src
 iptables -t raw -A pcheck -p udp ! --dport 2302:2502 -j SET --exist --add-set BLOCK src
 iptables -t raw -A pcheck -m length --length 48 -m u32 --u32 "42=0x1333360c" -j SET --exist --add-set TEST1 src
+iptables -t raw -A pcheck -m length --length 67 -m u32 --u32 "28=0xfefe0100" -j SET --exist --add-set TEST1 src
 iptables -t raw -A pcheck -m set --match-set TEST1 src -j ACCEPT
 iptables -t raw -A pcheck -j DROP
 iptables -t mangle -A PREROUTING -i eth0 -j SET --exist --add-set TEST1 src
