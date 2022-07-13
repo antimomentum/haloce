@@ -24,7 +24,7 @@ unzip halopull.zip && mv halopull-master halopull && rm halopull.zip
 # 3. It creates a start example script. This allows you to customize the docker run AND haloceded.exe command more personally :)
 
 cat <<DRUN >start-example.sh
-HPORT=2310 && \\
+HPORT=2302 && \\
 docker run -it \\
 -v \$(pwd)/halopull:/game \\
 -w /game \\
