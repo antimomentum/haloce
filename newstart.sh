@@ -1,6 +1,9 @@
-# This newstart.sh file should only be run once if ever. Here's what it does:
+# This newstart.sh file should only be run once if ever. It assumes Docker is installed.
+
+# Here's what it does:
 
 # 1. It installs unzip and builds a fresh wineconsole container:
+
 
 apt install unzip -y
 wait
@@ -27,6 +30,8 @@ docker run -it \\
 -w /game \\
 -e INTERNAL_PORT=\$HPORT \\
 -p \$HPORT:\$HPORT/udp \\
+--add-host=s1.master.hosthpc.com:34.197.71.170 \\
+--add-host=hosthpc.com:34.197.71.170 \\
 wineconsole/lite \\
 wineconsole --backend=curses haloceded.exe -path . -port \$HPORT
 DRUN
