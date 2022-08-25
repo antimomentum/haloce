@@ -103,14 +103,35 @@ AugusDogus
 
 Chalwk77 https://github.com/Chalwk77/HALO-SCRIPT-PROJECTS
 
-Devieth
-http://halopc.com/sv_extensions/
-
 .þsϵυdø.þrø×϶n
 
 Crash
 https://theashclan.org/
 
-Chimera http://vaporeon.io/hosted/halo/chimera/ 
+Chimera 
+http://vaporeon.io/hosted/halo/chimera/ 
+
+Devieth
+http://halopc.com/sv_extensions/
 
 Everyone else involved in helping make Halo more awesome
+
+
+## Ban Appeals ##
+
+
+To start a ban appeal either go to:
+
+
+https://github.com/antimomentum/halopull/issues
+
+
+And create a New issue
+
+
+or contact me on Discord:
+
+
+AntiMomentum#0262
+
+Be sure to include your in game name and why you think you should be unbanned.
