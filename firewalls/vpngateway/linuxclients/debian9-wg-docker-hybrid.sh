@@ -52,7 +52,7 @@ DOCK
 
 wait
 
-docker build -t halo/wineconsole .
+docker build -t wineconsole/lite .
 
 cat <<WEND >start-example.sh
 #!/bin/bash
@@ -80,7 +80,7 @@ docker run -it -v \$Here/halopull:/game \\
 -w /game -p \$i:\$i/udp \\
 --add-host=s1.master.hosthpc.com:34.197.71.170 \\
 --add-host=hosthpc.com:34.197.71.170 \\
-halo/wineconsole \\
+wineconsole/lite \\
 wineconsole haloceded.exe -path . -port \$i
 WEND
 
