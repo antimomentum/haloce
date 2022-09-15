@@ -1,7 +1,4 @@
-# Wireguard Gateway install
-
-# install ipset
-echo "Installing ipset"
+echo "Updating and installing ipset"
 apt update
 wait
 apt upgrade -y
@@ -13,15 +10,13 @@ wait
 echo "Installing Wireguard, press Ctrl + C to cancel..."
 sleep 5
 
-echo "deb http://deb.debian.org/debian/ unstable main" > \
-/etc/apt/sources.list.d/unstable-wireguard.list
-
-printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > \
-/etc/apt/preferences.d/limit-unstable
-
+apt update && apt upgrade -y
+wait
+sh -c "echo 'deb http://deb.debian.org/debian buster-backports main contrib non-free' > /etc/apt/sources.list.d/buster-backports.list"
+wait
 apt update
 wait
-apt-get install wireguard-dkms wireguard-tools -y
+apt install wireguard-dkms -y
 wait
 
 echo "Done"
