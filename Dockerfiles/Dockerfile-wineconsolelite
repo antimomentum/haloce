@@ -1,0 +1,5 @@
+FROM i386/alpine:3.13
+RUN apk add --no-cache wine freetype ncurses
+
+FROM scratch
+COPY --from=0 / /

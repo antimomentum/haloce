@@ -1,26 +1,6 @@
-FROM amd64/debian
-
-# Set environment variables
-ENV CONTAINER_VERSION=0.1 \
-    DISPLAY=:1 \
-    DEBIAN_FRONTEND=noninteractive \
-    PUID=0 \
-    PGID=0
-
-# Install temporary packages
-RUN echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && \
-    dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt install -y wine32 libwine:i386 fonts-wine
-
-# Set start command to execute the start script
-CMD wineconsole haloceded.exe -path .
+FROM antimomentum/wineconsole
+FROM scratch
+COPY --from=0 / /
 COPY ./halopull /game
-# Set working directory into the game directory
 WORKDIR /game
-
-# Expose necessary ports
-EXPOSE 2302/udp 2303/udp
-
-# Set volumes
-VOLUME /game
+CMD wineconsole haloceded.exe -path .

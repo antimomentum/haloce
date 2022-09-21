@@ -43,7 +43,7 @@ Use the Dockerfile to build a local wineconsole container:
 
 Then run your server!
 
-    docker run -v ~/halopull:/game -e INTERNAL_PORT=2302 -it -p 2302:2302/udp wineconsole/lite
+    docker run -v $(pwd)/halopull:/game -e INTERNAL_PORT=2302 -it -p 2302:2302/udp wineconsole/lite
 
 
 ##  Push your halo server images to docker!
