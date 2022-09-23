@@ -9,7 +9,7 @@ This is a Dockerfile for running the Halo CE dedicated server under Linux.
 
 The container is running 100% headless - no GUI is required for installation, execution or configuration.
 
-To install docker:
+To install docker in Ubuntu:
 
     apt update
     apt-get install docker.io
@@ -46,7 +46,7 @@ Then run your server!
     docker run -v $(pwd)/halopull:/game -e INTERNAL_PORT=2302 -it -p 2302:2302/udp wineconsole/halo
 
 
-##  Push your halo server images to docker!
+##  Push your halo server images to docker:
 
 docker build -t YourDockerUsername/MadeUpImageName . 
 
