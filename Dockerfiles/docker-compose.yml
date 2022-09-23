@@ -1,7 +1,7 @@
 version: "2"
 services:
   halofirst:
-    image: wineconsole/lite
+    image: wineconsole/halo
     tty: true
     stdin_open: true
     ports:
@@ -14,7 +14,7 @@ services:
     environment:
      - INTERNAL_PORT=2302
   halosecond:
-    image: wineconsole/lite
+    image: wineconsole/halo
     tty: true
     stdin_open: true
     ports:
