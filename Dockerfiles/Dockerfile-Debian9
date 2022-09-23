@@ -1,4 +1,4 @@
-FROM antimomentum/wineconsole
+FROM wineconsole/full
 COPY ./halopull /game
 WORKDIR /game
 CMD wineconsole haloceded.exe -path .
