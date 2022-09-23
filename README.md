@@ -38,12 +38,12 @@ https://github.com/antimomentum/halopull
 Use the Dockerfile to build a local wineconsole container:
 
     cd Dockerfiles
-    docker build -t wineconsole/lite .
+    docker build -t wineconsole/halo .
 
 
 Then run your server!
 
-    docker run -v $(pwd)/halopull:/game -e INTERNAL_PORT=2302 -it -p 2302:2302/udp wineconsole/lite
+    docker run -v $(pwd)/halopull:/game -e INTERNAL_PORT=2302 -it -p 2302:2302/udp wineconsole/halo
 
 
 ##  Push your halo server images to docker!
