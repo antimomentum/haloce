@@ -1,4 +1,3 @@
-
 ## nohup
 
 Nohup allows us to run the halo server console in the background without closing halo. We can also use a file named "input.txt" for example
@@ -65,7 +64,7 @@ Using bash aliases we can make this easier to do halo commands
 ## Bash aliases!
 
 
-Instead of having to this:
+Instead of having to do this:
 
 
 echo "no_lead 1" >> ~/input.txt
@@ -90,10 +89,31 @@ then copy and paste this into the bottom of the file and close + save:
 
 finally:
 
-    source .basrc
+    source .bashrc
 
 
 then halo commands can be run like so:
 
 
     halo sv_players
+
+
+Side Notes:
+
+Each halo console can have its own input file as well, or any combination of sharing input files :)
+
+
+Another use is being able to grep for strings in the halo console. So by enabling chat echo in the halo console:
+
+
+    halo chat_console_echo 1
+
+
+You can tail nohup.out for cheat complaints for example:
+
+
+    tail -f halopull/nohup.out | grep wall
+
+
+
+This could be used to send alerts but there are issues with messages repeating after a while. 
