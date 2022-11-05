@@ -117,3 +117,15 @@ You can tail nohup.out for cheat complaints for example:
 
 
 This could be used to send alerts but there are issues with messages repeating after a while. 
+
+
+nohup.out will continue to grow for as long as the halo console is running. 
+
+
+Eventually this would require some sort of management if the halo server is left running long-term. Unfortunately, deleting nohup.out will
+
+
+cause the halo console output to be gone. 
+
+
+One could eventually send the out to /dev/null if they are used to this enviroment. 
