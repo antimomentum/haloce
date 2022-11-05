@@ -98,7 +98,7 @@ then halo commands can be run like so:
     halo sv_players
 
 
-Side Notes:
+## Side Notes:
 
 Each halo console can have its own input file as well, or any combination of sharing input files :)
 
