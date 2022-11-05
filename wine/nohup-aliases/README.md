@@ -128,4 +128,4 @@ Eventually this would require some sort of management if the halo server is left
 cause the halo console output to be gone. 
 
 
-One could eventually send the out to /dev/null if they are used to this enviroment. 
+On ther hand one could send the output to /dev/null if they are used to this enviroment. 
