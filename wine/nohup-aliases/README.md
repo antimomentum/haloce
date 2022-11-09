@@ -153,4 +153,4 @@ Here's an example curl loop to keep pulling the webpage:
     while sleep 5; do curl -v http://45.56.67.78:9000/ 2>/dev/null; done > scrape.txt
 
 
-And then you can tail scrapte.txt locally any ways you want :)
+And then you can tail scrape.txt locally any ways you want :)
