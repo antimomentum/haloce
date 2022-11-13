@@ -45,6 +45,8 @@ iptables -t raw -A PREROUTING -i eth0 -m length --length 48 -m u32 --u32 "35=0x0
 iptables -t raw -A PREROUTING -i eth0 -m length ! --length 34 -j DROP
 iptables -t raw -A PREROUTING -i eth0 -m u32 ! --u32 "28=0x5C717565" -j DROP
 iptables -t raw -A PREROUTING -i eth0 -j ctest2
+iptables -t raw -A pcheck -p udp --sport 53 -j DROP
+iptables -t raw -A pcheck -p udp --dport 53 -j DROP
 iptables -t raw -A pcheck -p udp --sport 0 -j DROP
 iptables -t raw -A pcheck ! -p udp -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST1 src
@@ -54,6 +56,8 @@ iptables -t raw -A pcheck -m u32 --u32 "28=0x5C717565" -j ctest2
 iptables -t raw -A pcheck -m u32 ! --u32 "34&0xFFFFFF=0xFFFFFF" -j DROP
 iptables -t raw -A pcheck -j SET --exist --add-set TEST2 src
 iptables -t raw -A pcheck -j ACCEPT
+iptables -t raw -A ctest2 -p udp --sport 53 -j DROP
+iptables -t raw -A ctest2 -p udp --dport 53 -j DROP
 iptables -t raw -A ctest2 -p udp --sport 0 -j DROP
 iptables -t raw -A ctest2 ! -p udp -j DROP
 iptables -t raw -A ctest2 -j SET --exist --add-set TEST1 src
