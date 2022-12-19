@@ -15,7 +15,7 @@ Example nohup setup for halo:
 
     cd
     touch input.txt
-    echo "nohup tail -F ~/input.txt 2> /dev/null | nohup wineconsole haloceded.exe -path . & echo $!" > halopull/start-nohup.sh
+    echo "nohup tail -F ~/input.txt 2> /dev/null | nohup wineconsole haloceded.exe -path . & echo \$!" > halopull/start-nohup.sh
     chmod +x halopull/start-nohup.sh
 
 
