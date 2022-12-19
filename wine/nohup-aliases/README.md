@@ -15,7 +15,7 @@ Example nohup setup for halo:
 
     cd
     touch input.txt
-    echo "nohup tail -F ~/input.txt 2> /dev/null | nohup wineconsole haloceded.exe -path . &" > halopull/start-nohup.sh
+    echo "nohup tail -F ~/input.txt 2> /dev/null | nohup wineconsole haloceded.exe -path . & echo $!" > halopull/start-nohup.sh
     chmod +x halopull/start-nohup.sh
 
 
@@ -25,7 +25,7 @@ Then to start the halo server:
     ./start-nohup.sh
 
 
-The halo server will be sent to the background giving back control of stdin to our shell.
+The halo server will be sent to the background giving back control of stdin to our shell. Also, the "echo $!" will tell us the PID of the halo server. 
 
 
 The halo console output can be viewed by doing:
