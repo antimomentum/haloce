@@ -19,3 +19,16 @@ Obviously a root or sudo user is still needed for the apt install requirements t
 
 
 Future plans include making the halo container rootless too. Regardless its permissions should still be limited to the non-sudo "testuser"
+
+
+After the install script is done:
+
+
+Login as testuser
+
+    su - testuser
+
+    
+To start Docker
+
+    bin/dockerd-rootless.sh &
