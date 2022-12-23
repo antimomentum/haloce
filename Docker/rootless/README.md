@@ -32,3 +32,8 @@ Login as testuser
 To start Docker
 
     bin/dockerd-rootless.sh &
+
+
+Example container run
+
+    docker run -it -p 2302:2302/udp antimomentum/halo
