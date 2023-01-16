@@ -58,5 +58,3 @@ iptables -t raw -A OUTPUT -o eth0 -j SET --exist --add-set RAWTRACK dst,dst
 
 # Only lasts for the RAWTRACK timeout, you might need to re-run this before actually starting the halo server:
 ipset add RAWTRACK 54.82.252.156,udp:27900
-ipset add RAWTRACK 54.82.252.156,udp:27900
-
