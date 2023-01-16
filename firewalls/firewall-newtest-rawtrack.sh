@@ -1,5 +1,4 @@
 interface=$1
-
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 
 sysctl -w net.ipv6.conf.lo.disable_ipv6=1
@@ -40,7 +39,6 @@ iptables -t mangle -A ctest2 -m connlimit --connlimit-above 5 --connlimit-mask 3
 iptables -t mangle -A ctest2 -p udp --sport 53 -j SET --exist --add-set BLOCK src
 iptables -t mangle -A ctest2 -m set --match-set BLOCK src -j DROP
 iptables -t mangle -A ctest2 -m u32 --u32 "28=0xfefe0100" -j ACCEPT
-iptables -t mangle -A ctest2 -m set --match-set RAWTRACK src,src -j ACCEPT
 iptables -t mangle -A ctest2 -m length --length 34 -m u32 --u32 "28=0x5C717565" -j ACCEPT
 iptables -t mangle -A ctest2 -m length --length 48 -m u32 --u32 "42=0x1333360c" -j ACCEPT
 iptables -t mangle -A ctest2 -m u32 --u32 "34&0xFFFFFF=0xFFFFFF" -j ACCEPT
