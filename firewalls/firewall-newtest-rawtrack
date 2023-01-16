@@ -27,6 +27,7 @@ iptables -t mangle -A PREROUTING -i eth0 -p udp -m hashlimit --hashlimit-name DO
 iptables -t mangle -A PREROUTING -i eth0 -m set --match-set RAWTRACK src,src -j ACCEPT
 iptables -t mangle -A PREROUTING -i eth0 -p tcp -m set --match-set WHITELIST src -j ACCEPT
 iptables -t mangle -A PREROUTING -i eth0 -m set --match-set BANS src -j DROP
+iptables -t mangle -A PREROUTING -i eth0 -j ctest2
 iptables -t mangle -A ctest2 -m set --match-set BLOCK src -j DROP
 iptables -t mangle -A ctest2 -m set --match-set WHITELIST src -p icmp -j ACCEPT
 iptables -t mangle -A ctest2 -s 34.197.71.170 -j ACCEPT
