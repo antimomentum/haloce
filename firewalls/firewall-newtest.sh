@@ -62,7 +62,6 @@ iptables -t mangle -A PREROUTING -i eth0 -m set --match-set BANS src -j DROP
 iptables -t mangle -A PREROUTING -i eth0 -m set --match-set TEST1 src -j ctest2
 iptables -t mangle -A PREROUTING -i eth0 -j DROP
 iptables -t mangle -A ctest2 -m set --match-set BLOCK src -j DROP
-iptables -t mangle -A ctest2 -m set --match-set WHITELIST src -p icmp -j ACCEPT
 iptables -t mangle -A ctest2 -s 34.197.71.170 -j ACCEPT
 iptables -t mangle -A ctest2 -s 54.82.252.156 -j ACCEPT
 iptables -t mangle -A ctest2 -p udp --sport 0 -j SET --exist --add-set BLOCK src
@@ -82,7 +81,6 @@ iptables -t mangle -A ctest2 -j DROP
 iptables -t mangle -A reconnect -j SET --del-set TEST1 src
 iptables -t mangle -A reconnect -j SET --del-set LEGIT src,src
 iptables -t mangle -A reconnect -j ACCEPT
-iptables -t mangle -A ban -m set --match-set WHITELIST src -j ACCEPT
 iptables -t mangle -A ban -j SET --del-set TEST1 src
 iptables -t mangle -A ban -j SET --del-set LEGIT src,src
 iptables -t mangle -A ban -j SET --exist --add-set BAN src
