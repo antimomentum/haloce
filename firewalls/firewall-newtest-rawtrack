@@ -54,7 +54,7 @@ iptables -t mangle -A ban -j DROP
 iptables -t mangle -A ban2 -j SET --exist --add-set BAN2 src
 iptables -t mangle -A ban2 -j SET --del-set RAWTRACK src,src
 iptables -t mangle -A ban2 -j DROP
-iptables -t raw -A OUTPUT -o eth0 -j SET --exist --add-set RAWTRACK dst,dst
+iptables -t mangle -A POSTROUTING -o eth0 -j SET --exist --add-set RAWTRACK dst,dst
 
 # Only lasts for the RAWTRACK timeout, you might need to re-run this before actually starting the halo server:
 ipset add RAWTRACK 54.82.252.156,udp:27900
