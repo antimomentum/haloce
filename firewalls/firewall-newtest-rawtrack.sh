@@ -24,7 +24,7 @@ iptables -t raw -A PREROUTING -i $interface -m length ! --length 67 -j DROP
 iptables -t raw -A PREROUTING -i $interface -m u32 --u32 "28=0xfefe0100" -j ACCEPT
 iptables -t raw -A PREROUTING -i $interface -j DROP
 iptables -t mangle -A PREROUTING -i $interface -p udp -m hashlimit --hashlimit-name DOSBAN2 --hashlimit-mode srcip --hashlimit-srcmask 32 --hashlimit-above 900/second --hashlimit-burst 300 -j ban
-iptables -t mangle -A PREROUTING -i $interface -p udp -m length --length 31 -m set --match-set LEGIT src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
+iptables -t mangle -A PREROUTING -i $interface -p udp -m length --length 31 -m set --match-set RAWTRACK src,src -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
 iptables -t mangle -A PREROUTING -i $interface -m set --match-set RAWTRACK src,src -j ACCEPT
 iptables -t mangle -A PREROUTING -i $interface -m set --match-set BANS src -j DROP
 iptables -t mangle -A PREROUTING -i $interface -j ctest2
