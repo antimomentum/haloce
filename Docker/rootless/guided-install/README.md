@@ -42,7 +42,7 @@ Then start the rootless Docker service. First log into the rootless testuser acc
     
 Then start Docker:
 
-    bin/dockerd-rootless.sh
+    bin/dockerd-rootless.sh &
 
 You can then log back out of testuser and the rootless Docker service will remain running:
 
