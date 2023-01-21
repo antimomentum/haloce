@@ -36,6 +36,18 @@ Assuming your public interface name (the interface getting packets from the inte
     $HOME/firewall.sh eth0
 
 
+Then start the rootless Docker service. First log into the rootless testuser account:
+
+    su - testuser
+    
+Then start Docker:
+
+    bin/dockerd-rootless.sh
+
+You can then log back out of testuser and the rootless Docker service will remain running:
+
+    logout
+
 Now you should be able to run the start-example script. If everything was successful so far this should be able to both download and run the image from Docker while the firewall is running. As mentioned already you can change "halopull" to your own halo files.
 
 
