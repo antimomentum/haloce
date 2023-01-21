@@ -17,7 +17,7 @@ The "halopull" folder containing halo server files is NOT required. You can repl
 # Instructions:
 
 
-After running the installer:
+After running the installer like so:
 
     ./installer.sh
 
