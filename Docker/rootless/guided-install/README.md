@@ -17,7 +17,7 @@ The "halopull" folder containing halo server files is NOT required. You can repl
 # Instructions:
 
 
-After running the installer assuming everything was successful first add your ip to the firewall.sh file it made so that you don't lose remote access to your server. You can simply add your ip to the bottom of the file like so with 1.1.1.1 as an example:
+After running the installer assuming everything was successful first add your ip to the firewall.sh file it made so that you don't lose remote access to your server. You can simply add a line with your ip like the following example to the bottom of the file with 1.1.1.1 as an example ip:
 
     ipset add WHITELIST 1.1.1.1
 
