@@ -9,7 +9,7 @@ The install script is based on the Docker docs for Ubuntu:
 https://docs.docker.com/engine/security/rootless/
 
 
-Note: While this is a rootless install the following privilege is still needed:
+Note: While this is a rootless install the following privilege might still needed, try without this first:
 
 
 kernel.unprivileged_userns_clone=1
