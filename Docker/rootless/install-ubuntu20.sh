@@ -1,4 +1,4 @@
-apt update && apt-get install -y uidmap dbus-user-session slirp4netns
+apt update && apt-get install -y uidmap dbus-user-session
 wait
 sleep 1
 
