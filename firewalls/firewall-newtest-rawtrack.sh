@@ -23,7 +23,6 @@ iptables -t mangle -N ban2
 iptables -t raw -A PREROUTING -i $interface -m set --match-set RAWTRACK src,dst -j ACCEPT
 iptables -t raw -A PREROUTING -i $interface -m set --match-set WHITELIST src -j ACCEPT
 iptables -t raw -A PREROUTING -i $interface -m length --length 48 -m u32 --u32 "42=0x1333360c" -j ACCEPT
-iptables -t raw -A PREROUTING -i $interface -s 54.82.252.156 -j ACCEPT
 iptables -t raw -A PREROUTING -i $interface -m length ! --length 67 -j DROP
 iptables -t raw -A PREROUTING -i $interface -m u32 --u32 "28=0xfefe0100" -j ACCEPT
 iptables -t raw -A PREROUTING -i $interface -j DROP
