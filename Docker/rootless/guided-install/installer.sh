@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Rootless Docker install docs:
+# https://docs.docker.com/engine/security/rootless/
+
+# wget, curl, nano, unzip, and sudo are NOT required. You could technically install everything without those 5 tools, but they will make the install easy
 apt-get update -y && \
   apt-get -y install \
   iptables \
@@ -27,8 +31,9 @@ wait
 sudo -i -u testuser sh -c 'echo "export XDG_RUNTIME_DIR=/home/testuser/.docker/run" >> .bashrc'
 sudo -i -u testuser sh -c 'echo "export PATH=/home/testuser/bin:$PATH" >> .bashrc'
 sudo -i -u testuser sh -c 'echo "export DOCKER_HOST=unix:///home/testuser/.docker/run/docker.sock" >> .bashrc'
-wait
 
+# Since Docker is NOT installed to your current prvileged account running this script,
+# create an alias for your current user to run docker commands from the non-privileged testuser account:
 
 cat <<WUSH >>$HOME/.bashrc
 docker() {
@@ -36,15 +41,20 @@ docker() {
 }
 WUSH
 
+# The following halopull.zip is not required. But shows chown may be necessary regardless:
 wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && \
 unzip halopull.zip && \
 mv halopull-master halopull && \
 mv halopull /home/testuser/ && \
-chown -R testuser: /home/testuser/halopull && \
+chown -R testuser: /home/testuser/halopull
+wait
+
+# Grab the firewall and make it executable:
 wget https://raw.githubusercontent.com/antimomentum/haloce/master/firewalls/firewall-newtest-rawtrack.sh && \
 chmod +x firewall-newtest-rawtrack.sh && \
 mv firewall-newtest-rawtrack.sh $HOME/firewall.sh
 
+# Create an example start script with a function to pass docker commands to the non-privileged testuser account:
 cat <<DRUN >start-example.sh
 docker() {
 su - testuser -c "docker \$*"
@@ -65,4 +75,6 @@ DRUN
 chmod +x start-example.sh
 
 sleep 1
+
+# Reboot may not be necessary if you logout and log back in to your own user.
 reboot
