@@ -2,7 +2,8 @@ apt update && apt-get install -y uidmap dbus-user-session
 wait
 sleep 1
 
-echo "kernel.unprivileged_userns_clone=1" >> /etc/sysctl.conf
+# The following sysctl kernel setting does not seem to be required, commenting out:
+# echo "kernel.unprivileged_userns_clone=1" >> /etc/sysctl.conf
 wait
 useradd -m testuser
 usermod --shell /bin/bash testuser
