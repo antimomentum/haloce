@@ -1,0 +1,6 @@
+FROM i386/alpine:3.13
+RUN apk add --no-cache wine freetype ncurses
+FROM scratch
+COPY --from=0 / /
+WORKDIR /game
+CMD nohup tail -F input.txt 2> /dev/null | nohup wineconsole --backend=curses haloceded -path . -port ${INTERNAL_PORT} > nohup.out
