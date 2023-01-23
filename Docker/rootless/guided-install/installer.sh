@@ -89,7 +89,7 @@ chmod +x start-example.sh
 
 cat <<CONSOLE >nohup-start.sh
 docker() {
-su - testuser -c "docker $*"
+su - testuser -c "docker \$*"
 }
 
 # the rootless port won't actually be 2304
