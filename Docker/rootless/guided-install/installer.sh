@@ -41,6 +41,18 @@ docker() {
 }
 WUSH
 
+cat <<TU >>$HOME/.bashrc
+testuser() {
+su - testuser -c "\$*"
+}
+TU
+
+cat <<EXAMPLE >>$HOME/.bashrc
+halopull() {
+    echo "\$*" >> /home/testuser/halopull/input.txt
+}
+EXAMPLE
+
 # The following halopull.zip is not required. But shows chown may be necessary regardless:
 wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && \
 unzip halopull.zip && \
