@@ -86,6 +86,27 @@ DRUN
 
 chmod +x start-example.sh
 
+
+cat <<CONSOLE >nohup-start.sh
+docker() {
+su - testuser -c "docker $*"
+}
+
+# the rootless port won't actually be 2304
+i=halopull && \
+p=2304 && \
+docker run -itd --rm \
+--name=$i \
+-v /home/testuser/$i:/game \
+-e INTERNAL_PORT=$p \
+-p $p:$p/udp \
+--add-host=s1.master.hosthpc.com:34.197.71.170 \
+--add-host=hosthpc.com:34.197.71.170 \
+antimomentum/nohup-haloce
+CONSOLE
+
+chmod +x nohup-start.sh
+
 sleep 1
 
 # Reboot may not be necessary if you logout and log back in to your own user.
