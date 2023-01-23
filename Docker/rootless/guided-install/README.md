@@ -62,7 +62,7 @@ You can attach to the container by doing:
 So we can use nohup instead. The nohup-start.sh example runs a container that sends the halo console output to a file named nohup.out. We can then
 just tail the file. The installer also creates a bashrc alias for the example "halopull" halo server in the unprivileged testuser account (to send halo commands to input.txt), feel free to make aliases for your own halo servers!
 
-So instead of running nohup-start.sh run the nohup version:
+So instead of running start-example.sh run the nohup version:
 
     ./nohup-start.sh
 
