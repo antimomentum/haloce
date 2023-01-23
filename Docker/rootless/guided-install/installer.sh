@@ -48,12 +48,11 @@ su - testuser -c "\$*"
 TU
 
 # The following halopull.zip is not required. But shows chown may be necessary regardless:
-wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && \
-unzip halopull.zip && \
-mv halopull-master halopull && \
-mv halopull /home/testuser/ && \
-chown -R testuser: /home/testuser/halopull
+sudo -H -u testuser bash -c 'cd && wget -O halopull.zip https://github.com/antimomentum/halopull/archive/refs/heads/master.zip && unzip halopull.zip && mv halopull-master halopull'
 wait
+# In case you download halo files through an account that isn't testuser:
+# chown -R testuser: /home/testuser/halopull
+
 
 cat <<EXAMPLE >>$HOME/.bashrc
 halopull() {
