@@ -84,3 +84,11 @@ One nuance is halo commands that have quotes, for instance: sv_password "test" m
 This allows for bash scripting with your halo server(s) and is much faster than docker attach. One input could even be used to manage multiple containers depending on how you setup your own builds.
 
 
+You can read about some uses for this here:
+
+https://github.com/antimomentum/haloce/tree/master/wine/nohup-aliases
+
+
+This is the Dockerfile that's used for antimomentum/nohup-haloce in the nohup-start.sh script:
+
+https://github.com/antimomentum/haloce/blob/master/Docker/Dockerfile-nohup-haloce
