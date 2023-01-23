@@ -54,3 +54,33 @@ Now you should be able to run the start-example script. If everything was succes
 You can attach to the container by doing:
 
     docker attach --detach-keys z 2308
+    
+    
+
+# But docker attach is slow and isn't good for scripts
+
+So we can use nohup instead. The nohup-start.sh example runs a container that sends the halo console output to a file named nohup.out. We can then
+just tail the file. The installer also creates a bashrc alias for the example "halopull" halo server in the unprivileged testuser account (to send halo commands to input.txt), feel free to make aliases for your own halo servers!
+
+So instead of running nohup-start.sh run the nohup version:
+
+    ./nohup-start.sh
+
+
+Then you can view the output like so:
+
+    tail -f /home/testuser/halopull/nohup.out
+
+
+You can issue halo commands like so from your main account you ran the installer from:
+
+    halopull sv_players
+
+One nuance is halo commands that have quotes, for instance: sv_password "test" must be entered like this if using the alias:
+
+    halopull sv_password \"test\"
+
+
+This allows for bash scripting with your halo server(s) and is much faster than docker attach. One input could even be used to manage multiple containers depending on how you setup your own builds.
+
+
