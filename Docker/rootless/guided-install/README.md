@@ -71,6 +71,10 @@ Then you can view the output like so:
 
     tail -f /home/testuser/halopull/nohup.out
 
+OR
+
+    testuser tail -f halopull/nohup.out
+
 
 You can issue halo commands like so from your main account you ran the installer from:
 
