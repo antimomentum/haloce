@@ -88,6 +88,11 @@ One nuance is halo commands that have quotes, for instance: sv_password "test" m
 This allows for bash scripting with your halo server(s) and is much faster than docker attach. One input could even be used to manage multiple containers depending on how you setup your own builds.
 
 
+You can get the public port(s) of the halo server(s) by doing:
+
+    lsof |grep vpnkit| grep UDP| grep ':' | sed 's/^.*://'| head -1
+
+
 To stop the halo server and container gracefully:
 
     halopull quit && docker stop halopull
