@@ -106,3 +106,14 @@ https://github.com/antimomentum/haloce/tree/master/wine/nohup-aliases
 This is the Dockerfile that's used for antimomentum/nohup-haloce in the nohup-start.sh script:
 
 https://github.com/antimomentum/haloce/blob/master/Docker/Dockerfile-nohup-haloce
+
+
+# docker-compose
+
+ If the install was successful you can also go ahead and install docker-compose:
+ 
+    testuser curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o bin/docker-compose && \
+    testuser chmod +x bin/docker-compose && \
+    testuser docker-compose --version
+
+The current docker-compose.yml will work in rootless as well, but you may want to replace the containers with antimomentum/nohup-haloce if you want the nohup benefits.
