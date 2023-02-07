@@ -1,3 +1,11 @@
+# Requirements:
+
+iptables and ipset are both required for these firewalls (not including XDP). For example on Debian based distros:
+
+    apt install ipset
+
+
+
 # Details
 
 Typically the firewall would be used on the public interface getting packets to and from the internet.
