@@ -82,6 +82,6 @@ iptables -t mangle -A reconnect -j SET --del-set LEGIT src,src
 # iptables -I FORWARD -j ACCEPT
 # iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 # These services will not work while the firewall is active, so stop them:
-systemctl stop systemd-timesyncd 2&>/dev/null
-wait
-systemctl stop systemd-resolved 2&>/dev/null
+# systemctl stop systemd-timesyncd 2&>/dev/null
+# wait
+# systemctl stop systemd-resolved 2&>/dev/null
