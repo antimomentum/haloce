@@ -1,6 +1,10 @@
 ## Rootless install for Docker
 
-This is only succesfully tested on Ubuntu 20.04. Does not appear to work on Debian 10 using apt.
+This is only tested on Ubuntu 20.04. Does not appear to work on Debian 10 using apt.
+
+There seems to be an issue with crashing if players are in the game for a while. 
+This is not an issue in the root/sudo version of Docker so it is likely due to rootless not having some needed permissions.
+I am looking into it.
 
 
 The install script is based on the Docker docs for Ubuntu:
