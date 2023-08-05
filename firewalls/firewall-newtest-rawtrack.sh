@@ -1,3 +1,4 @@
+#not fully functional yet
 interface=$1
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 
@@ -10,6 +11,7 @@ sysctl -w net.core.netdev_max_backlog=4000
 ipset create BLOCK hash:ip timeout 300
 ipset create WHITELIST hash:ip
 ipset add WHITELIST 54.82.252.156
+ipset create LEGIT hash:ip,port
 ipset create BAN hash:ip
 ipset create BAN2 hash:ip
 ipset create BANS list:set
@@ -28,9 +30,11 @@ iptables -t raw -A PREROUTING -i $interface -m u32 --u32 "28=0xfefe0100" -j ACCE
 iptables -t raw -A PREROUTING -i $interface -j DROP
 iptables -t mangle -A PREROUTING -i $interface -p udp -m hashlimit --hashlimit-name DOSBAN2 --hashlimit-mode srcip --hashlimit-srcmask 32 --hashlimit-above 900/second --hashlimit-burst 300 -j ban
 iptables -t mangle -A PREROUTING -i $interface -p udp -m length --length 31 -m set --match-set RAWTRACK src,dst -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
-iptables -t mangle -A PREROUTING -i $interface -m set --match-set RAWTRACK src,dst -j ACCEPT
+# iptables -t mangle -A PREROUTING -i $interface -m set --match-set RAWTRACK src,dst -j ACCEPT
+iptables -t mangle -A PREROUTING -i $interface -m set --match-set RAWTRACK src,dst -m set --match-set LEGIT src,src -j ACCEPT
 iptables -t mangle -A PREROUTING -i $interface -m set --match-set WHITELIST src -j ACCEPT
 iptables -t mangle -A PREROUTING -i $interface -m set --match-set BANS src -j DROP
+# iptables -t mangle -A PREROUTING -i $interface -m set ! --match-set LEGIT src,src -m set --match-set RAWTRACK src,dst -j ACCEPT
 iptables -t mangle -A PREROUTING -i $interface -j ctest2
 iptables -t mangle -A ctest2 -m set --match-set BLOCK src -j DROP
 iptables -t mangle -A ctest2 -s 34.197.71.170 -j ACCEPT
@@ -42,12 +46,13 @@ iptables -t mangle -A ctest2 -m recent --update --name badguy3 --seconds 5 --hit
 iptables -t mangle -A ctest2 -m connlimit --connlimit-above 5 --connlimit-mask 32 -j DROP
 iptables -t mangle -A ctest2 -p udp --sport 53 -j SET --exist --add-set BLOCK src
 iptables -t mangle -A ctest2 -m set --match-set BLOCK src -j DROP
-iptables -t mangle -A ctest2 -m u32 --u32 "28=0xfefe0100" -j ACCEPT
+iptables -t mangle -A ctest2 -m u32 --u32 "28=0xfefe0100" -j SET --exist --add-set LEGIT src,src
 iptables -t mangle -A ctest2 -m length --length 34 -m u32 --u32 "28=0x5C717565" -j ACCEPT
 iptables -t mangle -A ctest2 -m length --length 48 -m u32 --u32 "42=0x1333360c" -j ACCEPT
 iptables -t mangle -A ctest2 -m u32 --u32 "34&0xFFFFFF=0xFFFFFF" -j ACCEPT
 iptables -t mangle -A ctest2 -j DROP
 iptables -t mangle -A reconnect -j SET --del-set RAWTRACK src,dst
+iptables -t mangle -A reconnect -j SET --del-set LEGIT src,src
 iptables -t mangle -A reconnect -j ACCEPT
 iptables -t mangle -A ban -j SET --del-set RAWTRACK src,dst
 iptables -t mangle -A ban -j SET --exist --add-set BAN src
@@ -56,5 +61,3 @@ iptables -t mangle -A ban2 -j SET --exist --add-set BAN2 src
 iptables -t mangle -A ban2 -j SET --del-set RAWTRACK src,dst
 iptables -t mangle -A ban2 -j DROP
 iptables -t mangle -A POSTROUTING -o $interface -j SET --exist --add-set RAWTRACK dst,src
-# old notes:
-# ipset add RAWTRACK 54.82.252.156,udp:49946
