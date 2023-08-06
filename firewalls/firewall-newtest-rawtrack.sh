@@ -32,6 +32,7 @@ iptables -t mangle -A PREROUTING -i $interface -p udp -m hashlimit --hashlimit-n
 iptables -t mangle -A PREROUTING -i $interface -p udp -m length --length 31 -m set --match-set RAWTRACK src,dst -m u32 --u32 "27&0x00FFFFFF=0x00fefe68" -j reconnect
 # iptables -t mangle -A PREROUTING -i $interface -m set --match-set RAWTRACK src,dst -j ACCEPT
 iptables -t mangle -A PREROUTING -i $interface -m set --match-set RAWTRACK src,dst -m set --match-set LEGIT src,src -j ACCEPT
+iptables -t mangle -A PREROUTING -i $interface -m set --match-set LEGIT src,src -j DROP
 iptables -t mangle -A PREROUTING -i $interface -m set --match-set WHITELIST src -j ACCEPT
 iptables -t mangle -A PREROUTING -i $interface -m set --match-set BANS src -j DROP
 # iptables -t mangle -A PREROUTING -i $interface -m set ! --match-set LEGIT src,src -m set --match-set RAWTRACK src,dst -j ACCEPT
