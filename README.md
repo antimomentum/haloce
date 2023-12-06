@@ -126,7 +126,10 @@ To start a ban appeal either go to:
 https://github.com/antimomentum/halopull/issues
 
 
-And create a New issue
+And create a New issue or contact me (below)
+
+
+Be sure to include your in game name and why you think you should be unbanned.
 
 
 ## Contact
@@ -138,4 +141,4 @@ Discord: AntiMomentum#0262
 
 
 
-Be sure to include your in game name and why you think you should be unbanned.
+
