@@ -129,9 +129,13 @@ https://github.com/antimomentum/halopull/issues
 And create a New issue
 
 
-or contact me on Discord:
+## Contact
+
+email: admin@halopc.org
 
 
-AntiMomentum#0262
+Discord: AntiMomentum#0262
+
+
 
 Be sure to include your in game name and why you think you should be unbanned.
