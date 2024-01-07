@@ -128,3 +128,20 @@ Eventually this would require some sort of management if the halo server is left
 
 On ther hand one could send the output to /dev/null if they are used to this enviroment. 
 
+
+## Bash halo scripts :)
+
+Just put the same function we used for the alias in your script and run your halo commands
+
+    halo() {
+        echo -e "$*\r\n" >> ~/input.txt
+        sleep 0.1
+    }
+
+    halo antispam 2
+    halo sv_log_enabled 1
+    halo no_lead 1
+    halo sv_maxplayers 16
+    halo chat_console_echo 1
+    halo afk_kick 300
+    halo sapp_console 1
