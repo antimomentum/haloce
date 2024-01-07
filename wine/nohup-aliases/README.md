@@ -83,8 +83,8 @@ then copy and paste this into the bottom of the file and close + save:
 
 
     halo() {
-        echo "$*" >> ~/input.txt
-        sleep 0.1
+    echo -e "$*\r\n" >> ~/input.txt
+    sleep 0.1
     }
 
 
