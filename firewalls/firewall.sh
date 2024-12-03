@@ -1,4 +1,4 @@
-# Has included Sappboom protection for months
+# Does not have sappboom protection (see bottom of README)
 # Assumes public interface name eth0
 # Uncomment the BOTTOM lines for a NAT gateway, 10.0.0.2 is a VLAN ip example. Also uncomment the sysctl ip_forward setting.
 # Requires ipset: apt install ipset -y
