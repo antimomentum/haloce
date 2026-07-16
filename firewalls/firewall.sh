@@ -1,3 +1,5 @@
+# requires ipset (apt install ipset)
+
 # This firewall assumes you are already blocking TCP, ICMP, and IPv6 with a cloud/host firewall (some rules and settings are left in perhaps commented)
 
 # The firewall expects you to supply the public interface name, for example: ./firewall.sh eth0
