@@ -68,7 +68,7 @@ ipset create BLOCK hash:ip timeout 300
 ipset create WHITELIST hash:ip
 ipset create BANNED hash:ip timeout 150
 ipset add WHITELIST 54.82.252.156
-ipset add WHITELIST 104.26.3.60
+ipset add WHITELIST 34.197.71.170
 ipset create LEGIT hash:ip,port timeout 13
 ipset create TEST1 hash:ip timeout 80
 ipset create BAN hash:ip
